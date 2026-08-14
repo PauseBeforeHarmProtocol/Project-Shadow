@@ -1,0 +1,20 @@
+{
+  "bytes": 1418194,
+  "canonical_r1": false,
+  "embedded": false,
+  "enabled_by_default": false,
+  "filename": "Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEARCH_2026-08-14.zip",
+  "historical_v0_3_3": {
+    "bytes_embedded": false,
+    "sha256": "270bf07ca0db7c30c4ebcc05ca607bb242937b8879753f932aeaf62696bf0541",
+    "status": "HISTORICAL_EXTERNAL_ACKNOWLEDGEMENT_ONLY_EXCLUDED_FROM_RELEASE_PAYLOAD"
+  },
+  "publication_authorized_by_this_candidate": false,
+  "r1_conformance_claimed": false,
+  "role": "OPTIONAL_DEFAULT_OFF_EXTERNAL_RESEARCH_SIDECAR",
+  "schema": "project-shadow.external-myth-sidecar-reference.v1",
+  "separate_distribution_and_authorization_required": true,
+  "sha256": "3c8c8c0d3d9582c76b685c1b685260cc8179478ab310037c858b46257aa314c7",
+  "status": "VERIFIED_EXTERNAL_REFERENCE",
+  "version": "0.3.4"
+}

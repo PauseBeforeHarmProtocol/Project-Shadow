@@ -1,0 +1,61 @@
+{
+  "admission_is_not_legal_clearance": true,
+  "build_mode": "CANDIDATE",
+  "classes": [
+    {
+      "class": "ORIGINAL_DOCUMENTATION_OR_MACHINE_READABLE_CONTROL",
+      "license": "CC-BY-4.0",
+      "paths": [
+        "00_START_HERE.md",
+        "01_AUTHORITY/**",
+        "02_STATUS/**",
+        "03_AUDIT/**",
+        "04_DISCLOSURES/**",
+        "06_SIGNATURE/**",
+        "07_EXTERNAL_SIDECAR/**",
+        "NOTICE",
+        "RIGHTS_MANIFEST.json",
+        "PACKAGE_MANIFEST.json",
+        "SHA256SUMS"
+      ]
+    },
+    {
+      "class": "ADMITTED_EXACT_NESTED_COMPONENTS",
+      "license": "PRESERVE_ALL_ATTACHED_PATH_SCOPED_TERMS; NO_OUTER_BLANKET_LICENSE",
+      "paths": [
+        "05_COMPONENTS/R1/**",
+        "05_COMPONENTS/PRIMITIVE_COMMONS/**"
+      ]
+    },
+    {
+      "class": "ORIGINAL_SOFTWARE",
+      "license": "Apache-2.0",
+      "paths": [
+        "tools/*.py"
+      ]
+    },
+    {
+      "class": "LICENSE_TEXT",
+      "license": "Apache-2.0-LICENSE-TEXT",
+      "paths": [
+        "LICENSE"
+      ]
+    },
+    {
+      "class": "LICENSE_TEXT",
+      "license": "CC-BY-4.0-LICENSE-TEXT",
+      "paths": [
+        "LICENSE-DOCS"
+      ]
+    }
+  ],
+  "external_sanitized_myth_sidecar": {
+    "embedded": false,
+    "licensed_by_this_candidate": false,
+    "separate_terms_and_distribution_required": true
+  },
+  "rights_expanded_by_packaging": false,
+  "schema": "project-shadow.public-release-rights.v1",
+  "third_party_rights_or_endorsement_granted": false,
+  "whole_container_blanket_license": false
+}

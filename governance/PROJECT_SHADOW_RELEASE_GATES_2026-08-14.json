@@ -1,0 +1,22 @@
+{
+  "build_mode": "CANDIDATE",
+  "candidate_build_gate_satisfied": true,
+  "candidate_build_gates": [
+    {
+      "id": "VERIFIED_SIGSTORE_RECEIPT",
+      "satisfied": true
+    },
+    {
+      "id": "SANITIZED_MYTH_V0_3_4_EXACT_EXTERNAL_HASH",
+      "satisfied": true
+    }
+  ],
+  "deployment_authorized": false,
+  "post_build_publication_gate": {
+    "external_to_candidate": true,
+    "id": "SEPARATE_MAINTAINER_EXACT_CANDIDATE_HASH_AUTHORIZATION",
+    "satisfied": false
+  },
+  "production_authorized": false,
+  "schema": "project-shadow.public-release-gates.v1"
+}

@@ -1,0 +1,118 @@
+{
+  "admission_record_sha256": "659d15bf371a1c2b8410d39c040733da43779fbe54730c43140e1d06dc70b424",
+  "candidate_date": "2026-08-14",
+  "deterministic_archive_policy": "ZIP_STORED_FIXED_CANDIDATE_DATE_UTC_LEXICAL_0644",
+  "file_count_excluding_controls": 20,
+  "files": [
+    {
+      "bytes": 1440,
+      "path": "00_START_HERE.md",
+      "sha256": "b4113a5d178ee3027a5582a12b83efe0eec35ade1fbfd5a6a63c2f426919b3ca"
+    },
+    {
+      "bytes": 139,
+      "path": "01_AUTHORITY/ADMISSION_RECORD_SHA256.txt",
+      "sha256": "1ee4c4a711323d502660a0deaea04592353c4c06d5de4798c0e104a8be3c7c78"
+    },
+    {
+      "bytes": 217626,
+      "path": "01_AUTHORITY/PROJECT_SHADOW_FABLE7_SCOPED_MAINTAINER_ADMISSION_RECORD_2026-08-12.json",
+      "sha256": "659d15bf371a1c2b8410d39c040733da43779fbe54730c43140e1d06dc70b424"
+    },
+    {
+      "bytes": 2919,
+      "path": "02_STATUS/PROJECT_SHADOW_PUBLIC_RELEASE_CANDIDATE_STATUS.json",
+      "sha256": "39eb957ad564f06942de015d348cd04035e2c8a9b4d337d30506c7c1738406d1"
+    },
+    {
+      "bytes": 1058,
+      "path": "03_AUDIT/PROJECT_SHADOW_FABLE7_SANITIZED_AUDIT_DISPOSITION_2026-08-12.json",
+      "sha256": "f170346e0ebf68784b63b23b6fa62cf27f52537094cdae1559de8cfe13a85206"
+    },
+    {
+      "bytes": 1328,
+      "path": "03_AUDIT/PROJECT_SHADOW_FABLE7_SANITIZED_AUDIT_DISPOSITION_2026-08-12.md",
+      "sha256": "1dd324d41c781223905279aa777155096b338c082e9d1565e55ea5da11905e57"
+    },
+    {
+      "bytes": 3641,
+      "path": "04_DISCLOSURES/ADMISSION_KNOWN_LIMITATIONS_AND_OPEN_GATES_2026-08-12.json",
+      "sha256": "750e299fbdce0e33975bf9d1b14e5b35114d2d83d1867af244700cccf28e6e7d"
+    },
+    {
+      "bytes": 2699,
+      "path": "04_DISCLOSURES/ADMISSION_KNOWN_LIMITATIONS_AND_OPEN_GATES_2026-08-12.md",
+      "sha256": "597ab2dd7e546eb9c2fa00cf2d47052e82fd89d2bc95ef49c466de9e59a5f1e2"
+    },
+    {
+      "bytes": 567,
+      "path": "04_DISCLOSURES/PROJECT_SHADOW_RELEASE_GATES_2026-08-14.json",
+      "sha256": "641bf505b6159cfa423dc516c961917d9502922befb382e8b2efe6b5fc278e76"
+    },
+    {
+      "bytes": 1935482,
+      "path": "05_COMPONENTS/PRIMITIVE_COMMONS/Project_Shadow_PS-R1-PC-S1_v0.1.0-beta.5_POST_REAUDIT_CORRECTION_CANDIDATE_2026-08-10.zip",
+      "sha256": "1ffdba41025c0b81da92d0bbb22d0eaa69488cffbc80936365034669110448d7"
+    },
+    {
+      "bytes": 5442808,
+      "path": "05_COMPONENTS/R1/Project_Shadow_R1_BETA2_Runtime_Successor_Candidate_2026-08-10.zip",
+      "sha256": "075b41ea4186b2d2edb0ed246ab7662cf8bbdf3160294e3eca176b9d0857b108"
+    },
+    {
+      "bytes": 6770,
+      "path": "06_SIGNATURE/ADMISSION_RECORD.sigstore.json",
+      "sha256": "a579f1b855ad22eb58be4ece5a580edbff60a171b35517b15ee172e417faaba0"
+    },
+    {
+      "bytes": 1625,
+      "path": "06_SIGNATURE/SIGNATURE_VERIFICATION_RECEIPT.json",
+      "sha256": "62e3965891b0f0a11aa46b50854f467acef84645faa569419fc79cf1051c1629"
+    },
+    {
+      "bytes": 851,
+      "path": "07_EXTERNAL_SIDECAR/PROJECT_SHADOW_SANITIZED_MYTH_V0.3.4_REFERENCE.json",
+      "sha256": "643c79786fd773a57966abf7bebb71133ccd5b432d7561e5901d3d435e6b38d4"
+    },
+    {
+      "bytes": 11359,
+      "path": "LICENSE",
+      "sha256": "8c6db340475136df3c1201d458fa5755698eace76e510471ecc9d857d6083dac"
+    },
+    {
+      "bytes": 1016,
+      "path": "LICENSE-DOCS",
+      "sha256": "a93c418facd312f94b040c860b40953106292a4d1ceb82a2fb43298976d335fd"
+    },
+    {
+      "bytes": 419,
+      "path": "NOTICE",
+      "sha256": "d2e17772c8ec60d2dff8b6befe696948fc23d1957e99971aa5aed3027bceaa2b"
+    },
+    {
+      "bytes": 1526,
+      "path": "RIGHTS_MANIFEST.json",
+      "sha256": "d03ad7660c8b3b2f6e8f65008f0d88cb06dccdc53a3b58403f31ad6778f4148f"
+    },
+    {
+      "bytes": 1313,
+      "path": "SAFETY_AND_SECRET_SCAN_REPORT.json",
+      "sha256": "e5fa351911330e774ebf5b518cfa855aa1bd5fc99f6fab9edc58053dd3af2e0a"
+    },
+    {
+      "bytes": 31966,
+      "path": "tools/verify_public_release.py",
+      "sha256": "3f2d762e2271def2ec6c61247d0446aeb7efb5d85aa2edd8c099f87abe041f49"
+    }
+  ],
+  "historical_myth_v0_3_3_embedded": false,
+  "outer_custody_container_embedded": false,
+  "primitive_commons_sha256": "1ffdba41025c0b81da92d0bbb22d0eaa69488cffbc80936365034669110448d7",
+  "publication_authorized": false,
+  "r1_sha256": "075b41ea4186b2d2edb0ed246ab7662cf8bbdf3160294e3eca176b9d0857b108",
+  "raw_private_report_embedded": false,
+  "release_identity": "PROJECT SHADOW 1.0 / R1 REFERENCE / BETA-ACTIVE-TESTING / PRELIVE",
+  "sanitized_myth_successor_embedded": false,
+  "schema": "project-shadow.public-release-package-manifest.v1",
+  "status": "RELEASE_CANDIDATE_AWAITING_EXACT_HASH_AUTHORIZATION"
+}

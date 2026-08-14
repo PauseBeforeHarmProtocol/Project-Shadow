@@ -1,0 +1,38 @@
+{
+  "artifacts": {
+    "optional_external_myth_sidecar_v0_3_4": {
+      "bytes": 1418194,
+      "filename": "Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEARCH_2026-08-14.zip",
+      "publication_authorized": true,
+      "sha256": "3c8c8c0d3d9582c76b685c1b685260cc8179478ab310037c858b46257aa314c7"
+    },
+    "r1_reference": {
+      "bytes": 7679812,
+      "filename": "Project_Shadow_R1_Public_Release_Candidate_2026-08-14.zip",
+      "publication_authorized": true,
+      "sha256": "2f8fe1530b6a83294d15011df95853aaecf08fa4dba756f0c2e91dd089e1b1ec"
+    }
+  },
+  "authorization_date": "2026-08-14",
+  "authorization_quote_exact": "I authorize the exact R1 candidate and separate Myth v0.3.4 sidecar identified above for public release. I authorize preserving the existing Project-Shadow repository privately as Project-Shadow-Private-Archive, creating a fresh clean-history public Project-Shadow repository, publishing the sidecar first and R1 last, and deploying release-status/download updates across all six websites. This does not authorize production or operational deployment, efficacy, safety, certification, or legal-compliance claims.",
+  "authorized_actions": {
+    "create_fresh_clean_history_public_repository": "Project-Shadow",
+    "deploy_release_status_and_download_updates_to_six_websites": true,
+    "preserve_existing_repository_private_as": "Project-Shadow-Private-Archive",
+    "publish_r1_last": true,
+    "publish_sidecar_first": true
+  },
+  "cryptographic_signature_claimed_for_this_receipt": false,
+  "nonclaims": {
+    "certification_claimed": false,
+    "efficacy_claimed": false,
+    "legal_compliance_claimed": false,
+    "operational_deployment_authorized": false,
+    "production_authorized": false,
+    "safety_claimed": false
+  },
+  "release_identity": "PROJECT SHADOW 1.0 / R1 REFERENCE / BETA-ACTIVE-TESTING / PRELIVE",
+  "schema": "project-shadow.public-release-authorization-receipt.v1",
+  "status": "AUTHORIZED_FOR_PUBLIC_RELEASE"
+}
+
