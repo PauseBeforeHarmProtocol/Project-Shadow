@@ -1,12 +1,28 @@
 # Governance evidence
 
-This directory separates two kinds of evidence:
+This directory separates governance and custody evidence:
 
 1. The exact admission record, its Sigstore bundle, and the independent
    signature-verification receipt establish the signature and external-time
    gates for the admitted record.
 2. `RELEASE_AUTHORIZATION_2026-08-14.json` records the later, separate
    maintainer authorization for the exact R1 and v0.3.4 sidecar hashes.
+3. The top-level `PUBLIC_RELEASE_STATUS_2026-08-14.json` resolves those two
+   states without changing the preserved candidate gate: the internal gate is
+   open by design, separate human authorization is present, and the exact
+   artifacts are published.
+4. `PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-15.json` records the later anonymous
+   redownload and matching byte-count/SHA-256 observations for both artifacts.
+5. [`POST_PUBLICATION_ATTESTATION_2026-08-15.json`](POST_PUBLICATION_ATTESTATION_2026-08-15.json)
+   records the historical
+   unsigned commit and lightweight-tag facts, publication order, and exact
+   public identities without rewriting them. Its signature binding is the
+   first `main` commit containing that exact record and is valid only when
+   GitHub displays that introducing commit as **Verified**.
+6. [`MAINTAINER_CONTINUITY.md`](MAINTAINER_CONTINUITY.md) records sole human
+   authority, the absence of a designated successor, the non-authority of AI
+   and automation, and the fail-closed stale-after date without changing any
+   historical release.
 
 The signed admission record did not self-authorize public release. The later
 authorization does not modify the signed record or the exact R1 archive; it

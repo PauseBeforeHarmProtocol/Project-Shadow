@@ -1,0 +1,56 @@
+name: Technical review
+description: Submit a reproducible technical finding about repository or release behavior.
+title: "[Technical review] "
+labels:
+  - question
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for challenging the system. Outside criticism is evidence, not hostility. Do not include secrets, exploit details, personal data, or private evidence; use the private channel in SECURITY.md instead.
+  - type: checkboxes
+    id: disclosure
+    attributes:
+      label: Safe public disclosure
+      options:
+        - label: This report contains no secrets, exploit details, personal data, or private evidence.
+          required: true
+        - label: I understand that a verifier pass is evidence only and is not a safety, efficacy, certification, production-readiness, or legal-compliance claim.
+          required: true
+  - type: input
+    id: artifact
+    attributes:
+      label: Exact artifact or repository revision
+      description: Provide the filename and SHA-256, tag, or full commit SHA.
+      placeholder: "Project_Shadow_...zip — sha256:..."
+    validations:
+      required: true
+  - type: input
+    id: component
+    attributes:
+      label: Affected component or path
+      placeholder: "tools/verify_public_release.py or archive/path"
+    validations:
+      required: true
+  - type: textarea
+    id: finding
+    attributes:
+      label: Finding
+      description: Separate observations, interpretation, uncertainty, and recommendation.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal synthetic reproduction
+      description: List exact commands and non-sensitive inputs.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and expected result
+      description: Include expected behavior, observed behavior, and public sources.
+    validations:
+      required: true

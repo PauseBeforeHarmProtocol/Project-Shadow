@@ -1,0 +1,62 @@
+{
+  "attestation_date": "2026-08-15",
+  "historical_publication_state": {
+    "original_public_repository_commit": "93bde4f2fd4b7b8824622150a03a14cbf5b4b30e",
+    "original_public_repository_commit_signature_status": "UNSIGNED_HISTORICAL_FACT",
+    "original_public_repository_commit_rewritten": false,
+    "released_artifacts_replaced_or_renamed": false,
+    "released_tags_rewritten": false
+  },
+  "published_artifacts": [
+    {
+      "bytes": 1418194,
+      "asset_download_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/download/myth-v0.3.4/Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEARCH_2026-08-14.zip",
+      "filename": "Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEARCH_2026-08-14.zip",
+      "publication_order": 1,
+      "published_before_r1": true,
+      "release_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/tag/myth-v0.3.4",
+      "role": "OPTIONAL_EXTERNAL_RESEARCH_SIDECAR",
+      "sha256": "3c8c8c0d3d9582c76b685c1b685260cc8179478ab310037c858b46257aa314c7",
+      "tag": "myth-v0.3.4",
+      "tag_object_type": "LIGHTWEIGHT_TAG_REF",
+      "tag_signature_status": "UNSIGNED_HISTORICAL_FACT",
+      "tag_target_commit": "93bde4f2fd4b7b8824622150a03a14cbf5b4b30e"
+    },
+    {
+      "bytes": 7679812,
+      "asset_download_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/download/r1-2026-08-14/Project_Shadow_R1_Public_Release_Candidate_2026-08-14.zip",
+      "filename": "Project_Shadow_R1_Public_Release_Candidate_2026-08-14.zip",
+      "publication_order": 2,
+      "release_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/tag/r1-2026-08-14",
+      "role": "CANONICAL_R1_REFERENCE",
+      "sha256": "2f8fe1530b6a83294d15011df95853aaecf08fa4dba756f0c2e91dd089e1b1ec",
+      "tag": "r1-2026-08-14",
+      "tag_object_type": "LIGHTWEIGHT_TAG_REF",
+      "tag_signature_status": "UNSIGNED_HISTORICAL_FACT",
+      "tag_target_commit": "93bde4f2fd4b7b8824622150a03a14cbf5b4b30e"
+    }
+  ],
+  "resolved_state_sources": [
+    "PUBLIC_RELEASE_STATUS_2026-08-14.json",
+    "PUBLICATION_MANIFEST.json",
+    "governance/RELEASE_AUTHORIZATION_2026-08-14.json",
+    "governance/PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-15.json"
+  ],
+  "schema": "project-shadow.post-publication-attestation.v1",
+  "signature_binding": {
+    "commit_locator": "FIRST_MAIN_BRANCH_COMMIT_CONTAINING_THIS_EXACT_RECORD",
+    "method": "GITHUB_VERIFIED_SIGNATURE_ON_INTRODUCING_MAIN_COMMIT",
+    "status": "BOUND_WHEN_INTRODUCING_MAIN_COMMIT_IS_VERIFIED",
+    "verification_instruction": "Open the introducing commit on GitHub and require its signature status to be Verified."
+  },
+  "scope": "POST_PUBLICATION_IDENTITY_AND_GOVERNANCE_ATTESTATION_ONLY",
+  "status": "ATTESTED",
+  "nonclaims": {
+    "certification_claimed": false,
+    "efficacy_claimed": false,
+    "legal_compliance_claimed": false,
+    "operational_deployment_authorized": false,
+    "production_authorized": false,
+    "safety_claimed": false
+  }
+}

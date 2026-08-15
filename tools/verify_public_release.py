@@ -108,6 +108,10 @@ HIGH_CONFIDENCE_SECRET_PATTERNS = (
 )
 MAX_MEMBER_BYTES = 128 * 1024 * 1024
 MAX_TOTAL_BYTES = 768 * 1024 * 1024
+MAX_ARCHIVE_MEMBERS = 10_000
+MAX_ARCHIVE_UNCOMPRESSED_BYTES = 768 * 1024 * 1024
+MAX_INDIVIDUAL_COMPRESSION_RATIO = 200.0
+MAX_CUMULATIVE_COMPRESSION_RATIO = 100.0
 MAX_DEPTH = 8
 
 
@@ -149,8 +153,73 @@ def validate_info(info: zipfile.ZipInfo, label: str) -> None:
     mode = (info.external_attr >> 16) & 0xFFFF
     if stat.S_ISLNK(mode):
         raise VerificationError(f"symbolic link in {label}: {info.filename}")
+    if info.is_dir() and info.file_size != 0:
+        raise VerificationError(
+            f"directory ZIP member carries payload bytes in {label}: {info.filename}"
+        )
     if info.file_size > MAX_MEMBER_BYTES:
         raise VerificationError(f"oversized ZIP member in {label}: {info.filename}")
+
+
+def compression_ratio(uncompressed: int, compressed: int) -> float:
+    """Return a conservative ZIP compression ratio from central-directory metadata."""
+    if uncompressed == 0:
+        return 0.0
+    if compressed <= 0:
+        return float("inf")
+    return uncompressed / compressed
+
+
+def preflight_archive(
+    archive: zipfile.ZipFile,
+    label: str,
+    *,
+    remaining_uncompressed_budget: int | None = None,
+) -> list[zipfile.ZipInfo]:
+    """Reject unsafe ZIP metadata before any member is decompressed or read."""
+    infos = archive.infolist()
+    if len(infos) > MAX_ARCHIVE_MEMBERS:
+        raise VerificationError(
+            f"ZIP member-count limit exceeded in {label}: "
+            f"{len(infos)} > {MAX_ARCHIVE_MEMBERS}"
+        )
+
+    uncompressed_total = 0
+    compressed_total = 0
+    effective_uncompressed_limit = MAX_ARCHIVE_UNCOMPRESSED_BYTES
+    if remaining_uncompressed_budget is not None:
+        effective_uncompressed_limit = min(
+            effective_uncompressed_limit,
+            max(remaining_uncompressed_budget, 0),
+        )
+
+    for info in infos:
+        validate_info(info, label)
+        if info.flag_bits & 0x1:
+            raise VerificationError(f"encrypted ZIP member in {label}: {info.filename}")
+        if info.is_dir():
+            continue
+        uncompressed_total += info.file_size
+        compressed_total += info.compress_size
+        if uncompressed_total > effective_uncompressed_limit:
+            raise VerificationError(
+                f"ZIP cumulative uncompressed-size limit exceeded in {label}: "
+                f"{uncompressed_total} > {effective_uncompressed_limit}"
+            )
+        ratio = compression_ratio(info.file_size, info.compress_size)
+        if ratio > MAX_INDIVIDUAL_COMPRESSION_RATIO:
+            raise VerificationError(
+                f"ZIP member compression-ratio limit exceeded in {label}: "
+                f"{info.filename} ({ratio:.2f} > {MAX_INDIVIDUAL_COMPRESSION_RATIO:.2f})"
+            )
+
+    cumulative_ratio = compression_ratio(uncompressed_total, compressed_total)
+    if cumulative_ratio > MAX_CUMULATIVE_COMPRESSION_RATIO:
+        raise VerificationError(
+            f"ZIP cumulative compression-ratio limit exceeded in {label}: "
+            f"{cumulative_ratio:.2f} > {MAX_CUMULATIVE_COMPRESSION_RATIO:.2f}"
+        )
+    return infos
 
 
 def load_target(path: Path) -> dict[str, bytes]:
@@ -172,8 +241,7 @@ def load_target(path: Path) -> dict[str, bytes]:
             seen: set[str] = set()
             roots: set[str] = set()
             rows: list[tuple[zipfile.ZipInfo, PurePosixPath]] = []
-            for info in archive.infolist():
-                validate_info(info, path.name)
+            for info in preflight_archive(archive, path.name):
                 normalized = str(PurePosixPath(info.filename))
                 if normalized in seen:
                     raise VerificationError(f"duplicate ZIP member: {normalized}")
@@ -302,8 +370,13 @@ def recursive_scan(path: str, data: bytes, findings: list[str], budget: list[int
     try:
         with zipfile.ZipFile(io.BytesIO(data), "r") as archive:
             seen: set[str] = set()
-            for info in sorted(archive.infolist(), key=lambda item: item.filename):
-                validate_info(info, path)
+            remaining_budget = MAX_TOTAL_BYTES - budget[0]
+            infos = preflight_archive(
+                archive,
+                path,
+                remaining_uncompressed_budget=remaining_budget,
+            )
+            for info in sorted(infos, key=lambda item: item.filename):
                 normalized = str(PurePosixPath(info.filename))
                 if normalized in seen:
                     raise VerificationError(f"duplicate nested ZIP member in {path}: {normalized}")

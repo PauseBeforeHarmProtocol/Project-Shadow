@@ -1,3 +1,6 @@
+**Optional, default-off, mixed-rights external research—not canonical R1 and
+not production or operational software.**
+
 # Project Shadow Myth Sidecar v0.3.4 — Optional External Research
 
 **Tag:** `myth-v0.3.4`  
@@ -11,6 +14,14 @@ embedded in canonical R1, not an admitted R1 descendant, not R1-conforming,
 default off, terminal only, nonauthorizing, and ineligible for production or
 operational deployment.
 
+The earlier admission record's Myth v0.3.3 state remains
+`ACKNOWLEDGE_ONLY`; it was not silently promoted or rewritten. Publishing this
+exact v0.3.4 archive was a separate, later human exact-hash decision recorded
+in the commit-pinned [human-readable authorization
+receipt][authorization-receipt] and [machine-readable authorization
+record][authorization-json]. That publication decision does not admit the
+sidecar into R1 or alter its default-off, external, nonauthorizing status.
+
 The archive carries its own controlling rights, provenance, contributor,
 notice, manifest, and checksum files. All third-party rights remain with their
 respective holders. No affiliation, endorsement, sponsorship, approval,
@@ -23,5 +34,9 @@ extraction, run:
 python3 -I -S -B tools/verify_package.py .
 ```
 
-This sidecar release must be published before the canonical R1 release.
+Download the named release asset above. Do **not** substitute GitHub's
+automatically generated “Source code (zip)” or “Source code (tar.gz)” archives;
+those are repository snapshots, not the released sidecar archive.
 
+[authorization-receipt]: https://github.com/PauseBeforeHarmProtocol/Project-Shadow/blob/93bde4f2fd4b7b8824622150a03a14cbf5b4b30e/governance/RELEASE_AUTHORIZATION_2026-08-14.md
+[authorization-json]: https://github.com/PauseBeforeHarmProtocol/Project-Shadow/blob/93bde4f2fd4b7b8824622150a03a14cbf5b4b30e/governance/RELEASE_AUTHORIZATION_2026-08-14.json

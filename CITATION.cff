@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: >-
+  If you use or discuss Project Shadow, cite this repository and the exact
+  release artifact. Read RIGHTS.md because the repository and releases are
+  mixed-rights and no blanket license applies.
+title: Project Shadow
+type: software
+authors:
+  - family-names: Linstrum
+    given-names: Phillip
+version: "1.0 R1 Reference (PRELIVE)"
+date-released: 2026-08-14
+repository-code: https://github.com/PauseBeforeHarmProtocol/Project-Shadow
+repository-artifact: https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/tag/r1-2026-08-14
+url: https://projectshadow.frylock117.chatgpt.site
+abstract: >-
+  A public PRELIVE reference system for pause, evidence, bounded decision
+  gates, verification, and human escalation. Publication is not production or
+  operational deployment and makes no efficacy, safety, certification, or
+  legal-compliance claim.
+keywords:
+  - quality assurance
+  - harm reduction
+  - decision support
+  - verification
+  - governance

@@ -1,0 +1,43 @@
+{
+  "artifacts": [
+    {
+      "bytes_expected": 7679812,
+      "bytes_observed": 7679812,
+      "canonical_download_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/download/r1-2026-08-14/Project_Shadow_R1_Public_Release_Candidate_2026-08-14.zip",
+      "filename": "Project_Shadow_R1_Public_Release_Candidate_2026-08-14.zip",
+      "http_status": 200,
+      "identity_verified": true,
+      "role": "CANONICAL_R1_REFERENCE",
+      "sha256_expected": "2f8fe1530b6a83294d15011df95853aaecf08fa4dba756f0c2e91dd089e1b1ec",
+      "sha256_observed": "2f8fe1530b6a83294d15011df95853aaecf08fa4dba756f0c2e91dd089e1b1ec"
+    },
+    {
+      "bytes_expected": 1418194,
+      "bytes_observed": 1418194,
+      "canonical_download_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/download/myth-v0.3.4/Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEARCH_2026-08-14.zip",
+      "filename": "Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEARCH_2026-08-14.zip",
+      "http_status": 200,
+      "identity_verified": true,
+      "role": "OPTIONAL_EXTERNAL_RESEARCH_SIDECAR",
+      "sha256_expected": "3c8c8c0d3d9582c76b685c1b685260cc8179478ab310037c858b46257aa314c7",
+      "sha256_observed": "3c8c8c0d3d9582c76b685c1b685260cc8179478ab310037c858b46257aa314c7"
+    }
+  ],
+  "method": {
+    "anonymous_download": true,
+    "followed_redirects": true,
+    "hash_algorithm": "SHA-256",
+    "transport": "HTTPS"
+  },
+  "nonclaims": {
+    "certification_claimed": false,
+    "efficacy_claimed": false,
+    "legal_compliance_claimed": false,
+    "operational_deployment_authorized": false,
+    "production_authorized": false,
+    "safety_claimed": false
+  },
+  "schema": "project-shadow.public-redownload-verification.v1",
+  "status": "VERIFIED",
+  "verified_utc": "2026-08-15T10:53:27Z"
+}
