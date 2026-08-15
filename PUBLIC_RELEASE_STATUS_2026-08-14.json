@@ -1,0 +1,94 @@
+{
+  "candidate_internal_publication_gate": {
+    "external_to_candidate": true,
+    "id": "SEPARATE_MAINTAINER_EXACT_CANDIDATE_HASH_AUTHORIZATION",
+    "open_by_design": true,
+    "preserved_without_modification": true,
+    "satisfied_inside_candidate": false,
+    "source": {
+      "json_pointer": "/post_build_publication_gate",
+      "path": "governance/PROJECT_SHADOW_RELEASE_GATES_2026-08-14.json"
+    }
+  },
+  "derived_record": true,
+  "derived_utc": "2026-08-15T10:53:27Z",
+  "nonclaims": {
+    "certification_claimed": false,
+    "efficacy_claimed": false,
+    "legal_compliance_claimed": false,
+    "operational_deployment_authorized": false,
+    "production_authorized": false,
+    "safety_claimed": false,
+    "source": {
+      "json_pointer": "/nonclaims",
+      "path": "governance/RELEASE_AUTHORIZATION_2026-08-14.json"
+    }
+  },
+  "public_artifacts": [
+    {
+      "bytes": 1418194,
+      "canonical_r1": false,
+      "download_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/download/myth-v0.3.4/Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEARCH_2026-08-14.zip",
+      "filename": "Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEARCH_2026-08-14.zip",
+      "github_release_api_source": "https://api.github.com/repos/PauseBeforeHarmProtocol/Project-Shadow/releases/tags/myth-v0.3.4",
+      "published": true,
+      "public_redownload_identity_verified": true,
+      "redownload_verification_source": {
+        "json_pointer": "/artifacts/1",
+        "path": "governance/PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-15.json"
+      },
+      "role": "OPTIONAL_EXTERNAL_RESEARCH_SIDECAR",
+      "sha256": "3c8c8c0d3d9582c76b685c1b685260cc8179478ab310037c858b46257aa314c7",
+      "source": {
+        "json_pointer": "/releases/0",
+        "path": "PUBLICATION_MANIFEST.json"
+      },
+      "tag": "myth-v0.3.4"
+    },
+    {
+      "bytes": 7679812,
+      "canonical_r1": true,
+      "download_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/download/r1-2026-08-14/Project_Shadow_R1_Public_Release_Candidate_2026-08-14.zip",
+      "filename": "Project_Shadow_R1_Public_Release_Candidate_2026-08-14.zip",
+      "github_release_api_source": "https://api.github.com/repos/PauseBeforeHarmProtocol/Project-Shadow/releases/tags/r1-2026-08-14",
+      "published": true,
+      "public_redownload_identity_verified": true,
+      "redownload_verification_source": {
+        "json_pointer": "/artifacts/0",
+        "path": "governance/PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-15.json"
+      },
+      "role": "R1_REFERENCE",
+      "sha256": "2f8fe1530b6a83294d15011df95853aaecf08fa4dba756f0c2e91dd089e1b1ec",
+      "source": {
+        "json_pointer": "/releases/1",
+        "path": "PUBLICATION_MANIFEST.json"
+      },
+      "tag": "r1-2026-08-14"
+    }
+  ],
+  "release_date": "2026-08-14",
+  "release_identity": "PROJECT SHADOW 1.0 / R1 REFERENCE / BETA-ACTIVE-TESTING / PRELIVE",
+  "resolution": {
+    "exact_public_artifacts_published": true,
+    "publication_status": "PUBLISHED",
+    "reason": "The preserved candidate does not self-authorize. A later, separate human authorization names the exact R1 and Myth hashes, and both public release assets match those identities on anonymous redownload.",
+    "source_records": [
+      "governance/PROJECT_SHADOW_RELEASE_GATES_2026-08-14.json",
+      "governance/RELEASE_AUTHORIZATION_2026-08-14.json",
+      "PUBLICATION_MANIFEST.json",
+      "SHA256SUMS",
+      "governance/PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-15.json"
+    ]
+  },
+  "schema": "project-shadow.public-release-status.v1",
+  "separate_human_authorization": {
+    "present": true,
+    "status": "AUTHORIZED_FOR_PUBLIC_RELEASE",
+    "source": {
+      "json_pointer": "/status",
+      "path": "governance/RELEASE_AUTHORIZATION_2026-08-14.json"
+    }
+  },
+  "status_scope": "PUBLICATION_ONLY; NOT OPERATIONAL OR PRODUCTION DEPLOYMENT",
+  "warning": "This derived record resolves publication state above preserved evidence. It does not alter, replace, or back-write the candidate's internal gate or any signed record."
+}

@@ -1,0 +1,42 @@
+name: Public evidence verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 11 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-evidence-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Read-only custody and release checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out exact repository state
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+
+      - name: Run positive and fail-closed mutation tests
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python3 -I -S -B -m unittest discover -s tests -v
+
+      - name: Verify repository evidence and exact public assets
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: >-
+          python3 -I -S -B tools/verify_repository_evidence.py
+          --online
+          --download-dir "${RUNNER_TEMP}/project-shadow-release-assets"

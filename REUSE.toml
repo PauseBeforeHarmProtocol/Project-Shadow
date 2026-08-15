@@ -1,0 +1,38 @@
+version = 1
+
+[[annotations]]
+path = [
+  ".github/ISSUE_TEMPLATE/*.yml",
+  "CITATION.cff",
+  "CODE_OF_CONDUCT.md",
+  "CONTRIBUTING.md",
+  "PUBLICATION_MANIFEST.json",
+  "PUBLIC_RELEASE_STATUS_2026-08-14.json",
+  "README.md",
+  "RELEASES.md",
+  "REUSE.toml",
+  "RIGHTS.md",
+  "SECURITY.md",
+  "docs/*.md",
+  "governance/MAINTAINER_CONTINUITY.md",
+  "governance/README.md",
+  "release-notes/*.md",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Phillip Linstrum"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+[[annotations]]
+path = ["tools/*.py"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Phillip Linstrum"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = [
+  ".github/workflows/*.yml",
+  "tests/*.py",
+]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Phillip Linstrum"
+SPDX-License-Identifier = "Apache-2.0"

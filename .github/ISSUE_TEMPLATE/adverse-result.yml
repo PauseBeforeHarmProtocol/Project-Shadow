@@ -1,0 +1,72 @@
+name: False positive, false negative, or adverse result
+description: Report an unexpected result using synthetic or safely publishable evidence.
+title: "[Adverse result] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        An adverse result is useful evidence. Do not include real personal data, confidential material, exploit details, or private evidence. Use SECURITY.md for sensitive reports.
+  - type: checkboxes
+    id: disclosure
+    attributes:
+      label: Safe public disclosure
+      options:
+        - label: The report and reproduction use only synthetic or intentionally public, non-sensitive material.
+          required: true
+        - label: I am not presenting this result as proof of safety, efficacy, certification, production readiness, or legal compliance.
+          required: true
+  - type: dropdown
+    id: result_type
+    attributes:
+      label: Result type
+      options:
+        - False positive
+        - False negative
+        - Unexpected HOLD or escalation
+        - Failure to HOLD or escalate
+        - Compatibility or portability failure
+        - Other adverse result
+    validations:
+      required: true
+  - type: input
+    id: artifact
+    attributes:
+      label: Exact artifact or revision
+      description: Provide filename and SHA-256, tag, or full commit SHA.
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: Synthetic input and preconditions
+      description: Include configuration, profile, and relevant environment details.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result and basis
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed result
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Potential impact and uncertainty
+      description: Distinguish demonstrated effects from reasonable concerns or unknowns.
+    validations:
+      required: true

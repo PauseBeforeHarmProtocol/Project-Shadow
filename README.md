@@ -1,5 +1,12 @@
 # Project Shadow
 
+> **Mixed-rights repository.** This repository is not one blanket
+> Apache-2.0 work. Apache-2.0 applies only to eligible original software;
+> CC BY 4.0 applies only to eligible original documentation and
+> machine-readable controls. Preserved governance evidence and both release
+> archives retain their own attached or path-scoped terms. Read
+> [`RIGHTS.md`](RIGHTS.md) before reuse.
+
 **PROJECT SHADOW 1.0 / R1 REFERENCE / BETA-ACTIVE-TESTING / PRELIVE**
 
 This clean-history repository is the public landing surface for two exact,
@@ -20,6 +27,11 @@ authorized bytes exactly. The archive's internal status was written before the
 separate exact-hash authorization. That external authorization is recorded in
 [`governance/RELEASE_AUTHORIZATION_2026-08-14.json`](governance/RELEASE_AUTHORIZATION_2026-08-14.json).
 The archive itself must not be rewritten to change its internal status.
+The resolved, machine-readable state above that preserved gate is recorded in
+[`PUBLIC_RELEASE_STATUS_2026-08-14.json`](PUBLIC_RELEASE_STATUS_2026-08-14.json).
+The historical unsigned commit/tag facts and the later commit-bound attestation
+are recorded in
+[`governance/POST_PUBLICATION_ATTESTATION_2026-08-15.json`](governance/POST_PUBLICATION_ATTESTATION_2026-08-15.json).
 
 ## Download order and separation
 
@@ -32,8 +44,10 @@ terms.
 ## Verify before use
 
 Verify the downloaded ZIP's byte count and SHA-256 before extracting it. Then
-run the verifier embedded in the extracted package. Exact Windows, macOS, and
-Linux commands are in [`docs/VERIFY_RELEASES.md`](docs/VERIFY_RELEASES.md).
+run the current repository verifier against the outer ZIP so its prospective
+archive-preflight limits apply, followed by the frozen verifier embedded in the
+extracted package. Exact Windows, macOS, and Linux instructions are in
+[`docs/VERIFY_RELEASES.md`](docs/VERIFY_RELEASES.md).
 
 ## Scope boundary
 
@@ -41,6 +55,11 @@ Public release is authorized only within `PROJECT SHADOW 1.0 / R1 REFERENCE /
 BETA-ACTIVE-TESTING / PRELIVE`. This release does not authorize production or
 operational deployment, efficacy, safety, certification, or legal-compliance
 claims. See [`docs/SCOPE_AND_NONCLAIMS.md`](docs/SCOPE_AND_NONCLAIMS.md).
+
+Current sole-maintainer authority, the absence of a designated successor, the
+non-authority of AI and automation, and the fail-closed stale-after date are
+recorded in
+[`governance/MAINTAINER_CONTINUITY.md`](governance/MAINTAINER_CONTINUITY.md).
 
 ## Rights
 
@@ -50,3 +69,11 @@ outer blanket license to either archive and does not grant third-party rights,
 affiliation, endorsement, or legal clearance. Read [`RIGHTS.md`](RIGHTS.md)
 before redistribution or adaptation.
 
+## Participate and challenge
+
+Technical criticism, correction evidence, false positives, false negatives,
+and adverse results are welcome. Outside criticism is evidence to evaluate,
+not hostility to suppress. Start with [`CONTRIBUTING.md`](CONTRIBUTING.md) and
+use the matching issue form. Report vulnerabilities privately under
+[`SECURITY.md`](SECURITY.md); never place exploit details or private evidence
+in a public issue.

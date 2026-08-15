@@ -3,6 +3,16 @@
 This repository does not impose one blanket license over Project Shadow's two
 release archives.
 
+Full reference license texts are preserved in [`LICENSES/`](LICENSES/):
+
+- `LICENSES/Apache-2.0.txt`; and
+- `LICENSES/CC-BY-4.0.txt`.
+
+Those texts do not expand the path-scoped grants described below. The root
+`LICENSE` file is an Apache-2.0 reference for eligible original software, not a
+whole-repository classification. [`REUSE.toml`](REUSE.toml) supplies practical
+SPDX mappings for clearly eligible repository-authored files.
+
 ## Canonical R1 archive
 
 `Project_Shadow_R1_Public_Release_Candidate_2026-08-14.zip` contains its own
@@ -35,4 +45,3 @@ documentation do not expand the rights of either archive.
 No license or notice in this repository grants trademark rights, third-party
 rights, endorsement, certification, safety, efficacy, production authority,
 operational-deployment authority, or a legal-compliance opinion.
-

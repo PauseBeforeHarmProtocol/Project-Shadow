@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private vulnerability report
+    url: https://github.com/PauseBeforeHarmProtocol/Project-Shadow/security/advisories/new
+    about: Report vulnerabilities, exploit details, secrets, or sensitive evidence privately.
+  - name: Security policy and email fallback
+    url: https://github.com/PauseBeforeHarmProtocol/Project-Shadow/security/policy
+    about: Read the private-reporting instructions and monitored-email fallback.

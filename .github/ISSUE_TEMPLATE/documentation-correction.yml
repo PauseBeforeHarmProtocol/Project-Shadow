@@ -1,0 +1,56 @@
+name: Documentation or record correction
+description: Propose a sourced correction without rewriting preserved historical evidence.
+title: "[Correction] "
+labels:
+  - documentation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Corrections are welcome. Preserved signed records, historical tags, release assets, and the candidate's internal gate will not be silently rewritten; a later correction or derived record may resolve their current meaning.
+  - type: checkboxes
+    id: disclosure
+    attributes:
+      label: Safe public disclosure
+      options:
+        - label: This report contains no secrets, exploit details, personal data, or private evidence.
+          required: true
+  - type: input
+    id: location
+    attributes:
+      label: Exact location
+      description: Give a repository path and section, JSON Pointer, public URL, or release-note paragraph.
+      placeholder: "README.md — Exact releases"
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current statement
+      description: Quote only the minimum text needed to locate the issue.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Proposed correction
+      description: State the corrected text or machine-readable value.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Supporting evidence
+      description: Link primary public sources or exact repository records and explain what each establishes.
+    validations:
+      required: true
+  - type: dropdown
+    id: custody
+    attributes:
+      label: Does this require changing preserved historical evidence?
+      options:
+        - "No — add or update a prospective/derived record"
+        - "Unsure — maintainer review needed"
+        - "Yes — explain why, understanding historical evidence will not be rewritten"
+    validations:
+      required: true
