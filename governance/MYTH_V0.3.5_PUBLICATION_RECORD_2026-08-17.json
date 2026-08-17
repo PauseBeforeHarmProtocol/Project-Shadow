@@ -1,0 +1,55 @@
+{
+  "schema": "project-shadow.myth-publication-record.v1",
+  "recorded_on": "2026-08-17",
+  "artifact": {
+    "filename": "Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+    "bytes": 1428812,
+    "sha256": "2b55867fe7c502a0defd8d6f2e9b53fbd1caaf1b0f225a438bd45b04a3e7bae2"
+  },
+  "publication_authorized": true,
+  "authorization_basis_type": "SCOPED_MAINTAINER_DIRECTIVE",
+  "maintainer_directive": "Then create a successor I guess, test it and and upload it to github and huggingface. I want it to read correctly.",
+  "exact_hash_separately_confirmed_by_maintainer": false,
+  "scope_resolution": "Publish the tested status-vocabulary successor as an authorized public optional companion while preserving mixed-rights, default-off, not-R1-admitted, nonauthorizing, no-deployment, and nested-v0.1.1 CAPA boundaries.",
+  "github": {
+    "role": "CANONICAL_CUSTODY_AND_RELEASE_HOST",
+    "release_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/tag/myth-v0.3.5",
+    "tag": "myth-v0.3.5",
+    "tag_target_commit": "9f43d4c1cd8b7af94bcac68ecf73425e1342acc7",
+    "release_id": 371850787,
+    "release_immutable": true,
+    "release_draft": false,
+    "release_prerelease": false,
+    "asset_id": 518314899,
+    "asset_bytes": 1428812,
+    "asset_digest": "sha256:2b55867fe7c502a0defd8d6f2e9b53fbd1caaf1b0f225a438bd45b04a3e7bae2",
+    "public_platform_digest_matches_tested_artifact": true,
+    "r1_remains_latest_release": true
+  },
+  "hugging_face": {
+    "role": "BYTE_IDENTICAL_CONVENIENCE_MIRROR",
+    "space_url": "https://huggingface.co/spaces/ProjectShadow/project-shadow-r1-reference",
+    "mirror_path": "releases/myth-v0.3.5/Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+    "mirror_commit": "43908132058855fa2320b00a4dbdd73699656897",
+    "storage": "XET",
+    "xet_hash": "34c08cde8a56bf97d425c853ab312f64a51f4a2a3c35306bcff5987f08b6606d",
+    "public_pointer_sha256": "2b55867fe7c502a0defd8d6f2e9b53fbd1caaf1b0f225a438bd45b04a3e7bae2",
+    "public_pointer_digest_matches_tested_artifact": true
+  },
+  "verification": {
+    "tested_artifact_sha256_matches_github_public_asset_digest": true,
+    "tested_artifact_sha256_matches_hugging_face_public_pointer_sha256": true,
+    "github_and_hugging_face_public_digests_match_each_other": true,
+    "binary_redownload_performed_in_this_record": false,
+    "verification_scope": "PUBLIC_PLATFORM_METADATA_AND_XET_POINTER_IDENTITY"
+  },
+  "relationship_to_r1": "SEPARATE_OPTIONAL_COMPANION_NOT_R1_ADMITTED",
+  "open_capa": "PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001",
+  "capa_scope": "NESTED_GENERIC_MYTH_V0_1_1_ONLY",
+  "capa_closed_by_this_publication": false,
+  "r1_bytes_modified": false,
+  "predecessor_v0_3_4_modified": false,
+  "production_or_operational_deployment_authorized": false,
+  "operational_authority_granted": false,
+  "third_party_clearance_claimed": false
+}
