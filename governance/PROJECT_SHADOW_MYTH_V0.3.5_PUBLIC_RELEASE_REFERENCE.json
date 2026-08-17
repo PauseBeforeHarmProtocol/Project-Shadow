@@ -1,0 +1,19 @@
+{
+  "artifact": {
+    "bytes": 1428812,
+    "filename": "Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+    "sha256": "2b55867fe7c502a0defd8d6f2e9b53fbd1caaf1b0f225a438bd45b04a3e7bae2"
+  },
+  "canonical_custody_host": "GITHUB_RELEASE_ASSET",
+  "created_on": "2026-08-17",
+  "github_release_tag": "myth-v0.3.5",
+  "hugging_face_mirror_path": "releases/myth-v0.3.5/Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+  "predecessor": {
+    "mutated": false,
+    "sha256": "3c8c8c0d3d9582c76b685c1b685260cc8179478ab310037c858b46257aa314c7",
+    "version": "0.3.4"
+  },
+  "publication_state_at_record_creation": "TESTED_AWAITING_GITHUB_AND_HUGGING_FACE_PUBLICATION",
+  "schema": "project-shadow.myth-public-release-reference.v1",
+  "version": "0.3.5"
+}
