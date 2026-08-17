@@ -1,0 +1,39 @@
+{
+  "schema": "project-shadow.public-contact-status.v1",
+  "effective_date": "2026-08-17",
+  "current_public_contact": "projectshadowqa@protonmail.com",
+  "subject_prefixes": [
+    "[CORRECTION]",
+    "[CAPA]",
+    "[SECURITY]",
+    "[RESEARCH]",
+    "[PRESS]",
+    "[COLLABORATION]",
+    "[CONDUCT]"
+  ],
+  "human_readable_policy": "CONTACT_AND_CORRECTIONS.md",
+  "security_policy": "SECURITY.md",
+  "historical_address_policy": {
+    "preserve_exact_hash_archives": true,
+    "preserve_signed_records_and_certificates": true,
+    "preserve_commits_tags_and_quoted_evidence": true,
+    "superseded_for_new_correspondence": true,
+    "note": "Historical addresses and certificate identities remain where required for custody or cryptographic verification. They are not current correspondence routes."
+  },
+  "artifact_effect": {
+    "r1_archive_modified": false,
+    "myth_sidecar_modified": false,
+    "release_hashes_changed": false,
+    "admission_or_authorization_changed": false,
+    "production_or_operational_authority_created": false
+  },
+  "nonclaims": {
+    "certification_claimed": false,
+    "efficacy_claimed": false,
+    "independent_validation_claimed": false,
+    "legal_compliance_claimed": false,
+    "production_authorized": false,
+    "operational_deployment_authorized": false,
+    "safety_claimed": false
+  }
+}
