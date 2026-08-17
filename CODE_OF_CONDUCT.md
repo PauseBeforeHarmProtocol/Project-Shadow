@@ -22,13 +22,14 @@ after being directed to the private security channel are not acceptable.
 
 ## Reporting and response
 
-For sensitive conduct reports, email
-`pausebeforeharmprotocol_PBHP@protonmail.com` with the subject
-`PROJECT SHADOW CONDUCT REPORT`. Do not place private evidence in a public
-issue. Maintainers may remove content, limit participation, or refer a security
-matter to the process in `SECURITY.md`. Decisions should be proportionate,
-documented where privacy permits, and open to correction when new evidence
-appears.
+For sensitive conduct reports, email `projectshadowqa@protonmail.com` with the
+subject prefix `[CONDUCT]`. Do not place private evidence in a public issue.
+Maintainers may remove content, limit participation, or refer a security matter
+to the process in `SECURITY.md`. Decisions should be proportionate, documented
+where privacy permits, and open to correction when new evidence appears.
+
+The broader contact and correction policy is in
+[`CONTACT_AND_CORRECTIONS.md`](CONTACT_AND_CORRECTIONS.md).
 
 This code governs participation only. It does not certify the project or
 authorize production or operational deployment.
