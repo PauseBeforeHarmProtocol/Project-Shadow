@@ -13,7 +13,12 @@
     "sha256": "3c8c8c0d3d9582c76b685c1b685260cc8179478ab310037c858b46257aa314c7",
     "version": "0.3.4"
   },
-  "publication_state_at_record_creation": "TESTED_AWAITING_GITHUB_AND_HUGGING_FACE_PUBLICATION",
+  "github_release_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/tag/myth-v0.3.5",
+  "github_release_commit": "9f43d4c1cd8b7af94bcac68ecf73425e1342acc7",
+  "hugging_face_space_url": "https://huggingface.co/spaces/ProjectShadow/project-shadow-r1-reference",
+  "hugging_face_mirror_commit": "43908132058855fa2320b00a4dbdd73699656897",
+  "publication_state_at_record_creation": "TESTED_AND_PUBLISHED_TO_GITHUB_AND_HUGGING_FACE",
+  "publication_record": "governance/MYTH_V0.3.5_PUBLICATION_RECORD_2026-08-17.json",
   "schema": "project-shadow.myth-public-release-reference.v1",
   "version": "0.3.5"
 }
