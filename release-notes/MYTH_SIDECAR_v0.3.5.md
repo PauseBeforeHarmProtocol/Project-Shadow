@@ -39,6 +39,6 @@ After extraction, run:
 python3 -I -S -B tools/verify_package.py . --run-tests --r1-family-zip /path/to/Project_Shadow_R1_BETA2_Runtime_Successor_Candidate_2026-08-10.zip
 ```
 
-Verify the byte count and SHA-256 before extraction. GitHub and Hugging Face host the same exact ZIP bytes; do not substitute an automatically generated source archive or repackaged copy. A `PASS` establishes only the implemented integrity, schema, regression, and bounded compatibility checks. It does not establish safety, efficacy, legal clearance, R1 admission, or production readiness.
+Verify the byte count and SHA-256 before extraction. GitHub is the canonical custody host; any Hugging Face convenience mirror must carry the same exact ZIP bytes. Do not substitute an automatically generated source archive or repackaged copy. A `PASS` establishes only the implemented integrity, schema, regression, and bounded compatibility checks. It does not establish safety, efficacy, legal clearance, R1 admission, or production readiness.
 
 [Preserved v0.3.4 public predecessor](https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/tag/myth-v0.3.4)
