@@ -1,0 +1,21 @@
+{
+  "authorization_basis_type": "SCOPED_MAINTAINER_DIRECTIVE",
+  "authorized_actions": [
+    "CREATE_STATUS_VOCABULARY_SUCCESSOR",
+    "RUN_RELEASE_VERIFICATION",
+    "PUBLISH_TO_GITHUB",
+    "MIRROR_EXACT_ARTIFACT_TO_HUGGING_FACE"
+  ],
+  "capa_closed": false,
+  "date": "2026-08-17",
+  "exact_hash_separately_confirmed_by_maintainer": false,
+  "maintainer_directive": "Then create a successor I guess, test it and and upload it to github and huggingface. I want it to read correctly.",
+  "nonauthority_boundaries_preserved": true,
+  "predecessor_mutation_authorized": false,
+  "production_or_operational_deployment_authorized": false,
+  "public_release_authorized_within_scope": true,
+  "schema": "project-shadow.myth-release-authorization.v1",
+  "scope_resolution": "Create and publish a tested v0.3.5 successor that distinguishes authorized public distribution from not-R1-admitted status while preserving mixed-rights, default-off, nonauthorizing, no-deployment, and nested-v0.1.1 CAPA boundaries.",
+  "third_party_rights_clearance_claimed": false,
+  "version": "0.3.5"
+}
