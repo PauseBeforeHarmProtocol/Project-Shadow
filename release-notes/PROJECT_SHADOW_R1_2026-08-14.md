@@ -6,7 +6,12 @@
 **Release identity:** `PROJECT SHADOW 1.0 / R1 REFERENCE / BETA-ACTIVE-TESTING / PRELIVE`  
 **Asset:** `Project_Shadow_R1_Public_Release_Candidate_2026-08-14.zip`  
 **Bytes:** 7,679,812  
-**SHA-256:** `2f8fe1530b6a83294d15011df95853aaecf08fa4dba756f0c2e91dd089e1b1ec`
+**SHA-256:** `2f8fe1530b6a83294d15011df95853aaecf08fa4dba756f0c2e91dd089e1b1ec`  
+**Current contact:** `projectshadowqa@protonmail.com`
+
+Use `[CORRECTION]`, `[CAPA]`, `[SECURITY]`, `[RESEARCH]`, `[PRESS]`, or
+`[COLLABORATION]` in the subject line. See
+[`CONTACT_AND_CORRECTIONS.md`](../CONTACT_AND_CORRECTIONS.md).
 
 This is the exact-hash authorized canonical R1 reference archive. Its preserved
 filename and internal status retain the build-time word `Candidate`; the later
@@ -62,6 +67,11 @@ cosign verify-blob \
   --certificate-oidc-issuer 'https://github.com/login/oauth' \
   governance/PROJECT_SHADOW_FABLE7_SCOPED_MAINTAINER_ADMISSION_RECORD_2026-08-12.json
 ```
+
+The certificate identity above is the frozen historical signing identity in the
+preserved Sigstore evidence. It is required for verification and is **not** the
+current Project Shadow contact mailbox. Do not replace it with
+`projectshadowqa@protonmail.com` in the verification command.
 
 Before using that direct command, separately confirm the Linux/amd64 Cosign
 SHA-256 `4629c757b7618056f8ddd7e2625ae9fdd94c0372a65049520bc7d9df9efc7f71`
