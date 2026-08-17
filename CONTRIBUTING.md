@@ -4,10 +4,17 @@ Project Shadow welcomes rigorous technical review, documentation corrections,
 false-positive and false-negative reports, and adverse results. Outside
 criticism is evidence to evaluate, not hostility to suppress.
 
+## Current contact
+
+For corrections, CAPA proposals, research, press, collaboration, conduct, or a
+private security fallback, use `projectshadowqa@protonmail.com` with the
+subject prefix defined in
+[`CONTACT_AND_CORRECTIONS.md`](CONTACT_AND_CORRECTIONS.md).
+
 ## Before opening a contribution
 
-1. Read `README.md`, `RIGHTS.md`, `SECURITY.md`, and
-   `docs/SCOPE_AND_NONCLAIMS.md`.
+1. Read `README.md`, `RIGHTS.md`, `SECURITY.md`,
+   `CONTACT_AND_CORRECTIONS.md`, and `docs/SCOPE_AND_NONCLAIMS.md`.
 2. Select the matching issue form before proposing a pull request.
 3. Use synthetic, non-sensitive evidence wherever possible.
 4. Report vulnerabilities privately under `SECURITY.md`; never publish exploit
@@ -20,6 +27,7 @@ criticism is evidence to evaluate, not hostility to suppress.
 - corrections tied to a precise path, statement, and source;
 - verifier mutation cases that fail closed;
 - false-positive, false-negative, or adverse-result reports;
+- correction and CAPA proposals with an effectiveness-check method;
 - accessibility, portability, and documentation improvements; and
 - narrowly scoped proposals that preserve Project Shadow's governance and
   nonclaim boundaries.
@@ -37,6 +45,8 @@ criticism is evidence to evaluate, not hostility to suppress.
   self-authorizes publication, production, or operational deployment.
 - Do not add efficacy, safety, certification, production-readiness, or
   legal-compliance claims.
+- Historical email addresses and certificate identities in preserved evidence
+  must not be rewritten merely to match the current contact mailbox.
 
 ## Pull requests
 

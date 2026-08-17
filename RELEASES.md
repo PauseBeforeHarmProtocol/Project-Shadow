@@ -19,6 +19,17 @@ authorized R1 or sidecar artifacts.
 Exact filenames, sizes, hashes, and ordering are machine-readable in
 [`PUBLICATION_MANIFEST.json`](PUBLICATION_MANIFEST.json).
 
+## Current contact
+
+For release questions, corrections, CAPA proposals, research, press,
+collaboration, or security routing, use `projectshadowqa@protonmail.com` with
+the subject prefix described in
+[`CONTACT_AND_CORRECTIONS.md`](CONTACT_AND_CORRECTIONS.md).
+
+Historical addresses and signing identities in exact-hash archives, signed
+records, certificates, tags, commits, and verification commands remain
+preserved evidence. They are not current correspondence routes.
+
 ## Prospective custody procedure
 
 The two 2026-08-14 tags are preserved lightweight tags pointing to the original

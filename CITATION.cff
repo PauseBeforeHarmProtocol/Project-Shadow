@@ -8,6 +8,7 @@ type: software
 authors:
   - family-names: Linstrum
     given-names: Phillip
+    email: projectshadowqa@protonmail.com
 version: "1.0 R1 Reference (PRELIVE)"
 date-released: 2026-08-14
 repository-code: https://github.com/PauseBeforeHarmProtocol/Project-Shadow

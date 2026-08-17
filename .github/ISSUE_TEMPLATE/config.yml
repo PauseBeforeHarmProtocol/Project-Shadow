@@ -1,8 +1,11 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Contact, correction, or CAPA route
+    url: https://github.com/PauseBeforeHarmProtocol/Project-Shadow/blob/main/CONTACT_AND_CORRECTIONS.md
+    about: Use the current Project Shadow mailbox and the appropriate subject prefix.
   - name: Private vulnerability report
     url: https://github.com/PauseBeforeHarmProtocol/Project-Shadow/security/advisories/new
     about: Report vulnerabilities, exploit details, secrets, or sensitive evidence privately.
   - name: Security policy and email fallback
     url: https://github.com/PauseBeforeHarmProtocol/Project-Shadow/security/policy
-    about: Read the private-reporting instructions and monitored-email fallback.
+    about: Read the private-reporting instructions and current monitored-email fallback.

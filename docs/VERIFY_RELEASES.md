@@ -1,5 +1,9 @@
 # Verify the exact Project Shadow releases
 
+For release-verification questions, corrections, or security reports, use
+`projectshadowqa@protonmail.com` with the appropriate subject prefix from
+[`CONTACT_AND_CORRECTIONS.md`](../CONTACT_AND_CORRECTIONS.md).
+
 Do not rely on a filename alone. Verify both byte count and SHA-256 before
 extracting an archive.
 
@@ -106,6 +110,11 @@ Expected verification inputs:
 | Sigstore TrustedRoot JSON SHA-256 | `6494e21ea73fa7ee769f85f57d5a3e6a08725eae1e38c755fc3517c9e6bc0b66` |
 | Certificate identity | `pausebeforeharmprotocol_PBHP@protonmail.com` |
 | Certificate OIDC issuer | `https://github.com/login/oauth` |
+
+The certificate identity in this table is the frozen historical identity
+recorded in the exact signature evidence. It is not the current contact
+mailbox. Replacing it with `projectshadowqa@protonmail.com` would make the
+verification command incorrect.
 
 The public Rekor entry for the exact admission record is:
 

@@ -15,6 +15,22 @@ governance evidence, integrity instructions, and nonclaim boundaries. It does
 not contain the release ZIPs in Git history; those are attached to their
 respective GitHub Releases.
 
+## Current contact
+
+All new Project Shadow correspondence should use
+**`projectshadowqa@protonmail.com`**.
+
+Use `[CORRECTION]`, `[CAPA]`, `[SECURITY]`, `[RESEARCH]`, `[PRESS]`,
+`[COLLABORATION]`, or `[CONDUCT]` in the subject line. The full intake and
+privacy rules are in
+[`CONTACT_AND_CORRECTIONS.md`](CONTACT_AND_CORRECTIONS.md), with a
+machine-readable status in
+[`PUBLIC_CONTACT_STATUS_2026-08-17.json`](PUBLIC_CONTACT_STATUS_2026-08-17.json).
+
+Historical addresses and certificate identities may remain inside exact-hash,
+signed, frozen, or quoted evidence. They are preserved for custody and
+verification and are not current contact routes.
+
 ## Exact releases
 
 | Artifact | Role | Bytes | SHA-256 |
@@ -73,7 +89,8 @@ before redistribution or adaptation.
 
 Technical criticism, correction evidence, false positives, false negatives,
 and adverse results are welcome. Outside criticism is evidence to evaluate,
-not hostility to suppress. Start with [`CONTRIBUTING.md`](CONTRIBUTING.md) and
-use the matching issue form. Report vulnerabilities privately under
+not hostility to suppress. Start with [`CONTRIBUTING.md`](CONTRIBUTING.md), use
+the matching issue form, or email `projectshadowqa@protonmail.com` with the
+appropriate subject prefix. Report vulnerabilities privately under
 [`SECURITY.md`](SECURITY.md); never place exploit details or private evidence
 in a public issue.
