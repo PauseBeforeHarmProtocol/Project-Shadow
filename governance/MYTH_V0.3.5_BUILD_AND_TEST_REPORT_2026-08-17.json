@@ -1,0 +1,26 @@
+{
+  "artifact": {
+    "bytes": 1428812,
+    "filename": "Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+    "sha256": "2b55867fe7c502a0defd8d6f2e9b53fbd1caaf1b0f225a438bd45b04a3e7bae2"
+  },
+  "candidate_r1_family_sha256": "075b41ea4186b2d2edb0ed246ab7662cf8bbdf3160294e3eca176b9d0857b108",
+  "cold_verification_result_sha256": "0427252bdb9e446db6a3384897676dbf3f5251e5d2917823c40b46f87df6d1fa",
+  "deterministic_rebuilds": 2,
+  "deterministic_rebuilds_byte_identical": true,
+  "importable_file_tamper_rejections_passed": 5,
+  "importable_tamper_payload_executions": 0,
+  "package_unlisted_file_tamper_rejected": true,
+  "package_verified_file_byte_tamper_rejected": true,
+  "profiles_passed": 5,
+  "publication_status": "AUTHORIZED_PUBLIC_RELEASE",
+  "schema": "project-shadow.myth-build-and-test-report.v1",
+  "source_verification_result_sha256": "0427252bdb9e446db6a3384897676dbf3f5251e5d2917823c40b46f87df6d1fa",
+  "status": "PASS",
+  "test_errors": 0,
+  "test_failures": 0,
+  "test_skips": 0,
+  "tests_run": 131,
+  "tested_on": "2026-08-17",
+  "version": "0.3.5"
+}
