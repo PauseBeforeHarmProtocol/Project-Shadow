@@ -17,7 +17,8 @@
   "github_release_commit": "9f43d4c1cd8b7af94bcac68ecf73425e1342acc7",
   "hugging_face_space_url": "https://huggingface.co/spaces/ProjectShadow/project-shadow-r1-reference",
   "hugging_face_mirror_commit": "43908132058855fa2320b00a4dbdd73699656897",
-  "publication_state_at_record_creation": "TESTED_AND_PUBLISHED_TO_GITHUB_AND_HUGGING_FACE",
+  "initial_publication_state_at_record_creation": "TESTED_AWAITING_GITHUB_AND_HUGGING_FACE_PUBLICATION",
+  "current_publication_state": "TESTED_AND_PUBLISHED_TO_GITHUB_AND_HUGGING_FACE",
   "publication_record": "governance/MYTH_V0.3.5_PUBLICATION_RECORD_2026-08-17.json",
   "schema": "project-shadow.myth-public-release-reference.v1",
   "version": "0.3.5"
