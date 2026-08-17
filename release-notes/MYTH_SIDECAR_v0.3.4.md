@@ -6,12 +6,7 @@ not production or operational software.**
 **Tag:** `myth-v0.3.4`  
 **Asset:** `Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEARCH_2026-08-14.zip`  
 **Bytes:** 1,418,194  
-**SHA-256:** `3c8c8c0d3d9582c76b685c1b685260cc8179478ab310037c858b46257aa314c7`  
-**Current contact:** `projectshadowqa@protonmail.com`
-
-Use `[CORRECTION]`, `[CAPA]`, `[SECURITY]`, `[RESEARCH]`, `[PRESS]`, or
-`[COLLABORATION]` in the subject line. See
-[`CONTACT_AND_CORRECTIONS.md`](../CONTACT_AND_CORRECTIONS.md).
+**SHA-256:** `3c8c8c0d3d9582c76b685c1b685260cc8179478ab310037c858b46257aa314c7`
 
 This exact v0.3.4 archive is released as a separate optional external research
 and commentary companion. It is source-available and mixed-rights. It is not
@@ -42,10 +37,6 @@ python3 -I -S -B tools/verify_package.py .
 Download the named release asset above. Do **not** substitute GitHub's
 automatically generated “Source code (zip)” or “Source code (tar.gz)” archives;
 those are repository snapshots, not the released sidecar archive.
-
-Historical contact addresses inside the exact sidecar remain preserved for
-custody integrity. They are superseded for new correspondence by
-`projectshadowqa@protonmail.com`.
 
 [authorization-receipt]: https://github.com/PauseBeforeHarmProtocol/Project-Shadow/blob/93bde4f2fd4b7b8824622150a03a14cbf5b4b30e/governance/RELEASE_AUTHORIZATION_2026-08-14.md
 [authorization-json]: https://github.com/PauseBeforeHarmProtocol/Project-Shadow/blob/93bde4f2fd4b7b8824622150a03a14cbf5b4b30e/governance/RELEASE_AUTHORIZATION_2026-08-14.json
