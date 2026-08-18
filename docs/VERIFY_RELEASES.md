@@ -1,4 +1,4 @@
-# Verify the exact Project Shadow releases
+# Verify Project Shadow releases by lifecycle phase
 
 For release-verification questions, corrections, or security reports, use
 `projectshadowqa@protonmail.com` with the appropriate subject prefix from
@@ -7,18 +7,62 @@ For release-verification questions, corrections, or security reports, use
 Do not rely on a filename alone. Verify both byte count and SHA-256 before
 extracting an archive.
 
-## Expected identities
+## Current phase
+
+The repository is in `PREPUBLICATION` for Generic Myth v0.2.0 and R1.0.1.
+Their final identities are concrete and frozen. Generic Myth v0.2.0 has scoped
+exact-hash publication authorization, and the exact Myth-free R1.0.1 inner is
+admitted. The final outer R1.0.1 archive also has its separate exact-hash
+publication authorization. The repository is `READY_TO_PUBLISH`, which is
+still a prepublication state; it does not assert that the public assets exist.
+
+Validate the repository state before any upload:
+
+```bash
+python3 -I -S -B tools/verify_repository_evidence.py --phase prepublication
+```
+
+Postpublication mode must fail until final identities, exact-hash
+authorizations, anonymous redownload evidence, and CAPA closure are all
+present:
+
+```bash
+python3 -I -S -B tools/verify_repository_evidence.py --phase postpublication
+```
+
+## Published and preserved exact identities
 
 | File | Bytes | SHA-256 |
 |---|---:|---|
 | `Project_Shadow_R1_Public_Release_Candidate_2026-08-14.zip` | 7,679,812 | `2f8fe1530b6a83294d15011df95853aaecf08fa4dba756f0c2e91dd089e1b1ec` |
 | `Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEARCH_2026-08-14.zip` | 1,418,194 | `3c8c8c0d3d9582c76b685c1b685260cc8179478ab310037c858b46257aa314c7` |
+| `Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip` | 1,428,812 | `2b55867fe7c502a0defd8d6f2e9b53fbd1caaf1b0f225a438bd45b04a3e7bae2` |
+
+The August 14 R1 identity is preserved as immutable historical evidence. It is
+not the corrected current reference because its nested runtime-family package
+included Generic Myth v0.1.1 carrying non-public metadata. Do not edit or
+silently replace the historical asset.
+
+## Frozen prepublication identities
+
+| File | Bytes | SHA-256 |
+|---|---:|---|
+| `Project_Shadow_Generic_Myth_Sidecar_v0.2.0_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip` | 93,676 | `6e7a362d4135f9d626dcfef463bfb1f7166226b3cf8a4c02a953ab39af1538bf` |
+| `Project_Shadow_R1.0.1_Runtime_Family_Myth_Decoupled_2026-08-17.zip` | 5,463,189 | `c8c32b12432c954b1a6f852c0c9f81bbbd40167e936be057d4c3de1a0aa3a623` |
+| `Project_Shadow_R1.0.1_Public_Reference_2026-08-17.zip` | 5,731,663 | `6f6f1e16d5e9a20e62403f14af7ce8629ce2d702528fb7f80aaf4a14deb7a1d1` |
+
+The Generic identity has scoped GitHub/Hugging Face publication authorization.
+The inner identity has the maintainer's scoped packaging admission, which
+explicitly does not authorize publication. The outer identity is recorded only
+with a separate exact-hash authorization covering GitHub, Hugging Face, the
+verified repository update, and six GPT Site updates. Neither authority permits
+production or operational deployment.
 
 ## Windows PowerShell
 
 ```powershell
 $r1 = ".\Project_Shadow_R1_Public_Release_Candidate_2026-08-14.zip"
-$myth = ".\Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEARCH_2026-08-14.zip"
+$myth = ".\Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip"
 
 (Get-Item -LiteralPath $r1).Length
 (Get-FileHash -LiteralPath $r1 -Algorithm SHA256).Hash.ToLowerInvariant()
@@ -33,13 +77,13 @@ $myth = ".\Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEA
 wc -c Project_Shadow_R1_Public_Release_Candidate_2026-08-14.zip
 sha256sum Project_Shadow_R1_Public_Release_Candidate_2026-08-14.zip
 
-wc -c Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEARCH_2026-08-14.zip
-sha256sum Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.4_OPTIONAL_EXTERNAL_RESEARCH_2026-08-14.zip
+wc -c Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip
+sha256sum Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip
 ```
 
 On macOS, `shasum -a 256` may be used when `sha256sum` is unavailable.
 
-## Apply the current outer-archive preflight before extraction
+## Historical August 14 outer-archive preflight
 
 The exact R1 ZIP is preserved and was not rewritten after publication. Its
 embedded verifier is therefore also a frozen historical release artifact and
@@ -179,9 +223,13 @@ The R1 archive's embedded verifier is the controlling packaged copy for the
 historical release. The current repository verifier should be used first on the
 outer ZIP for the later archive-preflight protections documented above.
 
-## Verify the optional sidecar after extraction
+## Verify optional sidecars after extraction
 
-From the extracted sidecar root:
+Full-Canon v0.3.5 and Generic v0.2.0 are separate optional companions. Neither
+is embedded in or required by R1.0.1. Use the verification-only tool shipped in
+the exact sidecar package after its final identity is confirmed.
+
+From an extracted Full-Canon sidecar root:
 
 ```bash
 python3 -I -S -B tools/verify_package.py .

@@ -1,0 +1,26 @@
+{
+  "schema": "project-shadow.generic-myth-sidecar-v0.2.0-exact-hash-public-release-authorization.v1",
+  "decision": "AUTHORIZE_EXACT_HASH_OPTIONAL_PUBLIC_RELEASE",
+  "artifact": {
+    "filename": "Project_Shadow_Generic_Myth_Sidecar_v0.2.0_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+    "bytes": 93676,
+    "sha256": "6e7a362d4135f9d626dcfef463bfb1f7166226b3cf8a4c02a953ab39af1538bf",
+    "version": "0.2.0",
+    "role": "SEPARATE_OPTIONAL_COMPANION",
+    "default_enabled": false,
+    "terminal_only": true,
+    "operational_authority": false
+  },
+  "publication_scope": {
+    "github_authorized": true,
+    "hugging_face_authorized": true,
+    "part_of_or_required_by_r1": false,
+    "production_authorized": false,
+    "operational_deployment_authorized": false
+  },
+  "maintainer_confirmation": {
+    "confirmed_by": "Phillip Linstrum",
+    "confirmed_at": "2026-08-18T00:09:39Z",
+    "statement": "I authorize this exact Generic Myth Sidecar v0.2.0—93,676 bytes, SHA-256 6e7a362d4135f9d626dcfef463bfb1f7166226b3cf8a4c02a953ab39af1538bf—for public release on GitHub and Hugging Face as a separate optional, default-off, terminal-only, nonauthorizing companion."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "artifact": {
+    "bytes": 93676,
+    "filename": "Project_Shadow_Generic_Myth_Sidecar_v0.2.0_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+    "frozen": true,
+    "sha256": "6e7a362d4135f9d626dcfef463bfb1f7166226b3cf8a4c02a953ab39af1538bf"
+  },
+  "boundaries": {
+    "canonical_r1_component": false,
+    "changes_operational_result": false,
+    "default_off": true,
+    "feedback_allowed": false,
+    "gate_input_eligible": false,
+    "model_context_eligible": false,
+    "operational_deployment_authorized": false,
+    "production_authorized": false,
+    "required_for_r1": false,
+    "terminal_only": true,
+    "tool_argument_eligible": false
+  },
+  "capa": {
+    "closed_by_this_artifact_alone": false,
+    "id": "PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001"
+  },
+  "licenses": {
+    "eligible_original_code": "Apache-2.0",
+    "eligible_original_documentation_and_data": "CC-BY-4.0",
+    "named_third_party_expressive_material_included": false
+  },
+  "publication": {
+    "github": {
+      "expected_asset_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/download/generic-myth-v0.2.0/Project_Shadow_Generic_Myth_Sidecar_v0.2.0_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+      "expected_release_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/tag/generic-myth-v0.2.0",
+      "tag": "generic-myth-v0.2.0"
+    },
+    "hugging_face": {
+      "exact_byte_mirror_expected": true,
+      "expected_asset_path": "releases/generic-myth-v0.2.0/Project_Shadow_Generic_Myth_Sidecar_v0.2.0_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+      "repository": "ProjectShadow/project-shadow-r1-reference"
+    },
+    "state": "READY_TO_PUBLISH"
+  },
+  "authorization_record": "governance/GENERIC_MYTH_v0.2.0_EXACT_HASH_PUBLIC_RELEASE_AUTHORIZATION_2026-08-17.json",
+  "schema": "project-shadow.generic-myth-public-release-reference.v1",
+  "test_record": "governance/GENERIC_MYTH_v0.2.0_BUILD_AND_TEST_REPORT_2026-08-17.json",
+  "version": "0.2.0"
+}

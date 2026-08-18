@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
 import json
 import tempfile
 import unittest
@@ -22,9 +23,103 @@ SPEC.loader.exec_module(VERIFIER)
 class RepositoryEvidenceTests(unittest.TestCase):
     def test_current_repository_metadata_agrees(self) -> None:
         self.assertGreaterEqual(VERIFIER.parse_all_json(), 1)
-        rows = VERIFIER.verify_repository_metadata()
-        self.assertEqual([row["order"] for row in rows], [1, 2])
+        rows = VERIFIER.verify_repository_metadata("PREPUBLICATION")
+        self.assertEqual([row["order"] for row in rows], [1, 2, 3, 4, 5])
+        self.assertEqual(
+            [row["tag"] for row in VERIFIER.published_rows(rows)],
+            ["myth-v0.3.4", "r1-2026-08-14", "myth-v0.3.5"],
+        )
         self.assertEqual(VERIFIER.prohibited_claim_findings(), [])
+
+    def test_historical_public_release_verifier_remains_byte_pinned(self) -> None:
+        digest = hashlib.sha256(
+            (ROOT / "tools" / "verify_public_release.py").read_bytes()
+        ).hexdigest()
+        self.assertEqual(
+            digest,
+            "f1358db6c824319501d0eabf341174eb96217e5d2545d9ac908a81d338c8afa8",
+        )
+
+    def test_ready_prepublication_has_no_release_placeholders(self) -> None:
+        self.assertEqual(VERIFIER.release_placeholder_findings(), [])
+
+    def test_postpublication_mode_rejects_prepublication_manifest(self) -> None:
+        with self.assertRaisesRegex(VERIFIER.EvidenceError, "manifest phase mismatch"):
+            VERIFIER.verify_repository_metadata("POSTPUBLICATION")
+
+    def test_generic_exact_identity_mutation_fails_closed(self) -> None:
+        manifest = json.loads(VERIFIER.PUBLICATION_MANIFEST.read_text(encoding="utf-8"))
+        generic = next(
+            row for row in manifest["releases"]
+            if row["tag"] == "generic-myth-v0.2.0"
+        )
+        generic["asset"]["bytes"] = 1
+        generic["asset"]["sha256"] = "0" * 64
+        with tempfile.TemporaryDirectory(prefix="shadow-generic-pending-test-") as temp:
+            mutated = Path(temp) / "PUBLICATION_MANIFEST.json"
+            mutated.write_text(json.dumps(manifest), encoding="utf-8")
+            with mock.patch.object(VERIFIER, "PUBLICATION_MANIFEST", mutated):
+                with self.assertRaisesRegex(
+                    VERIFIER.EvidenceError,
+                    "release notes for generic-myth-v0.2.0 omit",
+                ):
+                    VERIFIER.verify_repository_metadata("PREPUBLICATION")
+
+    def test_outer_authorized_action_mutation_fails_closed(self) -> None:
+        record = json.loads(VERIFIER.OUTER_AUTHORIZATION.read_text(encoding="utf-8"))
+        record["authorized_actions"]["github_release"] = False
+        with tempfile.TemporaryDirectory(prefix="shadow-outer-auth-test-") as temp:
+            mutated = Path(temp) / "R1_0_1_OUTER_RELEASE_AUTHORIZATION.json"
+            mutated.write_text(json.dumps(record), encoding="utf-8")
+            with mock.patch.object(VERIFIER, "OUTER_AUTHORIZATION", mutated):
+                with self.assertRaisesRegex(
+                    VERIFIER.EvidenceError,
+                    "outer authorization scope mismatch",
+                ):
+                    VERIFIER.verify_repository_metadata("PREPUBLICATION")
+
+    def test_generic_authorization_wording_mutation_fails_closed(self) -> None:
+        record = json.loads(VERIFIER.GENERIC_AUTHORIZATION.read_text(encoding="utf-8"))
+        record["maintainer_confirmation"]["statement"] += " altered"
+        with tempfile.TemporaryDirectory(prefix="shadow-generic-auth-test-") as temp:
+            mutated = Path(temp) / "GENERIC_AUTHORIZATION.json"
+            mutated.write_text(json.dumps(record), encoding="utf-8")
+            with mock.patch.object(VERIFIER, "GENERIC_AUTHORIZATION", mutated):
+                with self.assertRaisesRegex(
+                    VERIFIER.EvidenceError,
+                    "Generic Myth maintainer confirmation wording mismatch",
+                ):
+                    VERIFIER.verify_repository_metadata("PREPUBLICATION")
+
+    def test_inner_admission_wording_mutation_fails_closed(self) -> None:
+        record = json.loads(VERIFIER.INNER_ADMISSION.read_text(encoding="utf-8"))
+        record["maintainer_confirmation"]["statement"] += " altered"
+        with tempfile.TemporaryDirectory(prefix="shadow-inner-auth-test-") as temp:
+            mutated = Path(temp) / "INNER_ADMISSION.json"
+            mutated.write_text(json.dumps(record), encoding="utf-8")
+            with mock.patch.object(VERIFIER, "INNER_ADMISSION", mutated):
+                with self.assertRaisesRegex(
+                    VERIFIER.EvidenceError,
+                    "inner maintainer confirmation wording mismatch",
+                ):
+                    VERIFIER.verify_repository_metadata("PREPUBLICATION")
+
+    def test_generic_release_note_identity_removal_fails_closed(self) -> None:
+        original_path = VERIFIER.RELEASE_NOTES["generic-myth-v0.2.0"]
+        original = original_path.read_text(encoding="utf-8")
+        mutated_text = original.replace(VERIFIER.GENERIC_FINAL["sha256"], "")
+        with tempfile.TemporaryDirectory(prefix="shadow-generic-token-test-") as temp:
+            mutated = Path(temp) / original_path.name
+            mutated.write_text(mutated_text, encoding="utf-8")
+            with mock.patch.dict(
+                VERIFIER.RELEASE_NOTES,
+                {"generic-myth-v0.2.0": mutated},
+            ):
+                with self.assertRaisesRegex(
+                    VERIFIER.EvidenceError,
+                    "release notes for generic-myth-v0.2.0 omit",
+                ):
+                    VERIFIER.verify_repository_metadata("PREPUBLICATION")
 
     def test_rekor_documentation_mutation_fails_closed(self) -> None:
         original = VERIFIER.VERIFICATION_GUIDE.read_text(encoding="utf-8")

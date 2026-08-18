@@ -1,5 +1,12 @@
 {
-  "authorization_receipt": "governance/RELEASE_AUTHORIZATION_2026-08-14.json",
+  "current_reference": {
+    "publication_state": "READY_TO_PUBLISH",
+    "tag": "r1.0.1-2026-08-17"
+  },
+  "expected_github_latest_tag": {
+    "postpublication": "r1.0.1-2026-08-17",
+    "prepublication": "r1-2026-08-14"
+  },
   "nonclaims": {
     "certification_claimed": false,
     "efficacy_claimed": false,
@@ -8,7 +15,9 @@
     "production_authorized": false,
     "safety_claimed": false
   },
-  "release_identity": "PROJECT SHADOW 1.0 / R1 REFERENCE / BETA-ACTIVE-TESTING / PRELIVE",
+  "publication_phase": "PREPUBLICATION",
+  "prepublication_state": "READY_TO_PUBLISH",
+  "release_identity": "PROJECT SHADOW 1.0.1 / R1 REFERENCE / BETA-ACTIVE-TESTING / PRELIVE",
   "releases": [
     {
       "asset": {
@@ -18,8 +27,10 @@
         "sha256": "3c8c8c0d3d9582c76b685c1b685260cc8179478ab310037c858b46257aa314c7"
       },
       "canonical_r1": false,
+      "current": false,
       "enabled_by_default": false,
       "order": 1,
+      "publication_state": "PUBLISHED_HISTORICAL",
       "role": "OPTIONAL_EXTERNAL_RESEARCH_SIDECAR",
       "tag": "myth-v0.3.4",
       "title": "Project Shadow Myth Sidecar v0.3.4 — Optional External Research"
@@ -32,12 +43,61 @@
         "sha256": "2f8fe1530b6a83294d15011df95853aaecf08fa4dba756f0c2e91dd089e1b1ec"
       },
       "canonical_r1": true,
+      "current": false,
       "order": 2,
+      "publication_state": "PUBLISHED_HISTORICAL_SUPERSEDED",
       "role": "R1_REFERENCE",
       "tag": "r1-2026-08-14",
       "title": "Project Shadow 1.0 — R1 Reference (PRELIVE)"
+    },
+    {
+      "asset": {
+        "bytes": 1428812,
+        "download_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/download/myth-v0.3.5/Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+        "filename": "Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+        "sha256": "2b55867fe7c502a0defd8d6f2e9b53fbd1caaf1b0f225a438bd45b04a3e7bae2"
+      },
+      "canonical_r1": false,
+      "current": true,
+      "enabled_by_default": false,
+      "order": 3,
+      "publication_state": "PUBLISHED",
+      "role": "OPTIONAL_FULL_CANON_COMPANION",
+      "tag": "myth-v0.3.5",
+      "title": "Project Shadow Full-Canon Myth Sidecar v0.3.5 — Optional Public Companion"
+    },
+    {
+      "asset": {
+        "bytes": 93676,
+        "download_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/download/generic-myth-v0.2.0/Project_Shadow_Generic_Myth_Sidecar_v0.2.0_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+        "filename": "Project_Shadow_Generic_Myth_Sidecar_v0.2.0_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+        "sha256": "6e7a362d4135f9d626dcfef463bfb1f7166226b3cf8a4c02a953ab39af1538bf"
+      },
+      "canonical_r1": false,
+      "current": true,
+      "enabled_by_default": false,
+      "order": 4,
+      "publication_state": "READY_TO_PUBLISH",
+      "role": "OPTIONAL_GENERIC_COMPANION",
+      "tag": "generic-myth-v0.2.0",
+      "title": "Project Shadow Generic Myth Sidecar v0.2.0 — Optional Public Companion"
+    },
+    {
+      "asset": {
+        "bytes": 5731663,
+        "download_url": "https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/download/r1.0.1-2026-08-17/Project_Shadow_R1.0.1_Public_Reference_2026-08-17.zip",
+        "filename": "Project_Shadow_R1.0.1_Public_Reference_2026-08-17.zip",
+        "sha256": "6f6f1e16d5e9a20e62403f14af7ce8629ce2d702528fb7f80aaf4a14deb7a1d1"
+      },
+      "canonical_r1": true,
+      "current": true,
+      "order": 5,
+      "publication_state": "READY_TO_PUBLISH",
+      "role": "R1_REFERENCE_CORRECTED",
+      "tag": "r1.0.1-2026-08-17",
+      "title": "Project Shadow 1.0.1 — R1 Reference Packaging Correction (PRELIVE)"
     }
   ],
   "repository": "PauseBeforeHarmProtocol/Project-Shadow",
-  "schema": "project-shadow.publication-manifest.v1"
+  "schema": "project-shadow.publication-manifest.v2"
 }
