@@ -21,14 +21,18 @@ Validate the current published repository state:
 python3 -I -S -B tools/verify_repository_evidence.py --phase postpublication
 ```
 
-The current postpublication state does not claim effectiveness. Anonymous
-GitHub and Hugging Face redownload identity evidence and six-site verification
-remain pending, so CAPA `PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` remains
-`IMPLEMENTED_PENDING_EFFECTIVENESS`, not `CLOSED_EFFECTIVE`.
+The current postpublication state records packaging-correction effectiveness.
+Anonymous GitHub and Hugging Face redownloads matched the exact current
+identities; both downloaded Generic packages passed the bounded 23-path
+verifier; R1.0.1 passed recursive zero-Myth verification; and all six public
+sites passed the corrected-boundary checks. CAPA
+`PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` is `CLOSED_EFFECTIVE` for that bounded
+correction.
 
-Online mode can redownload and verify the exact GitHub assets and live release
-metadata. It does not create the separate Hugging Face redownload evidence or
-close the CAPA:
+Online mode redownloads and verifies the exact GitHub and Hugging Face assets,
+runs the historical and current package verifiers, checks live release
+metadata, and rechecks the six-site semantic boundary. It validates retained
+evidence but does not rewrite receipts or publish anything:
 
 ```bash
 python3 -I -S -B tools/verify_repository_evidence.py --phase postpublication \
