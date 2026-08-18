@@ -23,11 +23,17 @@ SPEC.loader.exec_module(VERIFIER)
 class RepositoryEvidenceTests(unittest.TestCase):
     def test_current_repository_metadata_agrees(self) -> None:
         self.assertGreaterEqual(VERIFIER.parse_all_json(), 1)
-        rows = VERIFIER.verify_repository_metadata("PREPUBLICATION")
+        rows = VERIFIER.verify_repository_metadata("POSTPUBLICATION")
         self.assertEqual([row["order"] for row in rows], [1, 2, 3, 4, 5])
         self.assertEqual(
             [row["tag"] for row in VERIFIER.published_rows(rows)],
-            ["myth-v0.3.4", "r1-2026-08-14", "myth-v0.3.5"],
+            [
+                "myth-v0.3.4",
+                "r1-2026-08-14",
+                "myth-v0.3.5",
+                "generic-myth-v0.2.0",
+                "r1.0.1-2026-08-17",
+            ],
         )
         self.assertEqual(VERIFIER.prohibited_claim_findings(), [])
 
@@ -40,12 +46,35 @@ class RepositoryEvidenceTests(unittest.TestCase):
             "f1358db6c824319501d0eabf341174eb96217e5d2545d9ac908a81d338c8afa8",
         )
 
-    def test_ready_prepublication_has_no_release_placeholders(self) -> None:
+    def test_published_postpublication_has_no_release_placeholders(self) -> None:
         self.assertEqual(VERIFIER.release_placeholder_findings(), [])
 
-    def test_postpublication_mode_rejects_prepublication_manifest(self) -> None:
+    def test_prepublication_mode_rejects_postpublication_manifest(self) -> None:
         with self.assertRaisesRegex(VERIFIER.EvidenceError, "manifest phase mismatch"):
-            VERIFIER.verify_repository_metadata("POSTPUBLICATION")
+            VERIFIER.verify_repository_metadata("PREPUBLICATION")
+
+    def test_postpublication_keeps_capa_pending_effectiveness(self) -> None:
+        status = json.loads(VERIFIER.CURRENT_STATUS.read_text(encoding="utf-8"))
+        capa = json.loads(VERIFIER.CAPA_RECORD.read_text(encoding="utf-8"))
+        self.assertEqual(status["publication_phase"], "POSTPUBLICATION")
+        self.assertEqual(status["capa"]["status"], "IMPLEMENTED_PENDING_EFFECTIVENESS")
+        self.assertFalse(status["capa"]["effectiveness_verified"])
+        self.assertEqual(capa["status"], "IMPLEMENTED_PENDING_EFFECTIVENESS")
+        self.assertFalse(capa["closure"]["effectiveness_verified"])
+        self.assertIsNone(capa["closure"]["verification_record"])
+
+    def test_false_postpublication_capa_closure_fails_closed(self) -> None:
+        status = json.loads(VERIFIER.CURRENT_STATUS.read_text(encoding="utf-8"))
+        status["capa"]["status"] = "CLOSED_EFFECTIVE"
+        with tempfile.TemporaryDirectory(prefix="shadow-capa-status-test-") as temp:
+            mutated = Path(temp) / "PUBLIC_RELEASE_STATUS_2026-08-17.json"
+            mutated.write_text(json.dumps(status), encoding="utf-8")
+            with mock.patch.object(VERIFIER, "CURRENT_STATUS", mutated):
+                with self.assertRaisesRegex(
+                    VERIFIER.EvidenceError,
+                    "current status/CAPA postpublication state mismatch",
+                ):
+                    VERIFIER.verify_repository_metadata("POSTPUBLICATION")
 
     def test_generic_exact_identity_mutation_fails_closed(self) -> None:
         manifest = json.loads(VERIFIER.PUBLICATION_MANIFEST.read_text(encoding="utf-8"))
@@ -63,7 +92,7 @@ class RepositoryEvidenceTests(unittest.TestCase):
                     VERIFIER.EvidenceError,
                     "release notes for generic-myth-v0.2.0 omit",
                 ):
-                    VERIFIER.verify_repository_metadata("PREPUBLICATION")
+                    VERIFIER.verify_repository_metadata("POSTPUBLICATION")
 
     def test_outer_authorized_action_mutation_fails_closed(self) -> None:
         record = json.loads(VERIFIER.OUTER_AUTHORIZATION.read_text(encoding="utf-8"))
@@ -76,7 +105,7 @@ class RepositoryEvidenceTests(unittest.TestCase):
                     VERIFIER.EvidenceError,
                     "outer authorization scope mismatch",
                 ):
-                    VERIFIER.verify_repository_metadata("PREPUBLICATION")
+                    VERIFIER.verify_repository_metadata("POSTPUBLICATION")
 
     def test_generic_authorization_wording_mutation_fails_closed(self) -> None:
         record = json.loads(VERIFIER.GENERIC_AUTHORIZATION.read_text(encoding="utf-8"))
@@ -89,7 +118,7 @@ class RepositoryEvidenceTests(unittest.TestCase):
                     VERIFIER.EvidenceError,
                     "Generic Myth maintainer confirmation wording mismatch",
                 ):
-                    VERIFIER.verify_repository_metadata("PREPUBLICATION")
+                    VERIFIER.verify_repository_metadata("POSTPUBLICATION")
 
     def test_inner_admission_wording_mutation_fails_closed(self) -> None:
         record = json.loads(VERIFIER.INNER_ADMISSION.read_text(encoding="utf-8"))
@@ -102,7 +131,7 @@ class RepositoryEvidenceTests(unittest.TestCase):
                     VERIFIER.EvidenceError,
                     "inner maintainer confirmation wording mismatch",
                 ):
-                    VERIFIER.verify_repository_metadata("PREPUBLICATION")
+                    VERIFIER.verify_repository_metadata("POSTPUBLICATION")
 
     def test_generic_release_note_identity_removal_fails_closed(self) -> None:
         original_path = VERIFIER.RELEASE_NOTES["generic-myth-v0.2.0"]
@@ -119,7 +148,7 @@ class RepositoryEvidenceTests(unittest.TestCase):
                     VERIFIER.EvidenceError,
                     "release notes for generic-myth-v0.2.0 omit",
                 ):
-                    VERIFIER.verify_repository_metadata("PREPUBLICATION")
+                    VERIFIER.verify_repository_metadata("POSTPUBLICATION")
 
     def test_rekor_documentation_mutation_fails_closed(self) -> None:
         original = VERIFIER.VERIFICATION_GUIDE.read_text(encoding="utf-8")

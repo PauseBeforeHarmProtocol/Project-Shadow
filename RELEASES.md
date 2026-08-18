@@ -4,21 +4,22 @@ Release assets are kept out of Git history and attached to separate GitHub
 Releases. Automatically generated source ZIP/TAR archives are repository
 snapshots, not Project Shadow release artifacts.
 
-## Current release plan
+## Current public releases
 
-Publication phase: **PREPUBLICATION**.
+Publication phase: **POSTPUBLICATION**. Effectiveness verification remains
+pending.
 
 1. `generic-myth-v0.2.0` — Generic Myth Sidecar v0.2.0, optional public
    companion. Its final identity is frozen, its final tests pass, and its exact
-   hash is authorized for separate GitHub and Hugging Face publication.
+   hash is published separately on GitHub and Hugging Face.
 2. `r1.0.1-2026-08-17` — Project Shadow 1.0.1 R1 reference packaging
    correction. Its exact inner is admitted and its deterministic outer build is
-   frozen and separately exact-hash authorized. It is ready to publish, not yet
-   published.
+   frozen, separately exact-hash authorized, and published on GitHub and
+   Hugging Face.
 
-The Generic sidecar must be published first. R1.0.1 must be published last so
-the corrected R1 becomes the latest release. Neither pending release is marked
-published in repository evidence before the public asset exists.
+The Generic sidecar was published first. R1.0.1 was published last so the
+corrected R1 is the latest release. Publication does not by itself verify
+anonymous redownload identity or close the packaging-boundary CAPA.
 
 ## Existing public releases
 
@@ -32,16 +33,15 @@ Historical release notes and governance records remain in place. Nothing in
 the 2026-08-17 correction back-writes the August 14 authorization, status,
 redownload receipt, tags, or archive.
 
-## Required publication sequence
+## Remaining effectiveness sequence
 
 1. Preserve the recorded Generic, inner, and outer exact-hash authorities
    without broadening them.
-2. Run `tools/verify_repository_evidence.py --phase prepublication`.
-3. Publish Generic v0.2.0, then R1.0.1.
-4. Anonymously redownload the GitHub and Hugging Face assets and verify exact
+2. Run `tools/verify_repository_evidence.py --phase postpublication`.
+3. Anonymously redownload the GitHub and Hugging Face assets and verify exact
    byte counts and SHA-256 values.
-5. Verify all six public sites, add the redownload record, close the CAPA, and
-   run postpublication mode.
+4. Verify all six public sites and add the redownload/effectiveness record.
+5. Close the CAPA only if every effectiveness criterion passes.
 
 ## Prospective custody procedure
 

@@ -824,7 +824,7 @@ def require_document_markers(label: str, path: Path, markers: Iterable[str]) -> 
 
 
 def validate_public_documentation(
-    phase: str = "PREPUBLICATION",
+    phase: str = "POSTPUBLICATION",
     *,
     pending_identities: bool = False,
 ) -> None:
@@ -944,7 +944,7 @@ def validate_public_documentation(
             ROOT / "README.md",
             (
                 "POSTPUBLICATION",
-                "CLOSED_EFFECTIVE",
+                "IMPLEMENTED_PENDING_EFFECTIVENESS",
                 "r1.0.1-2026-08-17",
                 "generic-myth-v0.2.0",
             ),
@@ -1002,7 +1002,7 @@ def validate_current_redownload(
         raise EvidenceError("redownload record lacks GitHub/Hugging Face coverage")
 
 
-def verify_repository_metadata(phase: str = "PREPUBLICATION") -> list[dict[str, Any]]:
+def verify_repository_metadata(phase: str = "POSTPUBLICATION") -> list[dict[str, Any]]:
     phase = phase_name(phase)
     manifest = require_object(load_json(PUBLICATION_MANIFEST), "PUBLICATION_MANIFEST.json")
     authorization = require_object(load_json(AUTHORIZATION), AUTHORIZATION.name)
@@ -1498,20 +1498,51 @@ def verify_repository_metadata(phase: str = "PREPUBLICATION") -> list[dict[str, 
             if outer_asset.get(key) != current_r1_asset[key]:
                 raise EvidenceError(f"R1.0.1 outer authorization mismatch: {key}")
         validate_outer_authority(outer_authorization)
+        current_capa = current_status.get("capa", {})
+        closure = capa.get("closure", {})
+        capa_status = current_capa.get("status")
         if (
-            current_status.get("publication_phase") != "POSTPUBLICATION"
-            or current_status.get("capa", {}).get("status") != "CLOSED_EFFECTIVE"
-            or current_status.get("capa", {}).get("effectiveness_verified") is not True
-            or capa.get("status") != "CLOSED_EFFECTIVE"
-            or capa.get("closure", {}).get("effectiveness_verified") is not True
-            or capa.get("closure", {}).get("verification_record")
-            != "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json"
+            manifest.get("current_reference")
+            != {
+                "publication_state": "PUBLISHED",
+                "tag": "r1.0.1-2026-08-17",
+            }
+            or current_status.get("publication_phase") != "POSTPUBLICATION"
+            or current_status.get("generic_myth", {}).get("publication_state")
+            != "PUBLISHED"
+            or current_status.get("current_reference", {}).get("publication_state")
+            != "PUBLISHED"
+            or capa_status != capa.get("status")
         ):
-            raise EvidenceError("current status/CAPA postpublication closure mismatch")
-        validate_current_redownload(
-            require_object(load_json(CURRENT_REDOWNLOAD), CURRENT_REDOWNLOAD.name),
-            by_tag,
-        )
+            raise EvidenceError("current status/CAPA postpublication state mismatch")
+        if capa_status == "IMPLEMENTED_PENDING_EFFECTIVENESS":
+            if (
+                manifest.get("postpublication_state")
+                != "PUBLISHED_PENDING_EFFECTIVENESS"
+                or current_capa.get("effectiveness_verified") is not False
+                or closure.get("effectiveness_verified") is not False
+                or closure.get("closed_at") is not None
+                or closure.get("verification_record") is not None
+            ):
+                raise EvidenceError(
+                    "pending-effectiveness postpublication state is inconsistent"
+                )
+        elif capa_status == "CLOSED_EFFECTIVE":
+            if (
+                manifest.get("postpublication_state")
+                != "PUBLISHED_EFFECTIVENESS_VERIFIED"
+                or current_capa.get("effectiveness_verified") is not True
+                or closure.get("effectiveness_verified") is not True
+                or closure.get("verification_record")
+                != "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json"
+            ):
+                raise EvidenceError("current status/CAPA postpublication closure mismatch")
+            validate_current_redownload(
+                require_object(load_json(CURRENT_REDOWNLOAD), CURRENT_REDOWNLOAD.name),
+                by_tag,
+            )
+        else:
+            raise EvidenceError(f"unsupported postpublication CAPA state: {capa_status!r}")
 
     validate_public_documentation(phase, pending_identities=pending_identities)
     return rows
@@ -1748,7 +1779,11 @@ def verify_online(
         release_url = f"https://github.com/{repository}/releases/tag/{row['tag']}"
         check_link(release_url)
     verify_live_release_metadata(online_rows, expected_latest_tag)
-    if phase == "POSTPUBLICATION":
+    current_status = require_object(load_json(CURRENT_STATUS), CURRENT_STATUS.name)
+    if (
+        phase == "POSTPUBLICATION"
+        and current_status.get("capa", {}).get("status") == "CLOSED_EFFECTIVE"
+    ):
         verify_public_site_release_links(rows)
 
     r1 = downloaded.get("R1_REFERENCE")
@@ -1781,7 +1816,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--online",
         action="store_true",
-        help="redownload exact assets and check release/public-site URLs",
+        help="redownload exact assets and check phase-appropriate public URLs",
     )
     parser.add_argument(
         "--download-dir",
@@ -1843,8 +1878,14 @@ def main() -> int:
     print("PASS: nonclaim scan")
     if args.online:
         print("PASS: exact published assets and release metadata")
-        if phase == "POSTPUBLICATION":
+        current_status = require_object(load_json(CURRENT_STATUS), CURRENT_STATUS.name)
+        if (
+            phase == "POSTPUBLICATION"
+            and current_status.get("capa", {}).get("status") == "CLOSED_EFFECTIVE"
+        ):
             print("PASS: six public-site release links")
+        elif phase == "POSTPUBLICATION":
+            print("INFO: six-site CAPA effectiveness verification remains pending")
     else:
         print("INFO: network verification skipped (use --online --download-dir DIR)")
     return 0

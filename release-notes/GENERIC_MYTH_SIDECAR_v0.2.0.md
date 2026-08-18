@@ -1,4 +1,4 @@
-**READY TO PUBLISH · NOT YET PUBLISHED · OPTIONAL · DEFAULT OFF · TERMINAL-ONLY · NONAUTHORIZING**
+**PUBLISHED · OPTIONAL · DEFAULT OFF · TERMINAL-ONLY · NONAUTHORIZING**
 
 # Project Shadow Generic Myth Sidecar v0.2.0 — Optional Public Companion
 
@@ -10,9 +10,9 @@
 
 **SHA-256:** `6e7a362d4135f9d626dcfef463bfb1f7166226b3cf8a4c02a953ab39af1538bf`
 
-The exact artifact above was built reproducibly, tested, frozen, and authorized
-for separate public release on GitHub and Hugging Face. This staged repository
-state is not evidence that the public uploads already exist.
+The exact artifact above was built reproducibly, tested, frozen, authorized,
+and published separately on GitHub and Hugging Face. Publication is not
+anonymous redownload identity evidence and does not close the CAPA.
 
 ## What it provides
 
