@@ -9,17 +9,17 @@
 
 **PROJECT SHADOW 1.0.1 / R1 REFERENCE / BETA-ACTIVE-TESTING / PRELIVE**
 
-Project Shadow 1.0.1 is a packaging-boundary correction in preparation. Its
-release design removes Myth from the R1 runtime-family package while preserving
-all 27 active operational descendants byte-for-byte. The Generic Myth v0.2.0
-identity is frozen and authorized for separate publication, the exact Myth-free
-inner family is admitted, and the final R1.0.1 outer identity is frozen. The
-outer archive now has its own exact-hash publication authorization. The staged
-repository is ready to publish, but no new artifact is represented as public
-until the upload exists and can be independently redownloaded.
+Project Shadow 1.0.1 is the corrected current R1 reference. It removes Myth
+from the R1 runtime-family package while preserving all 27 active operational
+descendants byte-for-byte. Generic Myth v0.2.0 is published separately as an
+optional companion, the exact Myth-free inner family is admitted, and the final
+R1.0.1 outer identity has its own exact-hash publication authorization.
 
-No pending artifact is represented as published. The machine-readable phase is
-[`PREPUBLICATION`](PUBLIC_RELEASE_STATUS_2026-08-17.json).
+Generic Myth v0.2.0 and R1.0.1 now exist as public GitHub and Hugging Face
+releases. Anonymous redownload identity verification and six-site effectiveness
+checks remain pending. The machine-readable phase is
+[`POSTPUBLICATION`](PUBLIC_RELEASE_STATUS_2026-08-17.json), and CAPA
+`PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` remains open.
 
 ## Current contact
 
@@ -41,8 +41,8 @@ contact routes.
 | R1, 2026-08-14 | Preserved historical release; superseded as the current reference | Contains a historically nested Generic Myth v0.1.1 member whose own metadata was non-public; the released bytes remain immutable evidence |
 | Full-Canon Myth v0.3.4 | Preserved historical optional sidecar | External, default off, nonauthorizing |
 | Full-Canon Myth v0.3.5 | Published optional companion | External, default off, terminal-only, nonauthorizing |
-| Generic Myth v0.2.0 | Ready to publish; not yet published | Separate optional companion; never embedded in R1 |
-| R1.0.1 | Ready to publish; not yet published | Corrected current reference; publication contract requires zero Myth payload |
+| Generic Myth v0.2.0 (`generic-myth-v0.2.0`) | Published optional companion | Separate, default-off, terminal-only, nonauthorizing; never embedded in R1 |
+| R1.0.1 (`r1.0.1-2026-08-17`) | Published corrected current reference | Publication contract requires zero Myth payload |
 
 The exact historical, published, authorized, and frozen identities are in
 [`PUBLICATION_MANIFEST.json`](PUBLICATION_MANIFEST.json). A concrete identity
@@ -59,28 +59,30 @@ deployment.
 
 - **Generic Myth Sidecar v0.2.0** is a generic mnemonic presentation with no
   named third-party expressive material. Its frozen exact-hash build has passed
-  final tests and is authorized for separate publication on GitHub and Hugging
-  Face; it is not yet represented as published.
+  final tests and is published separately on GitHub and Hugging Face.
 - **Full-Canon Myth Sidecar v0.3.5** is an optional mixed-rights interpretive
   companion published separately from R1.
 
-R1.0.1 will contain neither sidecar. The August 14 bytes are preserved rather
+R1.0.1 contains neither sidecar. The August 14 bytes are preserved rather
 than silently edited; the correction is a separately versioned successor.
 
 ## Verify before use
 
-Run the repository evidence verifier in the phase you intend to validate:
-
-```bash
-python3 -I -S -B tools/verify_repository_evidence.py --phase prepublication
-```
-
-Postpublication mode fails closed until every placeholder is replaced, both
-new release assets have anonymous redownload evidence, and the CAPA is closed
-with effectiveness evidence:
+Run the repository evidence verifier for the current lifecycle phase:
 
 ```bash
 python3 -I -S -B tools/verify_repository_evidence.py --phase postpublication
+```
+
+This validates the published identities, scoped authorities, optional-sidecar
+boundaries, and current open CAPA state. Online mode additionally redownloads
+the exact GitHub assets and checks live release metadata; it does not create the
+missing Hugging Face redownload receipt, establish six-site effectiveness, or
+close the CAPA:
+
+```bash
+python3 -I -S -B tools/verify_repository_evidence.py --phase postpublication \
+  --online --download-dir /tmp/project-shadow-release-assets
 ```
 
 Exact Windows, macOS, and Linux instructions are in
@@ -95,6 +97,8 @@ CAPA `PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` is
 Hugging Face redownload identity checks for the corrected artifacts plus live
 verification of the six Project Shadow public sites. See the
 [`CAPA record`](governance/CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_2026-08-17.json).
+Only after those criteria are evidenced may this state become
+`CLOSED_EFFECTIVE`.
 
 ## Scope boundary
 
