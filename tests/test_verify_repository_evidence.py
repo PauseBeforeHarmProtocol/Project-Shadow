@@ -46,6 +46,16 @@ class RepositoryEvidenceTests(unittest.TestCase):
             "f1358db6c824319501d0eabf341174eb96217e5d2545d9ac908a81d338c8afa8",
         )
 
+    def test_current_public_release_verifiers_remain_byte_pinned(self) -> None:
+        outer = hashlib.sha256(
+            (ROOT / "tools" / "verify_outer_release.py").read_bytes()
+        ).hexdigest()
+        generic = hashlib.sha256(
+            (ROOT / "tools" / "verify_generic_myth_v0_2_0.py").read_bytes()
+        ).hexdigest()
+        self.assertEqual(outer, VERIFIER.CURRENT_OUTER_VERIFIER_SHA256)
+        self.assertEqual(generic, VERIFIER.GENERIC_V0_2_0_VERIFIER_SHA256)
+
     def test_published_postpublication_has_no_release_placeholders(self) -> None:
         self.assertEqual(VERIFIER.release_placeholder_findings(), [])
 
@@ -53,28 +63,156 @@ class RepositoryEvidenceTests(unittest.TestCase):
         with self.assertRaisesRegex(VERIFIER.EvidenceError, "manifest phase mismatch"):
             VERIFIER.verify_repository_metadata("PREPUBLICATION")
 
-    def test_postpublication_keeps_capa_pending_effectiveness(self) -> None:
+    def test_postpublication_closes_capa_on_both_effectiveness_receipts(self) -> None:
         status = json.loads(VERIFIER.CURRENT_STATUS.read_text(encoding="utf-8"))
         capa = json.loads(VERIFIER.CAPA_RECORD.read_text(encoding="utf-8"))
         self.assertEqual(status["publication_phase"], "POSTPUBLICATION")
-        self.assertEqual(status["capa"]["status"], "IMPLEMENTED_PENDING_EFFECTIVENESS")
-        self.assertFalse(status["capa"]["effectiveness_verified"])
-        self.assertEqual(capa["status"], "IMPLEMENTED_PENDING_EFFECTIVENESS")
-        self.assertFalse(capa["closure"]["effectiveness_verified"])
-        self.assertIsNone(capa["closure"]["verification_record"])
+        self.assertEqual(status["capa"]["status"], "CLOSED_EFFECTIVE")
+        self.assertTrue(status["capa"]["effectiveness_verified"])
+        self.assertEqual(capa["status"], "CLOSED_EFFECTIVE")
+        self.assertTrue(capa["closure"]["effectiveness_verified"])
+        self.assertEqual(
+            status["capa"]["verification_records"],
+            list(VERIFIER.CAPA_EFFECTIVENESS_RECORDS),
+        )
+        self.assertEqual(
+            capa["closure"]["verification_records"],
+            list(VERIFIER.CAPA_EFFECTIVENESS_RECORDS),
+        )
 
     def test_false_postpublication_capa_closure_fails_closed(self) -> None:
         status = json.loads(VERIFIER.CURRENT_STATUS.read_text(encoding="utf-8"))
-        status["capa"]["status"] = "CLOSED_EFFECTIVE"
+        status["capa"]["effectiveness_verified"] = False
         with tempfile.TemporaryDirectory(prefix="shadow-capa-status-test-") as temp:
             mutated = Path(temp) / "PUBLIC_RELEASE_STATUS_2026-08-17.json"
             mutated.write_text(json.dumps(status), encoding="utf-8")
             with mock.patch.object(VERIFIER, "CURRENT_STATUS", mutated):
                 with self.assertRaisesRegex(
                     VERIFIER.EvidenceError,
-                    "current status/CAPA postpublication state mismatch",
+                    "current status/CAPA postpublication closure mismatch",
                 ):
                     VERIFIER.verify_repository_metadata("POSTPUBLICATION")
+
+    def test_retained_current_effectiveness_receipts_validate(self) -> None:
+        rows = VERIFIER.verify_repository_metadata("POSTPUBLICATION")
+        by_tag = {row["tag"]: row for row in rows}
+        redownload = json.loads(
+            VERIFIER.CURRENT_REDOWNLOAD.read_text(encoding="utf-8")
+        )
+        sites = json.loads(
+            VERIFIER.SIX_SITE_EFFECTIVENESS.read_text(encoding="utf-8")
+        )
+        VERIFIER.validate_current_redownload(redownload, by_tag)
+        VERIFIER.validate_six_public_sites_effectiveness(sites, by_tag)
+        project_shadow = next(
+            site for site in sites["sites"] if site["site_id"] == "project-shadow"
+        )
+        self.assertIn("/status", [route["path"] for route in project_shadow["routes"]])
+
+    def test_impossible_effectiveness_timestamp_fails_closed(self) -> None:
+        rows = VERIFIER.verify_repository_metadata("POSTPUBLICATION")
+        by_tag = {row["tag"]: row for row in rows}
+        redownload = json.loads(
+            VERIFIER.CURRENT_REDOWNLOAD.read_text(encoding="utf-8")
+        )
+        redownload["recorded_at"] = "2026-02-31T10:33:45Z"
+        with self.assertRaisesRegex(VERIFIER.EvidenceError, "not a real UTC timestamp"):
+            VERIFIER.validate_current_redownload(redownload, by_tag)
+
+    def test_redownload_hugging_face_final_host_mutation_fails_closed(self) -> None:
+        rows = VERIFIER.verify_repository_metadata("POSTPUBLICATION")
+        by_tag = {row["tag"]: row for row in rows}
+        redownload = json.loads(
+            VERIFIER.CURRENT_REDOWNLOAD.read_text(encoding="utf-8")
+        )
+        hf_row = next(
+            row for row in redownload["observations"]
+            if row["host"] == "HUGGING_FACE"
+        )
+        hf_row["final_host"] = "example.invalid"
+        with self.assertRaisesRegex(
+            VERIFIER.EvidenceError,
+            "unexpected HUGGING_FACE public-download final host",
+        ):
+            VERIFIER.validate_current_redownload(redownload, by_tag)
+
+    def test_generic_public_download_verifier_mutation_fails_closed(self) -> None:
+        rows = VERIFIER.verify_repository_metadata("POSTPUBLICATION")
+        by_tag = {row["tag"]: row for row in rows}
+        redownload = json.loads(
+            VERIFIER.CURRENT_REDOWNLOAD.read_text(encoding="utf-8")
+        )
+        redownload["generic_v0_2_0_bounded_verification"]["observations"][1][
+            "status"
+        ] = "FAIL"
+        with self.assertRaisesRegex(
+            VERIFIER.EvidenceError,
+            "Generic v0.2.0 public-download verification mismatch",
+        ):
+            VERIFIER.validate_current_redownload(redownload, by_tag)
+
+    def test_site_receipt_wrong_alias_final_path_fails_closed(self) -> None:
+        rows = VERIFIER.verify_repository_metadata("POSTPUBLICATION")
+        by_tag = {row["tag"]: row for row in rows}
+        sites = json.loads(
+            VERIFIER.SIX_SITE_EFFECTIVENESS.read_text(encoding="utf-8")
+        )
+        arm = next(
+            site for site in sites["sites"]
+            if site["site_id"] == "american-repair-manual"
+        )
+        manual = next(route for route in arm["routes"] if route["path"] == "/manual.html")
+        manual["final_url"] = manual["url"]
+        with self.assertRaisesRegex(
+            VERIFIER.EvidenceError,
+            "route observation mismatch: american-repair-manual/manual.html",
+        ):
+            VERIFIER.validate_six_public_sites_effectiveness(sites, by_tag)
+
+    def test_national_route_has_only_bounded_size_override(self) -> None:
+        rows = VERIFIER.verify_repository_metadata("POSTPUBLICATION")
+        by_tag = {row["tag"]: row for row in rows}
+        sites = json.loads(
+            VERIFIER.SIX_SITE_EFFECTIVENESS.read_text(encoding="utf-8")
+        )
+        record = next(
+            site for site in sites["sites"] if site["site_id"] == "the-record"
+        )
+        national = next(
+            route for route in record["routes"] if route["path"] == "/national.html"
+        )
+        self.assertGreater(national["bytes_observed"], VERIFIER.MAX_LINK_RESPONSE_BYTES)
+        VERIFIER.validate_six_public_sites_effectiveness(sites, by_tag)
+        national["bytes_observed"] = 16 * 1024 * 1024 + 1
+        with self.assertRaisesRegex(VERIFIER.EvidenceError, "route observation mismatch"):
+            VERIFIER.validate_six_public_sites_effectiveness(sites, by_tag)
+
+    def test_hidden_script_text_cannot_satisfy_public_semantics(self) -> None:
+        source = (
+            "<html><body><script>R1.0.1 contains no Myth package; Generic Myth "
+            "v0.2.0; Full-Canon Myth v0.3.5; separate optional default off "
+            "nonauthorizing</script></body></html>"
+        )
+        text, links = VERIFIER.public_html_view(source)
+        self.assertEqual(text, "")
+        self.assertEqual(links, ())
+
+    def test_satellite_direct_github_release_link_is_rejected(self) -> None:
+        requirement = next(
+            row for row in VERIFIER.PUBLIC_SITE_REQUIREMENTS
+            if row["site_id"] == "pause-before-harm"
+        )
+        source = (
+            '<p>R1.0.1 contains no Myth package. Generic Myth v0.2.0 and '
+            'Full-Canon Myth v0.3.5 are separate optional default-off '
+            'nonauthorizing companions.</p>'
+            '<a href="https://projectshadow.frylock117.chatgpt.site/release">release</a>'
+            '<a href="https://projectshadow.frylock117.chatgpt.site/capa">capa</a>'
+            '<a href="https://github.com/PauseBeforeHarmProtocol/Project-Shadow/'
+            'releases/tag/r1.0.1-2026-08-17">direct</a>'
+        )
+        checks = VERIFIER.public_site_semantic_checks(requirement, {"/": source})
+        self.assertFalse(checks["no_direct_github_release_link"])
 
     def test_generic_exact_identity_mutation_fails_closed(self) -> None:
         manifest = json.loads(VERIFIER.PUBLICATION_MANIFEST.read_text(encoding="utf-8"))

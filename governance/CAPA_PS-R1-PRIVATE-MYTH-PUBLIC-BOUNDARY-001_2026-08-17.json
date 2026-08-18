@@ -1,9 +1,13 @@
 {
   "capa_id": "PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001",
   "closure": {
-    "closed_at": null,
-    "effectiveness_verified": false,
-    "verification_record": null
+    "closed_at": "2026-08-18T10:39:24Z",
+    "effectiveness_verified": true,
+    "verification_record": "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json",
+    "verification_records": [
+      "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json",
+      "governance/R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json"
+    ]
   },
   "corrective_action": {
     "affected_august_14_release_mutated": false,
@@ -36,5 +40,5 @@
   },
   "opened_on": "2026-08-17",
   "schema": "project-shadow.capa.v1",
-  "status": "IMPLEMENTED_PENDING_EFFECTIVENESS"
+  "status": "CLOSED_EFFECTIVE"
 }

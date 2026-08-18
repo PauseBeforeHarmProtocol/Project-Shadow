@@ -16,10 +16,12 @@ optional companion, the exact Myth-free inner family is admitted, and the final
 R1.0.1 outer identity has its own exact-hash publication authorization.
 
 Generic Myth v0.2.0 and R1.0.1 now exist as public GitHub and Hugging Face
-releases. Anonymous redownload identity verification and six-site effectiveness
-checks remain pending. The machine-readable phase is
+releases. Anonymous exact-identity redownloads from both hosts, bounded package
+verification, recursive zero-Myth verification, and corrected-boundary checks
+across all six public sites passed. The machine-readable phase is
 [`POSTPUBLICATION`](PUBLIC_RELEASE_STATUS_2026-08-17.json), and CAPA
-`PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` remains open.
+`PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` is `CLOSED_EFFECTIVE` for this
+packaging correction.
 
 ## Current contact
 
@@ -75,10 +77,10 @@ python3 -I -S -B tools/verify_repository_evidence.py --phase postpublication
 ```
 
 This validates the published identities, scoped authorities, optional-sidecar
-boundaries, and current open CAPA state. Online mode additionally redownloads
-the exact GitHub assets and checks live release metadata; it does not create the
-missing Hugging Face redownload receipt, establish six-site effectiveness, or
-close the CAPA:
+boundaries, retained redownload and six-site receipts, and closed CAPA state.
+Online mode additionally redownloads the exact GitHub and Hugging Face assets,
+runs the historical and current bounded package verifiers, checks live release
+metadata, and rechecks the six-site boundary semantics:
 
 ```bash
 python3 -I -S -B tools/verify_repository_evidence.py --phase postpublication \
@@ -89,16 +91,23 @@ Exact Windows, macOS, and Linux instructions are in
 [`docs/VERIFY_RELEASES.md`](docs/VERIFY_RELEASES.md). The historical
 [`tools/verify_public_release.py`](tools/verify_public_release.py) remains
 pinned to the August 14 artifact; it is not silently retargeted to R1.0.1.
+The corrected archive is checked separately by
+[`tools/verify_outer_release.py`](tools/verify_outer_release.py), and Generic
+v0.2.0 by
+[`tools/verify_generic_myth_v0_2_0.py`](tools/verify_generic_myth_v0_2_0.py).
 
 ## CAPA state
 
 CAPA `PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` is
-**IMPLEMENTED_PENDING_EFFECTIVENESS**. Closure requires exact public GitHub and
-Hugging Face redownload identity checks for the corrected artifacts plus live
-verification of the six Project Shadow public sites. See the
+**CLOSED_EFFECTIVE** for the 2026-08-17 packaging-boundary correction. Exact
+public GitHub and Hugging Face redownload identity checks, bounded Generic and
+recursive R1.0.1 verification, and live checks across all six Project Shadow
+public sites passed. See the
 [`CAPA record`](governance/CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_2026-08-17.json).
-Only after those criteria are evidenced may this state become
-`CLOSED_EFFECTIVE`.
+The retained evidence is the
+[`redownload receipt`](governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json)
+and
+[`six-site receipt`](governance/R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json).
 
 ## Scope boundary
 

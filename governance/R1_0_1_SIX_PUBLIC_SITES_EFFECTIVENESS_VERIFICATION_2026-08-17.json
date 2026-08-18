@@ -1,0 +1,297 @@
+{
+  "schema": "project-shadow.r1.0.1-six-public-sites-effectiveness-verification.v1",
+  "capa_id": "PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001",
+  "status": "VERIFIED",
+  "verified_at": "2026-08-18T10:37:44Z",
+  "all_six_verified": true,
+  "method": {
+    "anonymous_https": true,
+    "http_status_required": 200,
+    "default_max_response_bytes": 2097152,
+    "route_max_response_bytes": {
+      "the-record:/national.html": 16777216
+    },
+    "response_hash_algorithm": "SHA-256",
+    "content_type_prefix": "text/html",
+    "same_origin_final_url_required": true,
+    "semantic_content_checks": true
+  },
+  "artifact_bindings": {
+    "r1_0_1_outer": {
+      "filename": "Project_Shadow_R1.0.1_Public_Reference_2026-08-17.zip",
+      "bytes": 5731663,
+      "sha256": "6f6f1e16d5e9a20e62403f14af7ce8629ce2d702528fb7f80aaf4a14deb7a1d1"
+    },
+    "r1_0_1_inner": {
+      "filename": "Project_Shadow_R1.0.1_Runtime_Family_Myth_Decoupled_2026-08-17.zip",
+      "bytes": 5463189,
+      "sha256": "c8c32b12432c954b1a6f852c0c9f81bbbd40167e936be057d4c3de1a0aa3a623"
+    },
+    "generic_myth_v0_2_0": {
+      "filename": "Project_Shadow_Generic_Myth_Sidecar_v0.2.0_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+      "bytes": 93676,
+      "sha256": "6e7a362d4135f9d626dcfef463bfb1f7166226b3cf8a4c02a953ab39af1538bf"
+    },
+    "full_canon_myth_v0_3_5": {
+      "filename": "Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+      "bytes": 1428812,
+      "sha256": "2b55867fe7c502a0defd8d6f2e9b53fbd1caaf1b0f225a438bd45b04a3e7bae2"
+    }
+  },
+  "sites": [
+    {
+      "site_id": "project-shadow",
+      "base_url": "https://projectshadow.frylock117.chatgpt.site",
+      "routes": [
+        {
+          "path": "/",
+          "url": "https://projectshadow.frylock117.chatgpt.site/",
+          "final_url": "https://projectshadow.frylock117.chatgpt.site/",
+          "http_status": 200,
+          "bytes_observed": 72224,
+          "sha256_observed": "9a903fefd0f009049c7aeab13d637069633b1d65321d5a186929e5865f4d1d4a",
+          "content_type": "text/html"
+        },
+        {
+          "path": "/release",
+          "url": "https://projectshadow.frylock117.chatgpt.site/release",
+          "final_url": "https://projectshadow.frylock117.chatgpt.site/release",
+          "http_status": 200,
+          "bytes_observed": 66408,
+          "sha256_observed": "86edaf872132243aeddd74b8a0d72fa28a35b55ebb67c234f2e3798dd7bba06a",
+          "content_type": "text/html"
+        },
+        {
+          "path": "/status",
+          "url": "https://projectshadow.frylock117.chatgpt.site/status",
+          "final_url": "https://projectshadow.frylock117.chatgpt.site/status",
+          "http_status": 200,
+          "bytes_observed": 41108,
+          "sha256_observed": "006d0a9a99895f0dd2a38250b748087fd8142112341840ec96842c1ee7af6575",
+          "content_type": "text/html"
+        },
+        {
+          "path": "/capa",
+          "url": "https://projectshadow.frylock117.chatgpt.site/capa",
+          "final_url": "https://projectshadow.frylock117.chatgpt.site/capa",
+          "http_status": 200,
+          "bytes_observed": 36970,
+          "sha256_observed": "5a11db9343fcf50b1cafebb49675ae9d0ab5c847e049a186b2b9299f8694cc9f",
+          "content_type": "text/html"
+        }
+      ],
+      "semantic_checks": {
+        "r1_0_1_current": true,
+        "contains_no_myth_package": true,
+        "generic_v0_2_0": true,
+        "full_canon_v0_3_5": true,
+        "sidecars_separate": true,
+        "sidecars_optional": true,
+        "sidecars_default_off": true,
+        "sidecars_nonauthorizing": true,
+        "canonical_release_link": true,
+        "capa_link": true,
+        "outer_exact_identity": true,
+        "inner_exact_identity": true,
+        "generic_exact_identity": true,
+        "full_canon_exact_identity": true,
+        "member_set_identity": true,
+        "capa_id": true,
+        "capa_state": true
+      }
+    },
+    {
+      "site_id": "pause-before-harm",
+      "base_url": "https://pausebeforeharm.frylock117.chatgpt.site",
+      "routes": [
+        {
+          "path": "/",
+          "url": "https://pausebeforeharm.frylock117.chatgpt.site/",
+          "final_url": "https://pausebeforeharm.frylock117.chatgpt.site/",
+          "http_status": 200,
+          "bytes_observed": 87970,
+          "sha256_observed": "daa3379f784532724b910a28c43cbf6462bb793ed40eef8845b09fb47920f037",
+          "content_type": "text/html"
+        }
+      ],
+      "semantic_checks": {
+        "r1_0_1_current": true,
+        "contains_no_myth_package": true,
+        "generic_v0_2_0": true,
+        "full_canon_v0_3_5": true,
+        "sidecars_separate": true,
+        "sidecars_optional": true,
+        "sidecars_default_off": true,
+        "sidecars_nonauthorizing": true,
+        "canonical_release_link": true,
+        "capa_link": true,
+        "no_direct_github_release_link": true
+      }
+    },
+    {
+      "site_id": "civic-qa",
+      "base_url": "https://civicqa.frylock117.chatgpt.site",
+      "routes": [
+        {
+          "path": "/",
+          "url": "https://civicqa.frylock117.chatgpt.site/",
+          "final_url": "https://civicqa.frylock117.chatgpt.site/",
+          "http_status": 200,
+          "bytes_observed": 57172,
+          "sha256_observed": "0ad8c1f8feef4142616abc8d91f2fc6979ad5c2d61ddee1f8c09f70039b15b9a",
+          "content_type": "text/html"
+        }
+      ],
+      "semantic_checks": {
+        "r1_0_1_current": true,
+        "contains_no_myth_package": true,
+        "generic_v0_2_0": true,
+        "full_canon_v0_3_5": true,
+        "sidecars_separate": true,
+        "sidecars_optional": true,
+        "sidecars_default_off": true,
+        "sidecars_nonauthorizing": true,
+        "canonical_release_link": true,
+        "capa_link": true,
+        "no_direct_github_release_link": true
+      }
+    },
+    {
+      "site_id": "american-repair-manual",
+      "base_url": "https://americanrepairmanual.frylock117.chatgpt.site",
+      "routes": [
+        {
+          "path": "/",
+          "url": "https://americanrepairmanual.frylock117.chatgpt.site/",
+          "final_url": "https://americanrepairmanual.frylock117.chatgpt.site/",
+          "http_status": 200,
+          "bytes_observed": 57770,
+          "sha256_observed": "6f37879fe2c3f1f7fd2f4dd0ce701a016b4d186e12e4d3cf73aaa01e791b386b",
+          "content_type": "text/html"
+        },
+        {
+          "path": "/manual.html",
+          "url": "https://americanrepairmanual.frylock117.chatgpt.site/manual.html",
+          "final_url": "https://americanrepairmanual.frylock117.chatgpt.site/manual",
+          "http_status": 200,
+          "bytes_observed": 614785,
+          "sha256_observed": "d74eb1e2d9f62399de7dd9bcba21b4c64e54b60eb7660f6acda5182b90a31ca7",
+          "content_type": "text/html"
+        }
+      ],
+      "semantic_checks": {
+        "r1_0_1_current": true,
+        "contains_no_myth_package": true,
+        "generic_v0_2_0": true,
+        "full_canon_v0_3_5": true,
+        "sidecars_separate": true,
+        "sidecars_optional": true,
+        "sidecars_default_off": true,
+        "sidecars_nonauthorizing": true,
+        "canonical_release_link": true,
+        "capa_link": true,
+        "no_direct_github_release_link": true,
+        "archived_manual_current_boundary": true
+      }
+    },
+    {
+      "site_id": "the-record",
+      "base_url": "https://therecord.frylock117.chatgpt.site",
+      "routes": [
+        {
+          "path": "/",
+          "url": "https://therecord.frylock117.chatgpt.site/",
+          "final_url": "https://therecord.frylock117.chatgpt.site/",
+          "http_status": 200,
+          "bytes_observed": 61387,
+          "sha256_observed": "dfc3d7f126a4dc7a921052f3f871385fc3e8ba87b88332e67c5fc267c5eecb75",
+          "content_type": "text/html"
+        },
+        {
+          "path": "/corrections",
+          "url": "https://therecord.frylock117.chatgpt.site/corrections",
+          "final_url": "https://therecord.frylock117.chatgpt.site/corrections",
+          "http_status": 200,
+          "bytes_observed": 85909,
+          "sha256_observed": "3dfe63973e9c04d428a5f1dadbca2004f9fafa4f18cff0ae9e8215818e145c12",
+          "content_type": "text/html"
+        },
+        {
+          "path": "/national.html",
+          "url": "https://therecord.frylock117.chatgpt.site/national.html",
+          "final_url": "https://therecord.frylock117.chatgpt.site/national",
+          "http_status": 200,
+          "bytes_observed": 14978318,
+          "sha256_observed": "1b5a68b84745c3a9e4894eadd5d3784cd1b8c76804e91b4a136c57cc68e5c3c2",
+          "content_type": "text/html"
+        }
+      ],
+      "semantic_checks": {
+        "r1_0_1_current": true,
+        "contains_no_myth_package": true,
+        "generic_v0_2_0": true,
+        "full_canon_v0_3_5": true,
+        "sidecars_separate": true,
+        "sidecars_optional": true,
+        "sidecars_default_off": true,
+        "sidecars_nonauthorizing": true,
+        "canonical_release_link": true,
+        "capa_link": true,
+        "no_direct_github_release_link": true,
+        "capa_state": true,
+        "national_trump_record": true
+      }
+    },
+    {
+      "site_id": "almsivi",
+      "base_url": "https://almsivi.frylock117.chatgpt.site",
+      "routes": [
+        {
+          "path": "/",
+          "url": "https://almsivi.frylock117.chatgpt.site/",
+          "final_url": "https://almsivi.frylock117.chatgpt.site/",
+          "http_status": 200,
+          "bytes_observed": 72687,
+          "sha256_observed": "c6455e5303bf0bc83c921793106620db67c429747a07796825d4d23b3722d9ef",
+          "content_type": "text/html"
+        },
+        {
+          "path": "/technical/project-shadow",
+          "url": "https://almsivi.frylock117.chatgpt.site/technical/project-shadow",
+          "final_url": "https://almsivi.frylock117.chatgpt.site/technical/project-shadow",
+          "http_status": 200,
+          "bytes_observed": 86546,
+          "sha256_observed": "303d979e69b2b7eadd805bece42779e002865a62cfcd5ba7afda1428917558e3",
+          "content_type": "text/html"
+        }
+      ],
+      "semantic_checks": {
+        "r1_0_1_current": true,
+        "contains_no_myth_package": true,
+        "generic_v0_2_0": true,
+        "full_canon_v0_3_5": true,
+        "sidecars_separate": true,
+        "sidecars_optional": true,
+        "sidecars_default_off": true,
+        "sidecars_nonauthorizing": true,
+        "canonical_release_link": true,
+        "capa_link": true,
+        "no_direct_github_release_link": true,
+        "outer_exact_identity": true,
+        "inner_exact_identity": true,
+        "generic_exact_identity": true,
+        "full_canon_exact_identity": true,
+        "member_set_identity": true,
+        "preserved_predecessor": true
+      }
+    }
+  ],
+  "nonclaims": {
+    "operational_deployment_authorized": false,
+    "production_authorized": false,
+    "efficacy_claimed": false,
+    "safety_claimed": false,
+    "certification_claimed": false,
+    "legal_compliance_claimed": false
+  }
+}
