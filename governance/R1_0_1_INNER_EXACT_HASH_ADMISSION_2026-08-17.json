@@ -1,0 +1,22 @@
+{
+  "schema": "project-shadow.r1.0.1-inner-exact-hash-maintainer-admission.v1",
+  "decision": "ADMIT_EXACT_HASH_FOR_R1.0.1_REFERENCE_PACKAGING",
+  "inner": {
+    "filename": "Project_Shadow_R1.0.1_Runtime_Family_Myth_Decoupled_2026-08-17.zip",
+    "bytes": 5463189,
+    "sha256": "c8c32b12432c954b1a6f852c0c9f81bbbd40167e936be057d4c3de1a0aa3a623",
+    "active_descendant_count": 27,
+    "operational_descendant_bytes_changed": 0,
+    "myth_payload_embedded": false
+  },
+  "maintainer_confirmation": {
+    "confirmed_by": "Phillip Linstrum",
+    "confirmed_at": "2026-08-18T00:09:39Z",
+    "statement": "I admit the exact Myth-free R1.0.1 inner family—5,463,189 bytes, SHA-256 c8c32b12432c954b1a6f852c0c9f81bbbd40167e936be057d4c3de1a0aa3a623—for R1.0.1 reference packaging. Its 27 active descendants are byte-identical to the August 14 predecessor, no Myth payload is embedded, and this admission does not authorize production, deployment, or publication."
+  },
+  "non_authorizations": {
+    "production_authorized": false,
+    "deployment_authorized": false,
+    "publication_authorized": false
+  }
+}

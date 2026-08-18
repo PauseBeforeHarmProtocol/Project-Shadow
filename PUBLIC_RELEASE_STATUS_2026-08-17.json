@@ -1,0 +1,59 @@
+{
+  "capa": {
+    "effectiveness_verified": false,
+    "id": "PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001",
+    "status": "IMPLEMENTED_PENDING_EFFECTIVENESS"
+  },
+  "current_reference": {
+    "active_descendant_count": 27,
+    "final_outer_identity_bound": true,
+    "inner_exact_hash_admitted": true,
+    "myth_payload_required": false,
+    "publication_state": "READY_TO_PUBLISH",
+    "tag": "r1.0.1-2026-08-17",
+    "zero_operational_descendant_bytes_changed": true
+  },
+  "derived_record": true,
+  "generic_myth": {
+    "canonical_r1_component": false,
+    "default_off": true,
+    "final_hardened_identity_bound": true,
+    "publication_authorization_recorded": true,
+    "publication_state": "READY_TO_PUBLISH",
+    "required_for_r1": false,
+    "tag": "generic-myth-v0.2.0",
+    "terminal_only": true
+  },
+  "historical_boundary": {
+    "affected_release_mutated": false,
+    "affected_release_sha256": "2f8fe1530b6a83294d15011df95853aaecf08fa4dba756f0c2e91dd089e1b1ec",
+    "affected_release_tag": "r1-2026-08-14",
+    "affected_release_treatment": "IMMUTABLE_HISTORICAL_EVIDENCE_SUPERSEDED_BY_SEPARATELY_VERSIONED_SUCCESSOR",
+    "finding": "A nested Generic Myth v0.1.1 member was physically present while its own metadata classified it as non-public and excluded from public manufacture."
+  },
+  "nonclaims": {
+    "certification_claimed": false,
+    "efficacy_claimed": false,
+    "legal_compliance_claimed": false,
+    "operational_deployment_authorized": false,
+    "production_authorized": false,
+    "safety_claimed": false
+  },
+  "publication_phase": "PREPUBLICATION",
+  "published_optional_companion": {
+    "default_off": true,
+    "filename": "Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+    "sha256": "2b55867fe7c502a0defd8d6f2e9b53fbd1caaf1b0f225a438bd45b04a3e7bae2",
+    "tag": "myth-v0.3.5"
+  },
+  "schema": "project-shadow.current-release-status.v1",
+  "source_records": [
+    "PUBLICATION_MANIFEST.json",
+    "governance/PROJECT_SHADOW_GENERIC_MYTH_v0.2.0_PUBLIC_RELEASE_REFERENCE.json",
+    "governance/GENERIC_MYTH_v0.2.0_EXACT_HASH_PUBLIC_RELEASE_AUTHORIZATION_2026-08-17.json",
+    "governance/R1_0_1_INNER_EXACT_HASH_ADMISSION_2026-08-17.json",
+    "governance/R1_0_1_OUTER_RELEASE_AUTHORIZATION_2026-08-17.json",
+    "governance/CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_2026-08-17.json"
+  ],
+  "warning": "READY_TO_PUBLISH is still PREPUBLICATION. Exact-hash authorities are recorded, but public release, anonymous redownload verification, six-site effectiveness checks, and CAPA closure have not yet occurred."
+}

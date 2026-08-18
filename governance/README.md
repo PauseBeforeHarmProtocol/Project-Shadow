@@ -24,6 +24,36 @@ This directory separates governance and custody evidence:
    and automation, and the fail-closed stale-after date without changing any
    historical release.
 
+## 2026-08-17 packaging-boundary correction
+
+The records below are additive. They do not modify the frozen August 14
+admission, signature bundle, authorization, derived status, redownload
+verification, or postpublication attestation.
+
+7. [`PROJECT_SHADOW_GENERIC_MYTH_v0.2.0_PUBLIC_RELEASE_REFERENCE.json`](PROJECT_SHADOW_GENERIC_MYTH_v0.2.0_PUBLIC_RELEASE_REFERENCE.json)
+   defines the Generic Myth v0.2.0 external/default-off boundary and publication
+   targets and binds its frozen final identity.
+8. [`GENERIC_MYTH_v0.2.0_BUILD_AND_TEST_REPORT_2026-08-17.json`](GENERIC_MYTH_v0.2.0_BUILD_AND_TEST_REPORT_2026-08-17.json)
+   records the passing final hardened tests for that frozen identity.
+9. [`GENERIC_MYTH_v0.2.0_EXACT_HASH_PUBLIC_RELEASE_AUTHORIZATION_2026-08-17.json`](GENERIC_MYTH_v0.2.0_EXACT_HASH_PUBLIC_RELEASE_AUTHORIZATION_2026-08-17.json)
+   records the maintainer's exact wording authorizing only that Generic artifact
+   for separate GitHub and Hugging Face publication.
+10. [`R1_0_1_INNER_EXACT_HASH_ADMISSION_2026-08-17.json`](R1_0_1_INNER_EXACT_HASH_ADMISSION_2026-08-17.json)
+    records the maintainer's scoped exact-hash inner admission and exact submitted
+    wording. It does not authorize production, deployment, or publication.
+11. [`R1_0_1_OUTER_RELEASE_AUTHORIZATION_2026-08-17.json`](R1_0_1_OUTER_RELEASE_AUTHORIZATION_2026-08-17.json)
+    records the maintainer's exact wording authorizing the separately built
+    final outer archive and corresponding repository/site updates.
+12. [`CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_2026-08-17.json`](CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_2026-08-17.json)
+    records the corrective design as implemented pending effectiveness. Closure
+    requires final identity binding, anonymous GitHub and Hugging Face
+    redownload verification, recursive zero-Myth verification, and corrected
+    wording on all six public sites.
+
+Concrete identity fields are not self-authorizing; the separate authority
+records supply the scoped decisions. `tools/verify_repository_evidence.py
+--phase postpublication` must still reject this ready-but-unpublished state.
+
 The signed admission record did not self-authorize public release. The later
 authorization does not modify the signed record or the exact R1 archive; it
 satisfies the external publication gate for the named artifacts only.

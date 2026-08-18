@@ -25,6 +25,7 @@ from typing import Any, Iterable
 ROOT = Path(__file__).resolve().parents[1]
 PUBLICATION_MANIFEST = ROOT / "PUBLICATION_MANIFEST.json"
 PUBLIC_STATUS = ROOT / "PUBLIC_RELEASE_STATUS_2026-08-14.json"
+CURRENT_STATUS = ROOT / "PUBLIC_RELEASE_STATUS_2026-08-17.json"
 AUTHORIZATION = ROOT / "governance" / "RELEASE_AUTHORIZATION_2026-08-14.json"
 PUBLIC_REDOWNLOAD = (
     ROOT / "governance" / "PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-15.json"
@@ -34,6 +35,35 @@ POST_PUBLICATION_ATTESTATION = (
 )
 SIDECAR_REFERENCE = (
     ROOT / "governance" / "PROJECT_SHADOW_SANITIZED_MYTH_V0.3.4_REFERENCE.json"
+)
+FULL_CANON_V035_REFERENCE = (
+    ROOT / "governance" / "PROJECT_SHADOW_MYTH_V0.3.5_PUBLIC_RELEASE_REFERENCE.json"
+)
+FULL_CANON_V035_PUBLICATION = (
+    ROOT / "governance" / "MYTH_V0.3.5_PUBLICATION_RECORD_2026-08-17.json"
+)
+GENERIC_REFERENCE = (
+    ROOT / "governance" / "PROJECT_SHADOW_GENERIC_MYTH_v0.2.0_PUBLIC_RELEASE_REFERENCE.json"
+)
+GENERIC_TEST_RECORD = (
+    ROOT / "governance" / "GENERIC_MYTH_v0.2.0_BUILD_AND_TEST_REPORT_2026-08-17.json"
+)
+GENERIC_AUTHORIZATION = (
+    ROOT
+    / "governance"
+    / "GENERIC_MYTH_v0.2.0_EXACT_HASH_PUBLIC_RELEASE_AUTHORIZATION_2026-08-17.json"
+)
+INNER_ADMISSION = (
+    ROOT / "governance" / "R1_0_1_INNER_EXACT_HASH_ADMISSION_2026-08-17.json"
+)
+OUTER_AUTHORIZATION = (
+    ROOT / "governance" / "R1_0_1_OUTER_RELEASE_AUTHORIZATION_2026-08-17.json"
+)
+CAPA_RECORD = (
+    ROOT / "governance" / "CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_2026-08-17.json"
+)
+CURRENT_REDOWNLOAD = (
+    ROOT / "governance" / "R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json"
 )
 R1_PACKAGE_MANIFEST = ROOT / "governance" / "R1_PACKAGE_MANIFEST.json"
 R1_RELEASE_GATES = (
@@ -72,11 +102,69 @@ AUTHORIZATION_JSON_URL = (
 RELEASE_NOTES = {
     "myth-v0.3.4": ROOT / "release-notes" / "MYTH_SIDECAR_v0.3.4.md",
     "r1-2026-08-14": ROOT / "release-notes" / "PROJECT_SHADOW_R1_2026-08-14.md",
+    "myth-v0.3.5": ROOT / "release-notes" / "MYTH_SIDECAR_v0.3.5.md",
+    "generic-myth-v0.2.0": ROOT / "release-notes" / "GENERIC_MYTH_SIDECAR_v0.2.0.md",
+    "r1.0.1-2026-08-17": ROOT / "release-notes" / "PROJECT_SHADOW_R1_0_1_2026-08-17.md",
 }
 AUTHORIZATION_KEYS = {
     "OPTIONAL_EXTERNAL_RESEARCH_SIDECAR": "optional_external_myth_sidecar_v0_3_4",
     "R1_REFERENCE": "r1_reference",
 }
+PUBLISHED_STATES = {
+    "PUBLISHED",
+    "PUBLISHED_HISTORICAL",
+    "PUBLISHED_HISTORICAL_SUPERSEDED",
+}
+PENDING_IDENTITY_TOKENS = {
+    "generic_bytes": "<" "GENERIC_BYTES" ">",
+    "generic_sha256": "<" "GENERIC_SHA256" ">",
+    "inner_bytes": "<" "INNER_BYTES" ">",
+    "inner_sha256": "<" "INNER_SHA256" ">",
+    "outer_bytes": "<" "OUTER_BYTES" ">",
+    "outer_sha256": "<" "OUTER_SHA256" ">",
+}
+GENERIC_FINAL = {
+    "filename": "Project_Shadow_Generic_Myth_Sidecar_v0.2.0_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+    "bytes": 93_676,
+    "sha256": "6e7a362d4135f9d626dcfef463bfb1f7166226b3cf8a4c02a953ab39af1538bf",
+}
+INNER_FINAL = {
+    "filename": "Project_Shadow_R1.0.1_Runtime_Family_Myth_Decoupled_2026-08-17.zip",
+    "bytes": 5_463_189,
+    "sha256": "c8c32b12432c954b1a6f852c0c9f81bbbd40167e936be057d4c3de1a0aa3a623",
+}
+OUTER_FINAL = {
+    "filename": "Project_Shadow_R1.0.1_Public_Reference_2026-08-17.zip",
+    "bytes": 5_731_663,
+    "sha256": "6f6f1e16d5e9a20e62403f14af7ce8629ce2d702528fb7f80aaf4a14deb7a1d1",
+}
+GATE_1_CONFIRMED_BY = "Phillip Linstrum"
+GATE_1_CONFIRMED_AT = "2026-08-18T00:09:39Z"
+GENERIC_AUTHORIZATION_STATEMENT = (
+    "I authorize this exact Generic Myth Sidecar v0.2.0—93,676 bytes, SHA-256 "
+    "6e7a362d4135f9d626dcfef463bfb1f7166226b3cf8a4c02a953ab39af1538bf—for "
+    "public release on GitHub and Hugging Face as a separate optional, default-off, "
+    "terminal-only, nonauthorizing companion."
+)
+INNER_ADMISSION_STATEMENT = (
+    "I admit the exact Myth-free R1.0.1 inner family—5,463,189 bytes, SHA-256 "
+    "c8c32b12432c954b1a6f852c0c9f81bbbd40167e936be057d4c3de1a0aa3a623—for "
+    "R1.0.1 reference packaging. Its 27 active descendants are byte-identical to the "
+    "August 14 predecessor, no Myth payload is embedded, and this admission does not "
+    "authorize production, deployment, or publication."
+)
+OUTER_AUTHORIZATION_CONFIRMED_AT = "2026-08-18T01:35:04Z"
+OUTER_AUTHORIZATION_STATEMENT = (
+    "I authorize Project_Shadow_R1.0.1_Public_Reference_2026-08-17.zip—5,731,663 "
+    "bytes, SHA-256 6f6f1e16d5e9a20e62403f14af7ce8629ce2d702528fb7f80aaf4a14deb7a1d1, "
+    "tag r1.0.1-2026-08-17—for public release on GitHub and Hugging Face. I also "
+    "authorize the verified GitHub repository update and corresponding updates and "
+    "deployments across all six GPT Sites. This does not authorize production or "
+    "operational deployment."
+)
+RELEASE_PLACEHOLDER_RE = re.compile(
+    r"<(?:GENERIC|INNER|OUTER)_[A-Z0-9_]+>"
+)
 PUBLIC_SITE_URLS = (
     "https://projectshadow.frylock117.chatgpt.site",
     "https://pausebeforeharm.frylock117.chatgpt.site",
@@ -189,6 +277,7 @@ def worktree_files() -> list[Path]:
             cwd=ROOT,
             check=True,
             stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
         )
     except (OSError, subprocess.CalledProcessError):
         return sorted(path for path in ROOT.rglob("*") if path.is_file() and ".git" not in path.parts)
@@ -247,6 +336,10 @@ def validate_asset_row(row: dict[str, Any], repository: str) -> dict[str, Any]:
     asset = row.get("asset")
     if not isinstance(asset, dict):
         raise EvidenceError(f"release {row.get('tag')!r} has no asset object")
+    if "identity_placeholders" in asset:
+        raise EvidenceError(
+            f"concrete release {row.get('tag')!r} retains identity_placeholders"
+        )
     filename = asset.get("filename")
     digest = asset.get("sha256")
     size = asset.get("bytes")
@@ -269,6 +362,112 @@ def validate_asset_row(row: dict[str, Any], repository: str) -> dict[str, Any]:
     return asset
 
 
+def validate_pending_asset_row(
+    row: dict[str, Any],
+    repository: str,
+    *,
+    expected_bytes_token: str,
+    expected_sha256_token: str,
+) -> dict[str, Any]:
+    """Validate an explicit fail-closed prepublication identity placeholder."""
+    asset = row.get("asset")
+    if not isinstance(asset, dict):
+        raise EvidenceError(f"pending release {row.get('tag')!r} has no asset object")
+    filename = asset.get("filename")
+    url = asset.get("download_url")
+    if not isinstance(filename, str) or PurePosixPath(filename).name != filename:
+        raise EvidenceError(f"pending release {row.get('tag')!r} has an unsafe filename")
+    if asset.get("bytes") is not None or asset.get("sha256") is not None:
+        raise EvidenceError(
+            f"pending release {row.get('tag')!r} must keep exact identity null"
+        )
+    placeholders = asset.get("identity_placeholders")
+    if placeholders != {
+        "bytes": expected_bytes_token,
+        "sha256": expected_sha256_token,
+    }:
+        raise EvidenceError(f"pending release {row.get('tag')!r} placeholder mismatch")
+    expected_url = (
+        f"https://github.com/{repository}/releases/download/"
+        f"{urllib.parse.quote(str(row.get('tag')), safe='')}/"
+        f"{urllib.parse.quote(filename, safe='._-')}"
+    )
+    if url != expected_url:
+        raise EvidenceError(f"pending release {row.get('tag')!r} URL mismatch")
+    return asset
+
+
+def phase_name(value: str) -> str:
+    normalized = value.upper()
+    if normalized not in {"PREPUBLICATION", "POSTPUBLICATION"}:
+        raise EvidenceError(f"unsupported verification phase: {value!r}")
+    return normalized
+
+
+def published_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [row for row in rows if row.get("publication_state") in PUBLISHED_STATES]
+
+
+def release_placeholder_findings(paths: Iterable[Path] | None = None) -> list[str]:
+    findings: list[str] = []
+    candidates = paths if paths is not None else worktree_files()
+    for path in sorted(candidates):
+        if path.suffix.lower() not in {".json", ".md", ".txt", ".yml", ".yaml"}:
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError) as exc:
+            raise EvidenceError(f"could not scan placeholder file {path}: {exc}") from exc
+        relative = path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else str(path)
+        for match in RELEASE_PLACEHOLDER_RE.finditer(text):
+            findings.append(f"{relative}:{match.group(0)}")
+    return findings
+
+
+def require_pending_tokens() -> None:
+    required = {
+        PUBLICATION_MANIFEST: (
+            PENDING_IDENTITY_TOKENS["generic_bytes"],
+            PENDING_IDENTITY_TOKENS["generic_sha256"],
+            PENDING_IDENTITY_TOKENS["outer_bytes"],
+            PENDING_IDENTITY_TOKENS["outer_sha256"],
+        ),
+        GENERIC_REFERENCE: (
+            PENDING_IDENTITY_TOKENS["generic_bytes"],
+            PENDING_IDENTITY_TOKENS["generic_sha256"],
+        ),
+        GENERIC_TEST_RECORD: (
+            PENDING_IDENTITY_TOKENS["generic_bytes"],
+            PENDING_IDENTITY_TOKENS["generic_sha256"],
+        ),
+        INNER_ADMISSION: (
+            PENDING_IDENTITY_TOKENS["inner_bytes"],
+            PENDING_IDENTITY_TOKENS["inner_sha256"],
+        ),
+        OUTER_AUTHORIZATION: (
+            PENDING_IDENTITY_TOKENS["outer_bytes"],
+            PENDING_IDENTITY_TOKENS["outer_sha256"],
+        ),
+        RELEASE_NOTES["generic-myth-v0.2.0"]: (
+            PENDING_IDENTITY_TOKENS["generic_bytes"],
+            PENDING_IDENTITY_TOKENS["generic_sha256"],
+        ),
+        RELEASE_NOTES["r1.0.1-2026-08-17"]: (
+            PENDING_IDENTITY_TOKENS["inner_bytes"],
+            PENDING_IDENTITY_TOKENS["inner_sha256"],
+            PENDING_IDENTITY_TOKENS["outer_bytes"],
+            PENDING_IDENTITY_TOKENS["outer_sha256"],
+        ),
+    }
+    for path, tokens in required.items():
+        text = path.read_text(encoding="utf-8")
+        for token in tokens:
+            if token not in text:
+                raise EvidenceError(
+                    f"prepublication placeholder missing from {path.relative_to(ROOT)}: {token}"
+                )
+
+
 def check_nonclaims(label: str, nonclaims: Any) -> None:
     if not isinstance(nonclaims, dict):
         raise EvidenceError(f"{label} has no nonclaims object")
@@ -277,6 +476,144 @@ def check_nonclaims(label: str, nonclaims: Any) -> None:
             raise EvidenceError(f"{label} must explicitly set nonclaim false: {key}")
     if "deployment_authorized" in nonclaims and nonclaims["deployment_authorized"] is not False:
         raise EvidenceError(f"{label} nonclaim must be false: deployment_authorized")
+
+
+def require_exact_identity(label: str, artifact: Any, expected: dict[str, Any]) -> None:
+    if not isinstance(artifact, dict):
+        raise EvidenceError(f"{label} artifact is missing")
+    for key in ("filename", "bytes", "sha256"):
+        if artifact.get(key) != expected[key]:
+            raise EvidenceError(f"{label} exact identity mismatch: {key}")
+    if "identity_placeholders" in artifact:
+        raise EvidenceError(f"{label} retains identity placeholders")
+
+
+def validate_gate_1_authority(
+    generic_authorization: dict[str, Any],
+    inner_admission: dict[str, Any],
+) -> None:
+    if (
+        generic_authorization.get("schema")
+        != "project-shadow.generic-myth-sidecar-v0.2.0-exact-hash-public-release-authorization.v1"
+        or generic_authorization.get("decision")
+        != "AUTHORIZE_EXACT_HASH_OPTIONAL_PUBLIC_RELEASE"
+    ):
+        raise EvidenceError("Generic Myth exact-hash authorization is incomplete")
+    require_exact_identity(
+        "Generic Myth authorization",
+        generic_authorization.get("artifact"),
+        GENERIC_FINAL,
+    )
+    generic_artifact = generic_authorization["artifact"]
+    if (
+        generic_artifact.get("version") != "0.2.0"
+        or generic_artifact.get("role") != "SEPARATE_OPTIONAL_COMPANION"
+        or generic_artifact.get("default_enabled") is not False
+        or generic_artifact.get("terminal_only") is not True
+        or generic_artifact.get("operational_authority") is not False
+    ):
+        raise EvidenceError("Generic Myth authorized boundary mismatch")
+    scope = generic_authorization.get("publication_scope")
+    if not isinstance(scope, dict) or (
+        scope.get("github_authorized") is not True
+        or scope.get("hugging_face_authorized") is not True
+        or scope.get("part_of_or_required_by_r1") is not False
+        or scope.get("production_authorized") is not False
+        or scope.get("operational_deployment_authorized") is not False
+    ):
+        raise EvidenceError("Generic Myth authorization scope mismatch")
+    generic_confirmation = generic_authorization.get("maintainer_confirmation")
+    if not isinstance(generic_confirmation, dict) or (
+        generic_confirmation.get("confirmed_by") != GATE_1_CONFIRMED_BY
+        or generic_confirmation.get("confirmed_at") != GATE_1_CONFIRMED_AT
+        or generic_confirmation.get("statement") != GENERIC_AUTHORIZATION_STATEMENT
+    ):
+        raise EvidenceError("Generic Myth maintainer confirmation wording mismatch")
+
+    if (
+        inner_admission.get("schema")
+        != "project-shadow.r1.0.1-inner-exact-hash-maintainer-admission.v1"
+        or inner_admission.get("decision")
+        != "ADMIT_EXACT_HASH_FOR_R1.0.1_REFERENCE_PACKAGING"
+    ):
+        raise EvidenceError("R1.0.1 final inner admission is incomplete")
+    require_exact_identity("R1.0.1 admitted inner", inner_admission.get("inner"), INNER_FINAL)
+    inner = inner_admission["inner"]
+    if (
+        inner.get("active_descendant_count") != 27
+        or inner.get("operational_descendant_bytes_changed") != 0
+        or inner.get("myth_payload_embedded") is not False
+    ):
+        raise EvidenceError("R1.0.1 inner invariants failed")
+    inner_confirmation = inner_admission.get("maintainer_confirmation")
+    if not isinstance(inner_confirmation, dict) or (
+        inner_confirmation.get("confirmed_by") != GATE_1_CONFIRMED_BY
+        or inner_confirmation.get("confirmed_at") != GATE_1_CONFIRMED_AT
+        or inner_confirmation.get("statement") != INNER_ADMISSION_STATEMENT
+    ):
+        raise EvidenceError("R1.0.1 inner maintainer confirmation wording mismatch")
+    if inner_admission.get("non_authorizations") != {
+        "production_authorized": False,
+        "deployment_authorized": False,
+        "publication_authorized": False,
+    }:
+        raise EvidenceError("R1.0.1 inner admission broadened authority")
+
+
+def validate_final_generic_tests(record: dict[str, Any]) -> None:
+    require_exact_identity("Generic Myth test record", record.get("final_artifact"), GENERIC_FINAL)
+    results = record.get("final_results")
+    if not isinstance(results, dict) or (
+        record.get("status") != "PASS"
+        or results.get("unit_tests") != 32
+        or results.get("unit_test_status") != "PASS"
+        or results.get("adversarial_mutation_tests_passed") != 11
+        or results.get("deterministic_rebuilds") != 2
+        or results.get("deterministic_rebuilds_byte_identical") is not True
+        or results.get("exact_path_inventory") != "23/23_NO_EXTRAS"
+        or results.get("source_tree_checksum_verifier") != "PASS"
+        or results.get("packed_checksum_verifier") != "PASS"
+        or results.get("rights_asset_scan") != "PASS"
+        or results.get("rights_files_scanned") != 19
+        or results.get("zip_integrity") != "PASS"
+    ):
+        raise EvidenceError("Generic Myth final test evidence mismatch")
+
+
+def validate_outer_authority(record: dict[str, Any]) -> None:
+    if (
+        record.get("schema")
+        != "project-shadow.r1.0.1-outer-exact-hash-public-release-authorization.v1"
+        or record.get("decision") != "AUTHORIZE_EXACT_HASH_PUBLIC_RELEASE"
+    ):
+        raise EvidenceError("R1.0.1 exact-hash publication authorization absent")
+    require_exact_identity("R1.0.1 outer authorization", record.get("outer"), OUTER_FINAL)
+    outer = record["outer"]
+    if (
+        outer.get("title")
+        != "Project Shadow 1.0.1 — R1 Reference Packaging Correction"
+        or outer.get("tag") != "r1.0.1-2026-08-17"
+        or record.get("authorized_actions")
+        != {
+            "github_release": True,
+            "hugging_face_release": True,
+            "verified_github_repository_update": True,
+            "six_gpt_site_updates_and_deployments": True,
+        }
+        or record.get("non_authorizations")
+        != {
+            "production_authorized": False,
+            "operational_deployment_authorized": False,
+        }
+    ):
+        raise EvidenceError("R1.0.1 outer authorization scope mismatch")
+    confirmation = record.get("maintainer_confirmation")
+    if not isinstance(confirmation, dict) or (
+        confirmation.get("confirmed_by") != GATE_1_CONFIRMED_BY
+        or confirmation.get("confirmed_at") != OUTER_AUTHORIZATION_CONFIRMED_AT
+        or confirmation.get("statement") != OUTER_AUTHORIZATION_STATEMENT
+    ):
+        raise EvidenceError("R1.0.1 outer maintainer confirmation wording mismatch")
 
 
 def validate_resolved_publication_state(
@@ -486,7 +823,11 @@ def require_document_markers(label: str, path: Path, markers: Iterable[str]) -> 
     return text
 
 
-def validate_public_documentation() -> None:
+def validate_public_documentation(
+    phase: str = "PREPUBLICATION",
+    *,
+    pending_identities: bool = False,
+) -> None:
     """Keep the published verification and continuity instructions fail-closed."""
     bundle = require_object(load_json(SIGNATURE_BUNDLE), SIGNATURE_BUNDLE.name)
     material = bundle.get("verificationMaterial")
@@ -524,12 +865,55 @@ def validate_public_documentation() -> None:
         "Myth release notes",
         RELEASE_NOTES["myth-v0.3.4"],
         (
-            "Myth v0.3.3",
-            "ACKNOWLEDGE_ONLY",
-            "separate, later human exact-hash decision",
+            "older generic Myth v0.1.1",
+            "separate",
+            "Off is the default",
             AUTHORIZATION_RECEIPT_URL,
             AUTHORIZATION_JSON_URL,
         ),
+    )
+    require_document_markers(
+        "Full-Canon Myth v0.3.5 release notes",
+        RELEASE_NOTES["myth-v0.3.5"],
+        (
+            "myth-v0.3.5",
+            "2b55867fe7c502a0defd8d6f2e9b53fbd1caaf1b0f225a438bd45b04a3e7bae2",
+            "optional",
+            "default-off",
+        ),
+    )
+    generic_markers = [
+        "generic-myth-v0.2.0",
+        "never embedded in R1.0.1",
+        "No production or operational deployment is authorized",
+    ]
+    r1_markers = [
+        "r1.0.1-2026-08-17",
+        "7a557efad953cbafd9e3ea9eb29b2d3e3e1bc6ab99dcf6b9ae7a99c487b0754d",
+        "R1.0.1 contains no Myth payload",
+    ]
+    if phase_name(phase) == "PREPUBLICATION" and pending_identities:
+        generic_markers.extend(
+            (
+                PENDING_IDENTITY_TOKENS["generic_bytes"],
+                PENDING_IDENTITY_TOKENS["generic_sha256"],
+            )
+        )
+        r1_markers.extend(
+            (
+                PENDING_IDENTITY_TOKENS["inner_sha256"],
+                PENDING_IDENTITY_TOKENS["outer_sha256"],
+            )
+        )
+    require_document_markers(
+        "Generic Myth v0.2.0 release notes",
+        RELEASE_NOTES["generic-myth-v0.2.0"],
+        generic_markers,
+    )
+    require_document_markers(
+        "R1.0.1 release notes",
+        RELEASE_NOTES["r1.0.1-2026-08-17"],
+        r1_markers,
     )
 
     require_document_markers(
@@ -554,105 +938,236 @@ def validate_public_documentation() -> None:
         ROOT / "governance" / "README.md",
         ("MAINTAINER_CONTINUITY.md",),
     )
+    if phase_name(phase) == "POSTPUBLICATION":
+        require_document_markers(
+            "repository README",
+            ROOT / "README.md",
+            (
+                "POSTPUBLICATION",
+                "CLOSED_EFFECTIVE",
+                "r1.0.1-2026-08-17",
+                "generic-myth-v0.2.0",
+            ),
+        )
+        require_document_markers(
+            "release index",
+            ROOT / "RELEASES.md",
+            (
+                "POSTPUBLICATION",
+                "r1.0.1-2026-08-17",
+                "generic-myth-v0.2.0",
+            ),
+        )
 
 
-def verify_repository_metadata() -> list[dict[str, Any]]:
+def validate_current_redownload(
+    record: dict[str, Any],
+    by_tag: dict[str, dict[str, Any]],
+) -> None:
+    if record.get("schema") != "project-shadow.r1.0.1-public-redownload-verification.v1":
+        raise EvidenceError("unsupported R1.0.1 redownload schema")
+    if record.get("status") != "VERIFIED" or record.get("anonymous_download") is not True:
+        raise EvidenceError("R1.0.1 redownload record is not anonymous/VERIFIED")
+    check_nonclaims("R1.0.1 redownload record", record.get("nonclaims"))
+    observations = record.get("observations")
+    if not isinstance(observations, list):
+        raise EvidenceError("R1.0.1 redownload observations missing")
+    expected: dict[tuple[str, str], dict[str, Any]] = {}
+    for tag, role in (
+        ("generic-myth-v0.2.0", "OPTIONAL_GENERIC_COMPANION"),
+        ("r1.0.1-2026-08-17", "R1_REFERENCE_CORRECTED"),
+    ):
+        asset = by_tag[tag]["asset"]
+        expected[(role, "GITHUB")] = asset
+        expected[(role, "HUGGING_FACE")] = asset
+    observed_keys: set[tuple[str, str]] = set()
+    for row in observations:
+        if not isinstance(row, dict):
+            raise EvidenceError("invalid R1.0.1 redownload observation")
+        key = (str(row.get("role")), str(row.get("host")))
+        asset = expected.get(key)
+        if asset is None or key in observed_keys:
+            raise EvidenceError(f"unexpected/duplicate redownload observation: {key}")
+        observed_keys.add(key)
+        if (
+            row.get("filename") != asset["filename"]
+            or row.get("bytes_expected") != asset["bytes"]
+            or row.get("bytes_observed") != asset["bytes"]
+            or row.get("sha256_expected") != asset["sha256"]
+            or row.get("sha256_observed") != asset["sha256"]
+            or row.get("identity_verified") is not True
+        ):
+            raise EvidenceError(f"redownload identity mismatch: {key}")
+    if observed_keys != set(expected):
+        raise EvidenceError("redownload record lacks GitHub/Hugging Face coverage")
+
+
+def verify_repository_metadata(phase: str = "PREPUBLICATION") -> list[dict[str, Any]]:
+    phase = phase_name(phase)
     manifest = require_object(load_json(PUBLICATION_MANIFEST), "PUBLICATION_MANIFEST.json")
     authorization = require_object(load_json(AUTHORIZATION), AUTHORIZATION.name)
     sidecar_reference = require_object(load_json(SIDECAR_REFERENCE), SIDECAR_REFERENCE.name)
     r1_manifest = require_object(load_json(R1_PACKAGE_MANIFEST), R1_PACKAGE_MANIFEST.name)
     gates = require_object(load_json(R1_RELEASE_GATES), R1_RELEASE_GATES.name)
     signature_receipt = require_object(load_json(SIGNATURE_RECEIPT), SIGNATURE_RECEIPT.name)
-    sums = parse_sha256sums(SHA256SUMS)
+    current_status = require_object(load_json(CURRENT_STATUS), CURRENT_STATUS.name)
+    full_canon_reference = require_object(
+        load_json(FULL_CANON_V035_REFERENCE), FULL_CANON_V035_REFERENCE.name
+    )
+    full_canon_publication = require_object(
+        load_json(FULL_CANON_V035_PUBLICATION), FULL_CANON_V035_PUBLICATION.name
+    )
+    generic_reference = require_object(load_json(GENERIC_REFERENCE), GENERIC_REFERENCE.name)
+    generic_tests = require_object(load_json(GENERIC_TEST_RECORD), GENERIC_TEST_RECORD.name)
+    generic_authorization = require_object(
+        load_json(GENERIC_AUTHORIZATION), GENERIC_AUTHORIZATION.name
+    )
+    inner_admission = require_object(load_json(INNER_ADMISSION), INNER_ADMISSION.name)
+    outer_authorization = require_object(
+        load_json(OUTER_AUTHORIZATION), OUTER_AUTHORIZATION.name
+    )
+    capa = require_object(load_json(CAPA_RECORD), CAPA_RECORD.name)
 
-    if manifest.get("schema") != "project-shadow.publication-manifest.v1":
+    if manifest.get("schema") != "project-shadow.publication-manifest.v2":
         raise EvidenceError("unsupported publication manifest schema")
-    repository = manifest.get("repository")
-    if repository != "PauseBeforeHarmProtocol/Project-Shadow":
+    if manifest.get("repository") != "PauseBeforeHarmProtocol/Project-Shadow":
         raise EvidenceError("unexpected repository identity")
+    if manifest.get("publication_phase") != phase:
+        raise EvidenceError(
+            f"manifest phase mismatch: expected {phase}; "
+            f"found {manifest.get('publication_phase')!r}"
+        )
     check_nonclaims("publication manifest", manifest.get("nonclaims"))
-
-    if authorization.get("schema") != "project-shadow.public-release-authorization-receipt.v1":
-        raise EvidenceError("unsupported release-authorization schema")
-    if authorization.get("status") != "AUTHORIZED_FOR_PUBLIC_RELEASE":
-        raise EvidenceError("separate human release authorization is not present")
-    if authorization.get("cryptographic_signature_claimed_for_this_receipt") is not False:
-        raise EvidenceError("authorization receipt overstates its cryptographic status")
-    check_nonclaims("release authorization", authorization.get("nonclaims"))
-    authorized_artifacts = authorization.get("artifacts")
-    if not isinstance(authorized_artifacts, dict):
-        raise EvidenceError("release authorization has no artifacts object")
-
     rows = release_rows(manifest)
-    expected_sums: dict[str, str] = {}
-    canonical_rows = [row for row in rows if row.get("canonical_r1") is True]
-    if len(canonical_rows) != 1 or canonical_rows[0].get("role") != "R1_REFERENCE":
-        raise EvidenceError("publication manifest must identify exactly one canonical R1")
-    if rows[-1] is not canonical_rows[0]:
-        raise EvidenceError("canonical R1 must remain last in publication order")
+    expected_tags = [
+        "myth-v0.3.4",
+        "r1-2026-08-14",
+        "myth-v0.3.5",
+        "generic-myth-v0.2.0",
+        "r1.0.1-2026-08-17",
+    ]
+    if [row.get("tag") for row in rows] != expected_tags:
+        raise EvidenceError("publication manifest release lineage/order mismatch")
+    current_r1 = [
+        row for row in rows
+        if row.get("canonical_r1") is True and row.get("current") is True
+    ]
+    if len(current_r1) != 1 or current_r1[0].get("tag") != "r1.0.1-2026-08-17":
+        raise EvidenceError("manifest must identify R1.0.1 as the sole current R1")
+    if rows[-1] is not current_r1[0]:
+        raise EvidenceError("corrected current R1 must remain last in publication order")
 
+    by_tag = {str(row["tag"]): row for row in rows}
     for row in rows:
-        tag = row.get("tag")
-        role = row.get("role")
+        tag = str(row.get("tag"))
         if tag not in RELEASE_NOTES:
             raise EvidenceError(f"no pinned release-notes file for tag {tag!r}")
-        if role not in AUTHORIZATION_KEYS:
-            raise EvidenceError(f"unknown release role: {role!r}")
-        asset = validate_asset_row(row, repository)
-        expected_sums[asset["filename"]] = asset["sha256"]
-        authorization_row = authorized_artifacts.get(AUTHORIZATION_KEYS[role])
-        if not isinstance(authorization_row, dict):
-            raise EvidenceError(f"authorization has no artifact row for {role}")
-        for key in ("filename", "bytes", "sha256"):
-            if authorization_row.get(key) != asset[key]:
-                raise EvidenceError(f"authorization mismatch for {role}: {key}")
-        if authorization_row.get("publication_authorized") is not True:
-            raise EvidenceError(f"exact human publication authorization absent for {role}")
+        state = row.get("publication_state")
+        if state in PUBLISHED_STATES:
+            asset = validate_asset_row(row, manifest["repository"])
+            identity_markers = (
+                asset["filename"],
+                asset["sha256"],
+                f"{asset['bytes']:,}",
+            )
+        elif tag in {"generic-myth-v0.2.0", "r1.0.1-2026-08-17"} and phase == (
+            "PREPUBLICATION"
+        ):
+            pending = row.get("asset", {}).get("bytes") is None
+            if pending:
+                prefix = "generic" if tag == "generic-myth-v0.2.0" else "outer"
+                asset = validate_pending_asset_row(
+                    row,
+                    manifest["repository"],
+                    expected_bytes_token=PENDING_IDENTITY_TOKENS[f"{prefix}_bytes"],
+                    expected_sha256_token=PENDING_IDENTITY_TOKENS[f"{prefix}_sha256"],
+                )
+                identity_markers = (
+                    asset["filename"],
+                    PENDING_IDENTITY_TOKENS[f"{prefix}_bytes"],
+                    PENDING_IDENTITY_TOKENS[f"{prefix}_sha256"],
+                )
+            else:
+                allowed_concrete_states = (
+                    {"AUTHORIZED_FOR_PUBLIC_RELEASE", "READY_TO_PUBLISH"}
+                    if tag == "generic-myth-v0.2.0"
+                    else {"PENDING_EXACT_HASH_AUTHORIZATION", "READY_TO_PUBLISH"}
+                )
+                if state not in allowed_concrete_states:
+                    raise EvidenceError(
+                        f"concrete prepublication identity has invalid authority state: {tag}"
+                    )
+                asset = validate_asset_row(row, manifest["repository"])
+                identity_markers = (
+                    asset["filename"],
+                    asset["sha256"],
+                    f"{asset['bytes']:,}",
+                )
+        else:
+            raise EvidenceError(f"release {tag!r} has invalid state for phase {phase}")
 
         note = RELEASE_NOTES[tag].read_text(encoding="utf-8")
-        for expected in (
-            str(tag),
-            asset["filename"],
-            asset["sha256"],
-            f"{asset['bytes']:,}",
-        ):
+        for expected in (tag,) + identity_markers:
             if expected not in note:
                 raise EvidenceError(f"release notes for {tag} omit {expected!r}")
         if not note.lstrip().startswith("**"):
             raise EvidenceError(f"release notes for {tag} lack a bold first-line warning")
-        if "automatically generated" not in note or "Source code (zip)" not in note:
+        if tag == "myth-v0.3.5":
+            source_warning_present = (
+                "automatically generated source archive" in note
+                and "repackaged copy" in note
+            )
+        else:
+            source_warning_present = (
+                "automatically generated" in note and "Source code (zip)" in note
+            )
+        if not source_warning_present:
             raise EvidenceError(f"release notes for {tag} omit the source-archive warning")
-        if re.search(
-            r"publish this release after|mark it as the latest release|publish this sidecar first",
-            note,
-            re.IGNORECASE,
-        ):
-            raise EvidenceError(f"release notes for {tag} retain a completed operator instruction")
 
-    if sums != expected_sums:
-        raise EvidenceError(
-            f"SHA256SUMS/release-manifest mismatch: expected={expected_sums}; found={sums}"
-        )
+    # Preserve and validate the original two-artifact publication as a closed,
+    # historical evidence set. New rows never rewrite its authorization.
+    if authorization.get("schema") != "project-shadow.public-release-authorization-receipt.v1":
+        raise EvidenceError("unsupported historical release-authorization schema")
+    if authorization.get("status") != "AUTHORIZED_FOR_PUBLIC_RELEASE":
+        raise EvidenceError("historical human release authorization is missing")
+    if authorization.get("cryptographic_signature_claimed_for_this_receipt") is not False:
+        raise EvidenceError("historical authorization overstates cryptographic status")
+    check_nonclaims("historical release authorization", authorization.get("nonclaims"))
+    authorized_artifacts = authorization.get("artifacts")
+    if not isinstance(authorized_artifacts, dict):
+        raise EvidenceError("historical release authorization has no artifacts object")
+    historical_rows = [by_tag["myth-v0.3.4"], by_tag["r1-2026-08-14"]]
+    expected_sums: dict[str, str] = {}
+    for row in historical_rows:
+        asset = row["asset"]
+        expected_sums[asset["filename"]] = asset["sha256"]
+        key = AUTHORIZATION_KEYS[row["role"]]
+        authorization_row = authorized_artifacts.get(key)
+        if not isinstance(authorization_row, dict):
+            raise EvidenceError(f"historical authorization missing {row['role']}")
+        for field in ("filename", "bytes", "sha256"):
+            if authorization_row.get(field) != asset[field]:
+                raise EvidenceError(
+                    f"historical authorization mismatch for {row['role']}: {field}"
+                )
+        if authorization_row.get("publication_authorized") is not True:
+            raise EvidenceError(f"historical publication authorization absent for {row['role']}")
+    if parse_sha256sums(SHA256SUMS) != expected_sums:
+        raise EvidenceError("historical SHA256SUMS must remain the original two-artifact set")
 
-    sidecar_rows = [
-        row for row in rows if row.get("role") == "OPTIONAL_EXTERNAL_RESEARCH_SIDECAR"
-    ]
-    if len(sidecar_rows) != 1:
-        raise EvidenceError("publication manifest must identify exactly one Myth sidecar")
-    sidecar_row = sidecar_rows[0]
-    sidecar_asset = sidecar_row["asset"]
+    old_sidecar = by_tag["myth-v0.3.4"]
     if (
-        sidecar_row.get("canonical_r1") is not False
-        or sidecar_row.get("enabled_by_default") is not False
+        old_sidecar.get("canonical_r1") is not False
+        or old_sidecar.get("enabled_by_default") is not False
         or sidecar_reference.get("embedded") is not False
         or sidecar_reference.get("canonical_r1") is not False
         or sidecar_reference.get("enabled_by_default") is not False
         or sidecar_reference.get("publication_authorized_by_this_candidate") is not False
     ):
-        raise EvidenceError("Myth sidecar external/default-off/nonauthorizing boundary failed")
+        raise EvidenceError("historical Myth sidecar boundary failed")
     for key in ("filename", "bytes", "sha256"):
-        if sidecar_reference.get(key) != sidecar_asset[key]:
-            raise EvidenceError(f"external Myth reference mismatch: {key}")
+        if sidecar_reference.get(key) != old_sidecar["asset"][key]:
+            raise EvidenceError(f"historical Myth reference mismatch: {key}")
     for key in (
         "outer_custody_container_embedded",
         "raw_private_report_embedded",
@@ -661,20 +1176,344 @@ def verify_repository_metadata() -> list[dict[str, Any]]:
         "publication_authorized",
     ):
         if r1_manifest.get(key) is not False:
-            raise EvidenceError(f"preserved R1 package boundary failed: {key}")
+            raise EvidenceError(f"preserved August 14 R1 boundary failed: {key}")
     publication_gate = gates.get("post_build_publication_gate")
-    if not isinstance(publication_gate, dict):
-        raise EvidenceError("preserved R1 has no post-build publication gate")
-    if (
+    if not isinstance(publication_gate, dict) or (
         publication_gate.get("satisfied") is not False
         or publication_gate.get("external_to_candidate") is not True
     ):
-        raise EvidenceError("preserved candidate publication gate was rewritten")
+        raise EvidenceError("preserved August 14 candidate gate was rewritten")
     governance_effect = signature_receipt.get("governance_effect")
-    if not isinstance(governance_effect, dict) or governance_effect.get("public_release_authorized") is not False:
-        raise EvidenceError("signature receipt must remain nonauthorizing")
-    validate_resolved_publication_state(rows, authorization, gates)
-    validate_public_documentation()
+    if not isinstance(governance_effect, dict) or (
+        governance_effect.get("public_release_authorized") is not False
+    ):
+        raise EvidenceError("historical signature receipt must remain nonauthorizing")
+    validate_resolved_publication_state(historical_rows, authorization, gates)
+
+    # Validate the independently published Full-Canon v0.3.5 row.
+    full_canon_row = by_tag["myth-v0.3.5"]
+    for record in (full_canon_reference, full_canon_publication):
+        artifact = record.get("artifact")
+        if not isinstance(artifact, dict):
+            raise EvidenceError("Full-Canon v0.3.5 record has no artifact")
+        for key in ("filename", "bytes", "sha256"):
+            if artifact.get(key) != full_canon_row["asset"][key]:
+                raise EvidenceError(f"Full-Canon v0.3.5 identity mismatch: {key}")
+    if (
+        full_canon_row.get("canonical_r1") is not False
+        or full_canon_row.get("enabled_by_default") is not False
+        or full_canon_publication.get("relationship_to_r1")
+        != "SEPARATE_OPTIONAL_COMPANION_NOT_R1_ADMITTED"
+        or full_canon_publication.get("production_or_operational_deployment_authorized")
+        is not False
+        or full_canon_publication.get("operational_authority_granted") is not False
+    ):
+        raise EvidenceError("Full-Canon v0.3.5 optional/nonauthorizing boundary failed")
+
+    generic_row = by_tag["generic-myth-v0.2.0"]
+    generic_artifact = generic_reference.get("artifact")
+    generic_test_artifact = generic_tests.get("final_artifact")
+    if not isinstance(generic_artifact, dict) or not isinstance(generic_test_artifact, dict):
+        raise EvidenceError("Generic Myth reference/test artifact is missing")
+    if generic_reference.get("test_record") != (
+        "governance/GENERIC_MYTH_v0.2.0_BUILD_AND_TEST_REPORT_2026-08-17.json"
+    ):
+        raise EvidenceError("Generic Myth test-record pointer mismatch")
+    if generic_reference.get("authorization_record") != (
+        "governance/GENERIC_MYTH_v0.2.0_EXACT_HASH_PUBLIC_RELEASE_AUTHORIZATION_2026-08-17.json"
+    ):
+        raise EvidenceError("Generic Myth authorization-record pointer mismatch")
+    boundaries = generic_reference.get("boundaries")
+    if not isinstance(boundaries, dict):
+        raise EvidenceError("Generic Myth boundary object missing")
+    for key in (
+        "canonical_r1_component",
+        "changes_operational_result",
+        "default_off",
+        "feedback_allowed",
+        "gate_input_eligible",
+        "model_context_eligible",
+        "operational_deployment_authorized",
+        "production_authorized",
+        "required_for_r1",
+        "terminal_only",
+        "tool_argument_eligible",
+    ):
+        expected = key in {"default_off", "terminal_only"}
+        if boundaries.get(key) is not expected:
+            raise EvidenceError(f"Generic Myth boundary mismatch: {key}")
+
+    inner = inner_admission.get("inner")
+    outer_asset = outer_authorization.get("outer")
+    if not isinstance(outer_asset, dict):
+        outer_asset = outer_authorization.get("asset")
+    if not isinstance(inner, dict) or not isinstance(outer_asset, dict):
+        raise EvidenceError("R1.0.1 inner/outer identity record missing")
+    if (
+        inner.get("active_descendant_count") != 27
+        or inner.get("operational_descendant_bytes_changed") != 0
+        or inner.get("myth_payload_embedded") is not False
+    ):
+        raise EvidenceError("R1.0.1 inner invariants failed")
+    if "nonclaims" in outer_authorization:
+        check_nonclaims("R1.0.1 outer authorization", outer_authorization.get("nonclaims"))
+    check_nonclaims("CAPA", capa.get("nonclaims"))
+    check_nonclaims("current release status", current_status.get("nonclaims"))
+
+    pending_identities = False
+    if phase == "PREPUBLICATION":
+        prepublication_state = manifest.get("prepublication_state")
+        if prepublication_state == "PENDING_IDENTITIES":
+            pending_identities = True
+            require_pending_tokens()
+            if generic_reference.get("publication", {}).get("state") != (
+                "PENDING_FINAL_HARDENED_IDENTITY"
+            ):
+                raise EvidenceError("Generic Myth reference is not pending final identity")
+            if generic_tests.get("status") != "PENDING_HARDENED_REBUILD_AND_RETEST":
+                raise EvidenceError("Generic Myth test record overstates final status")
+            if generic_row.get("publication_state") != "PENDING_FINAL_HARDENED_IDENTITY":
+                raise EvidenceError("Generic Myth manifest state is not pending")
+            for artifact in (
+                generic_row["asset"],
+                generic_artifact,
+                generic_test_artifact,
+            ):
+                if artifact.get("bytes") is not None or artifact.get("sha256") is not None:
+                    raise EvidenceError("Generic Myth pending identity must remain null")
+            if (
+                inner_admission.get("decision") != "PENDING_MAINTAINER_CONFIRMATION"
+                or inner_admission.get("maintainer_confirmation") is not None
+                or inner.get("bytes") is not None
+                or inner.get("sha256") is not None
+            ):
+                raise EvidenceError("R1.0.1 inner admission placeholder is not fail-closed")
+            if (
+                outer_authorization.get("status") != "PENDING_EXACT_HASH_AUTHORIZATION"
+                or outer_authorization.get("authorization", {}).get(
+                    "publication_authorized"
+                )
+                is not False
+                or outer_asset.get("bytes") is not None
+                or outer_asset.get("sha256") is not None
+            ):
+                raise EvidenceError(
+                    "R1.0.1 outer authorization placeholder is not fail-closed"
+                )
+        elif prepublication_state == "AWAITING_OUTER_EXACT_HASH_AUTHORIZATION":
+            placeholder_findings = release_placeholder_findings()
+            if placeholder_findings:
+                raise EvidenceError(
+                    "exact-identity prepublication repository retains release placeholders: "
+                    + ", ".join(placeholder_findings)
+                )
+            if generic_row.get("publication_state") != "AUTHORIZED_FOR_PUBLIC_RELEASE":
+                raise EvidenceError("Generic Myth manifest authorization state mismatch")
+            if by_tag["r1.0.1-2026-08-17"].get("publication_state") != (
+                "PENDING_EXACT_HASH_AUTHORIZATION"
+            ):
+                raise EvidenceError("R1.0.1 manifest is not pending exact-hash authorization")
+            require_exact_identity("Generic Myth manifest", generic_row.get("asset"), GENERIC_FINAL)
+            require_exact_identity(
+                "R1.0.1 manifest",
+                by_tag["r1.0.1-2026-08-17"].get("asset"),
+                OUTER_FINAL,
+            )
+            require_exact_identity("Generic Myth reference", generic_artifact, GENERIC_FINAL)
+            if generic_artifact.get("frozen") is not True or (
+                generic_reference.get("publication", {}).get("state")
+                != "AUTHORIZED_FOR_PUBLIC_RELEASE"
+            ):
+                raise EvidenceError("Generic Myth frozen/authorized state mismatch")
+            validate_final_generic_tests(generic_tests)
+            validate_gate_1_authority(generic_authorization, inner_admission)
+            inner_note = RELEASE_NOTES["r1.0.1-2026-08-17"].read_text(
+                encoding="utf-8"
+            )
+            for marker in (
+                INNER_FINAL["filename"],
+                str(INNER_FINAL["sha256"]),
+                f"{INNER_FINAL['bytes']:,}",
+            ):
+                if marker not in inner_note:
+                    raise EvidenceError(
+                        f"R1.0.1 release notes omit admitted inner identity: {marker}"
+                    )
+            require_exact_identity("R1.0.1 outer authority slot", outer_asset, OUTER_FINAL)
+            if (
+                outer_authorization.get("schema")
+                != "project-shadow.r1.0.1-outer-exact-hash-public-release-authorization.pending.v1"
+                or outer_authorization.get("status")
+                != "PENDING_EXACT_HASH_AUTHORIZATION"
+                or outer_authorization.get("authorization")
+                != {
+                    "confirmed_at": None,
+                    "confirmed_by": None,
+                    "publication_authorized": False,
+                    "statement": None,
+                }
+            ):
+                raise EvidenceError("R1.0.1 outer authorization is not fail-closed")
+            if (
+                current_status.get("generic_myth", {}).get(
+                    "final_hardened_identity_bound"
+                )
+                is not True
+                or current_status.get("generic_myth", {}).get(
+                    "publication_authorization_recorded"
+                )
+                is not True
+                or current_status.get("generic_myth", {}).get("publication_state")
+                != "AUTHORIZED_FOR_PUBLIC_RELEASE"
+                or current_status.get("current_reference", {}).get(
+                    "final_outer_identity_bound"
+                )
+                is not True
+                or current_status.get("current_reference", {}).get(
+                    "inner_exact_hash_admitted"
+                )
+                is not True
+                or current_status.get("current_reference", {}).get("publication_state")
+                != "PENDING_EXACT_HASH_AUTHORIZATION"
+                or capa.get("implementation", {}).get("final_exact_identities_bound")
+                is not True
+                or capa.get("implementation", {}).get(
+                    "generic_exact_hash_publication_authorized"
+                )
+                is not True
+                or capa.get("implementation", {}).get("inner_exact_hash_admitted")
+                is not True
+                or capa.get("implementation", {}).get(
+                    "outer_exact_hash_publication_authorized"
+                )
+                is not False
+            ):
+                raise EvidenceError("awaiting-outer-authorization state is incomplete")
+        elif prepublication_state == "READY_TO_PUBLISH":
+            placeholder_findings = release_placeholder_findings()
+            if placeholder_findings:
+                raise EvidenceError(
+                    "ready prepublication repository retains release placeholders: "
+                    + ", ".join(placeholder_findings)
+                )
+            for tag in ("generic-myth-v0.2.0", "r1.0.1-2026-08-17"):
+                if by_tag[tag].get("publication_state") != "READY_TO_PUBLISH":
+                    raise EvidenceError(f"prepublication row is not READY_TO_PUBLISH: {tag}")
+                validate_asset_row(by_tag[tag], manifest["repository"])
+            if generic_reference.get("publication", {}).get("state") != (
+                "READY_TO_PUBLISH"
+            ):
+                raise EvidenceError("Generic Myth ready evidence is incomplete")
+            validate_final_generic_tests(generic_tests)
+            validate_gate_1_authority(generic_authorization, inner_admission)
+            for artifact in (generic_artifact, generic_test_artifact):
+                for key in ("filename", "bytes", "sha256"):
+                    if artifact.get(key) != generic_row["asset"][key]:
+                        raise EvidenceError(f"Generic Myth final identity mismatch: {key}")
+            inner_note = RELEASE_NOTES["r1.0.1-2026-08-17"].read_text(
+                encoding="utf-8"
+            )
+            for marker in (
+                inner["filename"],
+                str(inner["sha256"]),
+                f"{inner['bytes']:,}",
+            ):
+                if marker not in inner_note:
+                    raise EvidenceError(
+                        f"R1.0.1 release notes omit admitted inner identity: {marker}"
+                    )
+            current_r1_asset = by_tag["r1.0.1-2026-08-17"]["asset"]
+            for key in ("filename", "bytes", "sha256"):
+                if outer_asset.get(key) != current_r1_asset[key]:
+                    raise EvidenceError(f"R1.0.1 outer authorization mismatch: {key}")
+            validate_outer_authority(outer_authorization)
+            if (
+                current_status.get("generic_myth", {}).get(
+                    "final_hardened_identity_bound"
+                )
+                is not True
+                or current_status.get("current_reference", {}).get(
+                    "final_outer_identity_bound"
+                )
+                is not True
+                or current_status.get("current_reference", {}).get(
+                    "inner_exact_hash_admitted"
+                )
+                is not True
+                or current_status.get("generic_myth", {}).get("publication_state")
+                != "READY_TO_PUBLISH"
+                or current_status.get("current_reference", {}).get("publication_state")
+                != "READY_TO_PUBLISH"
+                or capa.get("implementation", {}).get("final_exact_identities_bound")
+                is not True
+                or capa.get("implementation", {}).get(
+                    "generic_exact_hash_publication_authorized"
+                )
+                is not True
+                or capa.get("implementation", {}).get("inner_exact_hash_admitted")
+                is not True
+                or capa.get("implementation", {}).get(
+                    "outer_exact_hash_publication_authorized"
+                )
+                is not True
+            ):
+                raise EvidenceError("ready prepublication identity state is incomplete")
+        else:
+            raise EvidenceError(
+                f"unsupported prepublication state: {prepublication_state!r}"
+            )
+        if (
+            current_status.get("publication_phase") != "PREPUBLICATION"
+            or current_status.get("capa", {}).get("status")
+            != "IMPLEMENTED_PENDING_EFFECTIVENESS"
+            or current_status.get("capa", {}).get("effectiveness_verified") is not False
+            or capa.get("status") != "IMPLEMENTED_PENDING_EFFECTIVENESS"
+            or capa.get("closure", {}).get("effectiveness_verified") is not False
+        ):
+            raise EvidenceError("current status/CAPA prepublication state mismatch")
+    else:
+        placeholder_findings = release_placeholder_findings()
+        if placeholder_findings:
+            raise EvidenceError(
+                "postpublication repository retains release placeholders: "
+                + ", ".join(placeholder_findings)
+            )
+        for tag in ("generic-myth-v0.2.0", "r1.0.1-2026-08-17"):
+            if by_tag[tag].get("publication_state") != "PUBLISHED":
+                raise EvidenceError(f"postpublication manifest row is not PUBLISHED: {tag}")
+            validate_asset_row(by_tag[tag], manifest["repository"])
+        if (
+            generic_reference.get("publication", {}).get("state") != "PUBLISHED"
+            or generic_tests.get("status") != "PASS"
+        ):
+            raise EvidenceError("Generic Myth postpublication evidence is incomplete")
+        validate_final_generic_tests(generic_tests)
+        validate_gate_1_authority(generic_authorization, inner_admission)
+        for artifact in (generic_artifact, generic_test_artifact):
+            for key in ("filename", "bytes", "sha256"):
+                if artifact.get(key) != generic_row["asset"][key]:
+                    raise EvidenceError(f"Generic Myth final identity mismatch: {key}")
+        current_r1_asset = by_tag["r1.0.1-2026-08-17"]["asset"]
+        for key in ("filename", "bytes", "sha256"):
+            if outer_asset.get(key) != current_r1_asset[key]:
+                raise EvidenceError(f"R1.0.1 outer authorization mismatch: {key}")
+        validate_outer_authority(outer_authorization)
+        if (
+            current_status.get("publication_phase") != "POSTPUBLICATION"
+            or current_status.get("capa", {}).get("status") != "CLOSED_EFFECTIVE"
+            or current_status.get("capa", {}).get("effectiveness_verified") is not True
+            or capa.get("status") != "CLOSED_EFFECTIVE"
+            or capa.get("closure", {}).get("effectiveness_verified") is not True
+            or capa.get("closure", {}).get("verification_record")
+            != "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json"
+        ):
+            raise EvidenceError("current status/CAPA postpublication closure mismatch")
+        validate_current_redownload(
+            require_object(load_json(CURRENT_REDOWNLOAD), CURRENT_REDOWNLOAD.name),
+            by_tag,
+        )
+
+    validate_public_documentation(phase, pending_identities=pending_identities)
     return rows
 
 
@@ -812,7 +1651,10 @@ def normalize_release_body(value: str) -> str:
     return value.replace("\r\n", "\n").replace("\r", "\n").rstrip()
 
 
-def verify_live_release_metadata(rows: list[dict[str, Any]]) -> None:
+def verify_live_release_metadata(
+    rows: list[dict[str, Any]],
+    expected_latest_tag: str,
+) -> None:
     repository = "PauseBeforeHarmProtocol/Project-Shadow"
     for row in rows:
         tag = row["tag"]
@@ -850,8 +1692,11 @@ def verify_live_release_metadata(rows: list[dict[str, Any]]) -> None:
     latest = fetch_public_json(
         f"https://api.github.com/repos/{repository}/releases/latest"
     )
-    if latest.get("tag_name") != rows[-1]["tag"] or rows[-1].get("canonical_r1") is not True:
-        raise EvidenceError("canonical R1 is not the latest GitHub release")
+    if latest.get("tag_name") != expected_latest_tag:
+        raise EvidenceError(
+            f"unexpected latest GitHub release: expected {expected_latest_tag!r}; "
+            f"found {latest.get('tag_name')!r}"
+        )
 
 
 def fetch_public_page(url: str) -> str:
@@ -886,16 +1731,25 @@ def verify_public_site_release_links(rows: list[dict[str, Any]]) -> None:
                 )
 
 
-def verify_online(rows: list[dict[str, Any]], destination: Path) -> None:
+def verify_online(
+    rows: list[dict[str, Any]],
+    destination: Path,
+    *,
+    phase: str,
+    expected_latest_tag: str,
+) -> None:
+    phase = phase_name(phase)
+    online_rows = published_rows(rows) if phase == "PREPUBLICATION" else rows
     downloaded: dict[str, Path] = {}
     repository = "PauseBeforeHarmProtocol/Project-Shadow"
-    for row in rows:
+    for row in online_rows:
         asset = row["asset"]
         downloaded[row["role"]] = download_and_hash(asset, destination)
         release_url = f"https://github.com/{repository}/releases/tag/{row['tag']}"
         check_link(release_url)
-    verify_live_release_metadata(rows)
-    verify_public_site_release_links(rows)
+    verify_live_release_metadata(online_rows, expected_latest_tag)
+    if phase == "POSTPUBLICATION":
+        verify_public_site_release_links(rows)
 
     r1 = downloaded.get("R1_REFERENCE")
     if r1 is None:
@@ -934,6 +1788,12 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         help="destination for online release downloads (required with --online)",
     )
+    parser.add_argument(
+        "--phase",
+        choices=("auto", "prepublication", "postpublication"),
+        default="auto",
+        help="validate an explicit lifecycle phase (default: read the manifest)",
+    )
     return parser.parse_args()
 
 
@@ -944,7 +1804,13 @@ def main() -> int:
         return 2
     try:
         json_count = parse_all_json()
-        rows = verify_repository_metadata()
+        manifest = require_object(load_json(PUBLICATION_MANIFEST), PUBLICATION_MANIFEST.name)
+        phase = (
+            phase_name(str(manifest.get("publication_phase")))
+            if args.phase == "auto"
+            else phase_name(args.phase)
+        )
+        rows = verify_repository_metadata(phase)
         findings = prohibited_claim_findings()
         if findings:
             raise EvidenceError(
@@ -952,18 +1818,33 @@ def main() -> int:
                 + "\n  - ".join(findings)
             )
         if args.online:
-            verify_online(rows, args.download_dir.resolve())
+            latest_by_phase = manifest.get("expected_github_latest_tag")
+            if not isinstance(latest_by_phase, dict):
+                raise EvidenceError("manifest lacks expected latest-tag phase map")
+            expected_latest = latest_by_phase.get(phase.lower())
+            if not isinstance(expected_latest, str):
+                raise EvidenceError(f"manifest lacks latest-tag expectation for {phase}")
+            verify_online(
+                rows,
+                args.download_dir.resolve(),
+                phase=phase,
+                expected_latest_tag=expected_latest,
+            )
     except EvidenceError as exc:
         print(f"FAIL: {exc}", file=sys.stderr)
         return 1
     print(f"PASS: parsed {json_count} repository JSON files")
-    print("PASS: publication manifest, checksums, notes, and human authorization agree")
-    print("PASS: derived publication status, redownload receipt, and attestation agree")
-    print("PASS: Myth remains external, default-off, noncanonical, and nonauthorizing")
-    print("PASS: preserved candidate and signature records remain non-self-authorizing")
+    print(f"PASS: lifecycle phase {phase}")
+    print("PASS: publication manifest, notes, lifecycle records, and authority state agree")
+    print("PASS: historical August 14 status, redownload receipt, and attestation agree")
+    print("PASS: Myth companions remain external, default-off, and nonauthorizing")
+    print("PASS: corrected R1 boundary requires zero embedded Myth payload")
+    print("PASS: preserved historical candidate/signature records remain non-self-authorizing")
     print("PASS: nonclaim scan")
     if args.online:
-        print("PASS: exact public assets, release URLs, and six public-site release links")
+        print("PASS: exact published assets and release metadata")
+        if phase == "POSTPUBLICATION":
+            print("PASS: six public-site release links")
     else:
         print("INFO: network verification skipped (use --online --download-dir DIR)")
     return 0

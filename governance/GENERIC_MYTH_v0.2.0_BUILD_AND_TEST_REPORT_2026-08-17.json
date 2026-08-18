@@ -1,0 +1,25 @@
+{
+  "final_artifact": {
+    "bytes": 93676,
+    "filename": "Project_Shadow_Generic_Myth_Sidecar_v0.2.0_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
+    "sha256": "6e7a362d4135f9d626dcfef463bfb1f7166226b3cf8a4c02a953ab39af1538bf"
+  },
+  "final_results": {
+    "adversarial_mutation_tests_passed": 11,
+    "deterministic_rebuilds": 2,
+    "deterministic_rebuilds_byte_identical": true,
+    "exact_path_inventory": "23/23_NO_EXTRAS",
+    "packed_checksum_verifier": "PASS",
+    "rights_asset_scan": "PASS",
+    "rights_files_scanned": 19,
+    "source_tree_checksum_verifier": "PASS",
+    "unit_test_status": "PASS",
+    "unit_tests": 32,
+    "zip_integrity": "PASS"
+  },
+  "publication_authorized_by_this_record": false,
+  "schema": "project-shadow.generic-myth-build-and-test-report.v1",
+  "status": "PASS",
+  "tested_on": "2026-08-17",
+  "version": "0.2.0"
+}

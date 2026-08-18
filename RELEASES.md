@@ -1,52 +1,53 @@
 # Releases
 
-Release assets are intentionally kept out of Git history and attached to two
-separate GitHub Releases.
+Release assets are kept out of Git history and attached to separate GitHub
+Releases. Automatically generated source ZIP/TAR archives are repository
+snapshots, not Project Shadow release artifacts.
 
-1. `myth-v0.3.4` — **Project Shadow Myth Sidecar v0.3.4 — Optional External Research**
-2. `r1-2026-08-14` — **Project Shadow 1.0 — R1 Reference (PRELIVE)**
+## Current release plan
 
-The sidecar was published first. R1 was published last and is the latest
-release. Neither release is marked as a GitHub prerelease: both exact artifacts
-are publicly released, while the controlling `BETA-ACTIVE-TESTING / PRELIVE`
-scope label explicitly withholds production and operational authority. That
-scope label must remain visible in the R1 title and notes.
+Publication phase: **PREPUBLICATION**.
 
-Always download the explicitly named release assets. GitHub's automatically
-generated source-code ZIP and TAR archives are repository snapshots, not the
-authorized R1 or sidecar artifacts.
+1. `generic-myth-v0.2.0` — Generic Myth Sidecar v0.2.0, optional public
+   companion. Its final identity is frozen, its final tests pass, and its exact
+   hash is authorized for separate GitHub and Hugging Face publication.
+2. `r1.0.1-2026-08-17` — Project Shadow 1.0.1 R1 reference packaging
+   correction. Its exact inner is admitted and its deterministic outer build is
+   frozen and separately exact-hash authorized. It is ready to publish, not yet
+   published.
 
-Exact filenames, sizes, hashes, and ordering are machine-readable in
-[`PUBLICATION_MANIFEST.json`](PUBLICATION_MANIFEST.json).
+The Generic sidecar must be published first. R1.0.1 must be published last so
+the corrected R1 becomes the latest release. Neither pending release is marked
+published in repository evidence before the public asset exists.
 
-## Current contact
+## Existing public releases
 
-For release questions, corrections, CAPA proposals, research, press,
-collaboration, or security routing, use `projectshadowqa@protonmail.com` with
-the subject prefix described in
-[`CONTACT_AND_CORRECTIONS.md`](CONTACT_AND_CORRECTIONS.md).
+- `myth-v0.3.5` — Full-Canon Myth Sidecar v0.3.5, optional public companion.
+- `myth-v0.3.4` — preserved historical optional research sidecar.
+- `r1-2026-08-14` — preserved historical R1 release. Its bytes are immutable;
+  R1.0.1 supersedes it as the current reference because the old outer package
+  included a nested Generic Myth v0.1.1 member carrying non-public metadata.
 
-Historical addresses and signing identities in exact-hash archives, signed
-records, certificates, tags, commits, and verification commands remain
-preserved evidence. They are not current correspondence routes.
+Historical release notes and governance records remain in place. Nothing in
+the 2026-08-17 correction back-writes the August 14 authorization, status,
+redownload receipt, tags, or archive.
+
+## Required publication sequence
+
+1. Preserve the recorded Generic, inner, and outer exact-hash authorities
+   without broadening them.
+2. Run `tools/verify_repository_evidence.py --phase prepublication`.
+3. Publish Generic v0.2.0, then R1.0.1.
+4. Anonymously redownload the GitHub and Hugging Face assets and verify exact
+   byte counts and SHA-256 values.
+5. Verify all six public sites, add the redownload record, close the CAPA, and
+   run postpublication mode.
 
 ## Prospective custody procedure
 
-The two 2026-08-14 tags are preserved lightweight tags pointing to the original
-public commit. They are historical facts and must not be rewritten merely to
-retrofit later controls.
-
-For every future release:
-
-1. land the release record through the protected `main` pull-request and CI
-   path;
-2. create a signed annotated tag from the intended verified commit;
-3. verify that tag locally before pushing it;
-4. publish exact-hash-authorized assets without replacing them afterward; and
-5. anonymously download each public asset and record its byte count and
-   SHA-256.
-
-Example maintainer commands:
+Future release tags should be signed annotated tags from the intended verified
+commit. Release assets must not be replaced after publication. GitHub release
+immutability and tag protection do not rewrite the original August 14 tags.
 
 ```bash
 git tag -s <release-tag> -m "<release title>" <verified-commit-sha>
@@ -54,6 +55,6 @@ git tag -v <release-tag>
 git push origin <release-tag>
 ```
 
-A release-tag ruleset must protect the release-tag patterns prospectively.
-GitHub's release-immutability setting is also prospective and does not rewrite
-or retroactively relabel the two original releases.
+For questions or corrections, use `projectshadowqa@protonmail.com` with the
+subject prefix described in
+[`CONTACT_AND_CORRECTIONS.md`](CONTACT_AND_CORRECTIONS.md).
