@@ -1,4 +1,4 @@
-**READY TO PUBLISH · NOT YET PUBLISHED · PACKAGING-BOUNDARY CORRECTION · BETA-ACTIVE-TESTING · PRELIVE**
+**PUBLISHED · PACKAGING-BOUNDARY CORRECTION · BETA-ACTIVE-TESTING · PRELIVE**
 
 # Project Shadow 1.0.1 — R1 Reference Packaging Correction
 
@@ -11,9 +11,9 @@
 **SHA-256:** `6f6f1e16d5e9a20e62403f14af7ce8629ce2d702528fb7f80aaf4a14deb7a1d1`
 
 The values above identify the final deterministic outer archive. The maintainer
-has separately authorized this exact filename, byte count, SHA-256, and tag for
-public release. This staged note does not assert that the public upload already
-exists.
+separately authorized this exact filename, byte count, SHA-256, and tag, and the
+artifact is published on GitHub and Hugging Face. Publication is not anonymous
+redownload identity evidence and does not close the CAPA.
 
 ## What this corrects
 
