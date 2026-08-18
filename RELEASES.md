@@ -6,8 +6,8 @@ snapshots, not Project Shadow release artifacts.
 
 ## Current public releases
 
-Publication phase: **POSTPUBLICATION**. Effectiveness verification remains
-pending.
+Publication phase: **POSTPUBLICATION**. Packaging-correction effectiveness is
+verified.
 
 1. `generic-myth-v0.2.0` — Generic Myth Sidecar v0.2.0, optional public
    companion. Its final identity is frozen, its final tests pass, and its exact
@@ -18,8 +18,9 @@ pending.
    Hugging Face.
 
 The Generic sidecar was published first. R1.0.1 was published last so the
-corrected R1 is the latest release. Publication does not by itself verify
-anonymous redownload identity or close the packaging-boundary CAPA.
+corrected R1 is the latest release. Subsequent anonymous GitHub and Hugging
+Face redownloads, bounded package verification, and all six public-site checks
+passed; the packaging-boundary CAPA is `CLOSED_EFFECTIVE`.
 
 ## Existing public releases
 
@@ -33,15 +34,26 @@ Historical release notes and governance records remain in place. Nothing in
 the 2026-08-17 correction back-writes the August 14 authorization, status,
 redownload receipt, tags, or archive.
 
-## Remaining effectiveness sequence
+Files under `release-notes/` are content-aligned publication-time snapshots of
+the live GitHub release bodies (line endings and trailing Markdown spaces are
+normalized). Any open/pending CAPA wording retained there records the
+then-current release-time state; current lifecycle status is defined only by
+`PUBLIC_RELEASE_STATUS_2026-08-17.json`, `PUBLICATION_MANIFEST.json`, and the
+two retained effectiveness receipts.
 
-1. Preserve the recorded Generic, inner, and outer exact-hash authorities
-   without broadening them.
-2. Run `tools/verify_repository_evidence.py --phase postpublication`.
-3. Anonymously redownload the GitHub and Hugging Face assets and verify exact
-   byte counts and SHA-256 values.
-4. Verify all six public sites and add the redownload/effectiveness record.
-5. Close the CAPA only if every effectiveness criterion passes.
+## Completed effectiveness sequence
+
+1. The recorded Generic, inner, and outer exact-hash authorities were
+   preserved without broadening them.
+2. GitHub and Hugging Face copies of Generic v0.2.0 and R1.0.1 were anonymously
+   redownloaded and matched their exact byte counts and SHA-256 values.
+3. Both downloaded Generic archives passed the bounded 23-path verifier, and
+   R1.0.1 passed recursive zero-Myth verification.
+4. All six public sites passed the corrected-boundary semantic checks,
+   including the current Project Shadow status surface and the National Trump
+   Record route.
+5. CAPA `PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` was closed effective on the
+   retained redownload and six-site receipts.
 
 ## Prospective custody procedure
 
