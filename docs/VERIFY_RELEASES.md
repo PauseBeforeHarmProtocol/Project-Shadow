@@ -9,25 +9,30 @@ extracting an archive.
 
 ## Current phase
 
-The repository is in `PREPUBLICATION` for Generic Myth v0.2.0 and R1.0.1.
-Their final identities are concrete and frozen. Generic Myth v0.2.0 has scoped
-exact-hash publication authorization, and the exact Myth-free R1.0.1 inner is
-admitted. The final outer R1.0.1 archive also has its separate exact-hash
-publication authorization. The repository is `READY_TO_PUBLISH`, which is
-still a prepublication state; it does not assert that the public assets exist.
+The repository is in `POSTPUBLICATION` for Generic Myth v0.2.0 and R1.0.1.
+Their final identities are concrete, frozen, separately authorized, and
+published on GitHub and Hugging Face. The exact Myth-free R1.0.1 inner remains
+the scoped admitted packaging identity; its admission does not independently
+authorize publication.
 
-Validate the repository state before any upload:
-
-```bash
-python3 -I -S -B tools/verify_repository_evidence.py --phase prepublication
-```
-
-Postpublication mode must fail until final identities, exact-hash
-authorizations, anonymous redownload evidence, and CAPA closure are all
-present:
+Validate the current published repository state:
 
 ```bash
 python3 -I -S -B tools/verify_repository_evidence.py --phase postpublication
+```
+
+The current postpublication state does not claim effectiveness. Anonymous
+GitHub and Hugging Face redownload identity evidence and six-site verification
+remain pending, so CAPA `PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` remains
+`IMPLEMENTED_PENDING_EFFECTIVENESS`, not `CLOSED_EFFECTIVE`.
+
+Online mode can redownload and verify the exact GitHub assets and live release
+metadata. It does not create the separate Hugging Face redownload evidence or
+close the CAPA:
+
+```bash
+python3 -I -S -B tools/verify_repository_evidence.py --phase postpublication \
+  --online --download-dir /tmp/project-shadow-release-assets
 ```
 
 ## Published and preserved exact identities
@@ -43,7 +48,7 @@ not the corrected current reference because its nested runtime-family package
 included Generic Myth v0.1.1 carrying non-public metadata. Do not edit or
 silently replace the historical asset.
 
-## Frozen prepublication identities
+## Published corrected identities
 
 | File | Bytes | SHA-256 |
 |---|---:|---|
@@ -51,12 +56,13 @@ silently replace the historical asset.
 | `Project_Shadow_R1.0.1_Runtime_Family_Myth_Decoupled_2026-08-17.zip` | 5,463,189 | `c8c32b12432c954b1a6f852c0c9f81bbbd40167e936be057d4c3de1a0aa3a623` |
 | `Project_Shadow_R1.0.1_Public_Reference_2026-08-17.zip` | 5,731,663 | `6f6f1e16d5e9a20e62403f14af7ce8629ce2d702528fb7f80aaf4a14deb7a1d1` |
 
-The Generic identity has scoped GitHub/Hugging Face publication authorization.
+The Generic identity is published under scoped GitHub/Hugging Face publication
+authorization.
 The inner identity has the maintainer's scoped packaging admission, which
-explicitly does not authorize publication. The outer identity is recorded only
-with a separate exact-hash authorization covering GitHub, Hugging Face, the
-verified repository update, and six GPT Site updates. Neither authority permits
-production or operational deployment.
+explicitly does not authorize publication. The outer identity has a separate
+exact-hash authorization covering GitHub, Hugging Face, the verified repository
+update, and six GPT Site updates. Neither authority permits production or
+operational deployment.
 
 ## Windows PowerShell
 
