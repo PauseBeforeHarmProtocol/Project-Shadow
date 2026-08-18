@@ -45,18 +45,22 @@ verification, or postpublication attestation.
     records the maintainer's exact wording authorizing the separately built
     final outer archive and corresponding repository/site updates.
 12. [`CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_2026-08-17.json`](CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_2026-08-17.json)
-    records the corrective design as implemented pending effectiveness. Closure
-    requires final identity binding, anonymous GitHub and Hugging Face
-    redownload verification, recursive zero-Myth verification, and corrected
-    wording on all six public sites.
+    records the corrective design and its `CLOSED_EFFECTIVE` transition after
+    every bounded effectiveness criterion passed.
+13. [`R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json`](R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json)
+    records exact anonymous GitHub and Hugging Face observations for Generic
+    v0.2.0 and R1.0.1, plus bounded Generic and recursive R1.0.1 verifier PASS
+    results.
+14. [`R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json`](R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json)
+    records bounded HTTP, final-route, content-type, SHA-256, and visible
+    semantic observations across all six public sites.
 
 Concrete identity fields are not self-authorizing; the separate authority
-records supply the scoped decisions. Generic Myth v0.2.0 and R1.0.1 are now
-published on GitHub and Hugging Face, but publication is not CAPA effectiveness
-evidence. `tools/verify_repository_evidence.py --phase postpublication`
-therefore validates the published identities while preserving
-`IMPLEMENTED_PENDING_EFFECTIVENESS` until anonymous redownload and six-site
-criteria are evidenced.
+records supply the scoped decisions. Publication alone was not CAPA
+effectiveness evidence. The later redownload, package-verifier, and six-site
+receipts satisfy the bounded criteria, so
+`tools/verify_repository_evidence.py --phase postpublication` now validates
+`CLOSED_EFFECTIVE` without broadening any publication or operational authority.
 
 The signed admission record did not self-authorize public release. The later
 authorization does not modify the signed record or the exact R1 archive; it
