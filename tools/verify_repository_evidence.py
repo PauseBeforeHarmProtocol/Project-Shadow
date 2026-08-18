@@ -10,15 +10,19 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import html
 import json
 import os
 import re
 import subprocess
 import sys
+import tempfile
 import urllib.error
 import urllib.parse
 import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
+from html.parser import HTMLParser
 from typing import Any, Iterable
 
 
@@ -64,6 +68,11 @@ CAPA_RECORD = (
 )
 CURRENT_REDOWNLOAD = (
     ROOT / "governance" / "R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json"
+)
+SIX_SITE_EFFECTIVENESS = (
+    ROOT
+    / "governance"
+    / "R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json"
 )
 R1_PACKAGE_MANIFEST = ROOT / "governance" / "R1_PACKAGE_MANIFEST.json"
 R1_RELEASE_GATES = (
@@ -138,6 +147,12 @@ OUTER_FINAL = {
     "bytes": 5_731_663,
     "sha256": "6f6f1e16d5e9a20e62403f14af7ce8629ce2d702528fb7f80aaf4a14deb7a1d1",
 }
+CURRENT_OUTER_VERIFIER_SHA256 = (
+    "721c384b245ca654c087d184bbfe5725d85d41536250140467d7cd913e6a1ccb"
+)
+GENERIC_V0_2_0_VERIFIER_SHA256 = (
+    "0d84c8f90da35a16abbd410744ebd7df6f06a836e0c0b830b5213fb598087e9b"
+)
 GATE_1_CONFIRMED_BY = "Phillip Linstrum"
 GATE_1_CONFIRMED_AT = "2026-08-18T00:09:39Z"
 GENERIC_AUTHORIZATION_STATEMENT = (
@@ -165,14 +180,129 @@ OUTER_AUTHORIZATION_STATEMENT = (
 RELEASE_PLACEHOLDER_RE = re.compile(
     r"<(?:GENERIC|INNER|OUTER)_[A-Z0-9_]+>"
 )
-PUBLIC_SITE_URLS = (
-    "https://projectshadow.frylock117.chatgpt.site",
-    "https://pausebeforeharm.frylock117.chatgpt.site",
-    "https://civicqa.frylock117.chatgpt.site",
-    "https://americanrepairmanual.frylock117.chatgpt.site",
-    "https://therecord.frylock117.chatgpt.site",
-    "https://almsivi.frylock117.chatgpt.site",
+CAPA_ID = "PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001"
+CURRENT_REDOWNLOAD_RECORD = (
+    "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json"
 )
+SIX_SITE_EFFECTIVENESS_RECORD = (
+    "governance/"
+    "R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json"
+)
+CAPA_EFFECTIVENESS_RECORDS = (
+    CURRENT_REDOWNLOAD_RECORD,
+    SIX_SITE_EFFECTIVENESS_RECORD,
+)
+HF_SPACE_RESOLVE_BASE = (
+    "https://huggingface.co/spaces/ProjectShadow/"
+    "project-shadow-r1-reference/resolve/main"
+)
+PUBLIC_SITE_REQUIREMENTS = (
+    {
+        "site_id": "project-shadow",
+        "base_url": "https://projectshadow.frylock117.chatgpt.site",
+        "routes": ("/", "/release", "/status", "/capa"),
+        "specific_checks": (
+            "outer_exact_identity",
+            "inner_exact_identity",
+            "generic_exact_identity",
+            "full_canon_exact_identity",
+            "member_set_identity",
+            "capa_id",
+            "capa_state",
+        ),
+    },
+    {
+        "site_id": "pause-before-harm",
+        "base_url": "https://pausebeforeharm.frylock117.chatgpt.site",
+        "routes": ("/",),
+        "specific_checks": (),
+    },
+    {
+        "site_id": "civic-qa",
+        "base_url": "https://civicqa.frylock117.chatgpt.site",
+        "routes": ("/",),
+        "specific_checks": (),
+    },
+    {
+        "site_id": "american-repair-manual",
+        "base_url": "https://americanrepairmanual.frylock117.chatgpt.site",
+        "routes": ("/", "/manual.html"),
+        "specific_checks": ("archived_manual_current_boundary",),
+    },
+    {
+        "site_id": "the-record",
+        "base_url": "https://therecord.frylock117.chatgpt.site",
+        "routes": ("/", "/corrections", "/national.html"),
+        "specific_checks": (
+            "capa_state",
+            "national_trump_record",
+        ),
+    },
+    {
+        "site_id": "almsivi",
+        "base_url": "https://almsivi.frylock117.chatgpt.site",
+        "routes": ("/", "/technical/project-shadow"),
+        "specific_checks": (
+            "outer_exact_identity",
+            "inner_exact_identity",
+            "generic_exact_identity",
+            "full_canon_exact_identity",
+            "member_set_identity",
+            "preserved_predecessor",
+        ),
+    },
+)
+PUBLIC_SITE_URLS = tuple(
+    str(requirement["base_url"]) for requirement in PUBLIC_SITE_REQUIREMENTS
+)
+COMMON_SITE_CHECKS = (
+    "r1_0_1_current",
+    "contains_no_myth_package",
+    "generic_v0_2_0",
+    "full_canon_v0_3_5",
+    "sidecars_separate",
+    "sidecars_optional",
+    "sidecars_default_off",
+    "sidecars_nonauthorizing",
+    "canonical_release_link",
+    "capa_link",
+)
+OPERATIONAL_MEMBER_SET_SHA256 = (
+    "7a557efad953cbafd9e3ea9eb29b2d3e3e1bc6ab99dcf6b9ae7a99c487b0754d"
+)
+SITE_ROUTE_FINAL_PATH_OVERRIDES = {
+    ("american-repair-manual", "/manual.html"): "/manual",
+    ("the-record", "/national.html"): "/national",
+}
+SITE_ROUTE_MAX_BYTES_OVERRIDES = {
+    ("the-record", "/national.html"): 16 * 1024 * 1024,
+}
+SITE_RECEIPT_METHOD = {
+    "anonymous_https": True,
+    "http_status_required": 200,
+    "default_max_response_bytes": 2 * 1024 * 1024,
+    "route_max_response_bytes": {
+        "the-record:/national.html": 16 * 1024 * 1024,
+    },
+    "response_hash_algorithm": "SHA-256",
+    "content_type_prefix": "text/html",
+    "same_origin_final_url_required": True,
+    "semantic_content_checks": True,
+}
+CURRENT_MIRROR_PATHS = {
+    "generic-myth-v0.2.0": (
+        "releases/generic-myth-v0.2.0/"
+        "Project_Shadow_Generic_Myth_Sidecar_v0.2.0_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip"
+    ),
+    "r1.0.1-2026-08-17": (
+        "releases/r1.0.1-2026-08-17/"
+        "Project_Shadow_R1.0.1_Public_Reference_2026-08-17.zip"
+    ),
+}
+PUBLIC_DOWNLOAD_FINAL_HOSTS = {
+    "GITHUB": frozenset({"github.com", "release-assets.githubusercontent.com"}),
+    "HUGGING_FACE": frozenset({"huggingface.co"}),
+}
 USER_AGENT = "Project-Shadow-read-only-evidence-verifier/1.0"
 MAX_LINK_RESPONSE_BYTES = 2 * 1024 * 1024
 
@@ -229,6 +359,7 @@ NEGATION_MARKERS = (
     "not ",
     "no ",
     "never ",
+    "neither ",
     "without ",
     "does not ",
     "do not ",
@@ -402,6 +533,21 @@ def phase_name(value: str) -> str:
     if normalized not in {"PREPUBLICATION", "POSTPUBLICATION"}:
         raise EvidenceError(f"unsupported verification phase: {value!r}")
     return normalized
+
+
+def parse_rfc3339_utc(label: str, value: Any) -> datetime:
+    if not isinstance(value, str) or re.fullmatch(
+        r"20\d\d-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])T"
+        r"(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\dZ",
+        value,
+    ) is None:
+        raise EvidenceError(f"{label} is not RFC3339 UTC")
+    try:
+        return datetime.strptime(value, "%Y-%m-%dT%H:%M:%SZ").replace(
+            tzinfo=timezone.utc
+        )
+    except ValueError as exc:
+        raise EvidenceError(f"{label} is not a real UTC timestamp") from exc
 
 
 def published_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -883,8 +1029,13 @@ def validate_public_documentation(
         ),
     )
     generic_markers = [
-        "generic-myth-v0.2.0",
-        "never embedded in R1.0.1",
+        "Project Shadow Generic Myth Sidecar v0.2.0",
+        GENERIC_FINAL["filename"],
+        GENERIC_FINAL["sha256"],
+        "separate from canonical Project Shadow R1",
+        "default-off",
+        "Terminal-only",
+        "Nonauthorizing",
         "No production or operational deployment is authorized",
     ]
     r1_markers = [
@@ -944,7 +1095,7 @@ def validate_public_documentation(
             ROOT / "README.md",
             (
                 "POSTPUBLICATION",
-                "IMPLEMENTED_PENDING_EFFECTIVENESS",
+                "CLOSED_EFFECTIVE",
                 "r1.0.1-2026-08-17",
                 "generic-myth-v0.2.0",
             ),
@@ -968,29 +1119,47 @@ def validate_current_redownload(
         raise EvidenceError("unsupported R1.0.1 redownload schema")
     if record.get("status") != "VERIFIED" or record.get("anonymous_download") is not True:
         raise EvidenceError("R1.0.1 redownload record is not anonymous/VERIFIED")
+    recorded_at = record.get("recorded_at")
+    parse_rfc3339_utc("R1.0.1 redownload timestamp", recorded_at)
+    if record.get("method") != {
+        "anonymous_https": True,
+        "exact_byte_count_and_sha256": True,
+        "http_status_required": 200,
+    }:
+        raise EvidenceError("R1.0.1 redownload method is incomplete")
     check_nonclaims("R1.0.1 redownload record", record.get("nonclaims"))
     observations = record.get("observations")
     if not isinstance(observations, list):
         raise EvidenceError("R1.0.1 redownload observations missing")
-    expected: dict[tuple[str, str], dict[str, Any]] = {}
+    expected: dict[tuple[str, str], tuple[dict[str, Any], str]] = {}
     for tag, role in (
         ("generic-myth-v0.2.0", "OPTIONAL_GENERIC_COMPANION"),
         ("r1.0.1-2026-08-17", "R1_REFERENCE_CORRECTED"),
     ):
         asset = by_tag[tag]["asset"]
-        expected[(role, "GITHUB")] = asset
-        expected[(role, "HUGGING_FACE")] = asset
+        expected[(role, "GITHUB")] = (asset, asset["download_url"])
+        expected[(role, "HUGGING_FACE")] = (
+            asset,
+            f"{HF_SPACE_RESOLVE_BASE}/{CURRENT_MIRROR_PATHS[tag]}",
+        )
     observed_keys: set[tuple[str, str]] = set()
     for row in observations:
         if not isinstance(row, dict):
             raise EvidenceError("invalid R1.0.1 redownload observation")
         key = (str(row.get("role")), str(row.get("host")))
-        asset = expected.get(key)
-        if asset is None or key in observed_keys:
+        expected_row = expected.get(key)
+        if expected_row is None or key in observed_keys:
             raise EvidenceError(f"unexpected/duplicate redownload observation: {key}")
+        asset, expected_url = expected_row
         observed_keys.add(key)
+        final_host = row.get("final_host")
+        if not isinstance(final_host, str):
+            raise EvidenceError(f"redownload final host missing: {key}")
+        validate_public_download_final_host(key[1], f"https://{final_host}/")
         if (
             row.get("filename") != asset["filename"]
+            or row.get("download_url") != expected_url
+            or row.get("http_status") != 200
             or row.get("bytes_expected") != asset["bytes"]
             or row.get("bytes_observed") != asset["bytes"]
             or row.get("sha256_expected") != asset["sha256"]
@@ -1000,6 +1169,190 @@ def validate_current_redownload(
             raise EvidenceError(f"redownload identity mismatch: {key}")
     if observed_keys != set(expected):
         raise EvidenceError("redownload record lacks GitHub/Hugging Face coverage")
+    generic_verification = record.get("generic_v0_2_0_bounded_verification")
+    if generic_verification != {
+        "tool": "tools/verify_generic_myth_v0_2_0.py",
+        "tool_sha256": GENERIC_V0_2_0_VERIFIER_SHA256,
+        "target": GENERIC_FINAL,
+        "inventory_path_count": 23,
+        "bounded_archive_verifier": True,
+        "old_predecessor_embedded": False,
+        "observations": [
+            {"host": "GITHUB", "status": "PASS"},
+            {"host": "HUGGING_FACE", "status": "PASS"},
+        ],
+    }:
+        raise EvidenceError("Generic v0.2.0 public-download verification mismatch")
+    recursive = record.get("r1_0_1_recursive_verification")
+    if recursive != {
+        "tool": "tools/verify_outer_release.py",
+        "tool_sha256": CURRENT_OUTER_VERIFIER_SHA256,
+        "target": OUTER_FINAL,
+        "status": "PASS",
+        "recursive_forbidden_payload_scan": True,
+        "zero_embedded_myth_payload": True,
+        "observations": [
+            {"host": "GITHUB", "status": "PASS"},
+            {"host": "HUGGING_FACE", "status": "PASS"},
+        ],
+    }:
+        raise EvidenceError("R1.0.1 recursive public-download verification mismatch")
+
+
+def required_site_checks(requirement: dict[str, Any]) -> tuple[str, ...]:
+    satellite_checks = (
+        ("no_direct_github_release_link",)
+        if requirement["site_id"] != "project-shadow"
+        else ()
+    )
+    return COMMON_SITE_CHECKS + satellite_checks + tuple(requirement["specific_checks"])
+
+
+def exact_public_site_url(base_url: str, route: str) -> str:
+    if not route.startswith("/") or route.startswith("//"):
+        raise EvidenceError(f"unsafe public-site route: {route!r}")
+    return base_url + route
+
+
+def site_route_key(requirement: dict[str, Any], route: str) -> tuple[str, str]:
+    return (str(requirement["site_id"]), route)
+
+
+def site_route_max_bytes(requirement: dict[str, Any], route: str) -> int:
+    return SITE_ROUTE_MAX_BYTES_OVERRIDES.get(
+        site_route_key(requirement, route),
+        MAX_LINK_RESPONSE_BYTES,
+    )
+
+
+def expected_site_final_url(requirement: dict[str, Any], route: str) -> str:
+    final_path = SITE_ROUTE_FINAL_PATH_OVERRIDES.get(
+        site_route_key(requirement, route),
+        route,
+    )
+    return exact_public_site_url(str(requirement["base_url"]), final_path)
+
+
+def validate_six_public_sites_effectiveness(
+    record: dict[str, Any],
+    by_tag: dict[str, dict[str, Any]],
+) -> None:
+    """Validate retained route observations and corrected-boundary semantics."""
+    if record.get("schema") != (
+        "project-shadow.r1.0.1-six-public-sites-effectiveness-verification.v1"
+    ):
+        raise EvidenceError("unsupported six-public-sites effectiveness schema")
+    if (
+        record.get("capa_id") != CAPA_ID
+        or record.get("status") != "VERIFIED"
+        or record.get("all_six_verified") is not True
+    ):
+        raise EvidenceError("six-public-sites effectiveness receipt is not VERIFIED")
+    verified_at = record.get("verified_at")
+    parse_rfc3339_utc(
+        "six-public-sites effectiveness timestamp",
+        verified_at,
+    )
+    if record.get("method") != SITE_RECEIPT_METHOD:
+        raise EvidenceError("six-public-sites effectiveness method is incomplete")
+    check_nonclaims("six-public-sites effectiveness receipt", record.get("nonclaims"))
+
+    bindings = record.get("artifact_bindings")
+    if not isinstance(bindings, dict):
+        raise EvidenceError("six-public-sites effectiveness receipt lacks artifact bindings")
+    expected_bindings = {
+        "r1_0_1_outer": by_tag["r1.0.1-2026-08-17"]["asset"],
+        "r1_0_1_inner": INNER_FINAL,
+        "generic_myth_v0_2_0": by_tag["generic-myth-v0.2.0"]["asset"],
+        "full_canon_myth_v0_3_5": by_tag["myth-v0.3.5"]["asset"],
+    }
+    if set(bindings) != set(expected_bindings):
+        raise EvidenceError("six-public-sites artifact-binding coverage mismatch")
+    for key, expected in expected_bindings.items():
+        observed = bindings.get(key)
+        if not isinstance(observed, dict):
+            raise EvidenceError(f"six-public-sites artifact binding is invalid: {key}")
+        if set(observed) != {"filename", "bytes", "sha256"}:
+            raise EvidenceError(f"six-public-sites artifact binding has extra fields: {key}")
+        for field in ("filename", "bytes", "sha256"):
+            if observed.get(field) != expected[field]:
+                raise EvidenceError(
+                    f"six-public-sites artifact binding mismatch: {key}.{field}"
+                )
+
+    sites = record.get("sites")
+    if not isinstance(sites, list) or len(sites) != len(PUBLIC_SITE_REQUIREMENTS):
+        raise EvidenceError("six-public-sites receipt does not contain exactly six sites")
+    observed_ids: set[str] = set()
+    for requirement, site in zip(PUBLIC_SITE_REQUIREMENTS, sites):
+        if not isinstance(site, dict):
+            raise EvidenceError("six-public-sites receipt contains an invalid site row")
+        site_id = str(requirement["site_id"])
+        if site.get("site_id") != site_id or site_id in observed_ids:
+            raise EvidenceError("six-public-sites site order/identity mismatch")
+        observed_ids.add(site_id)
+        base_url = str(requirement["base_url"])
+        if site.get("base_url") != base_url:
+            raise EvidenceError(f"six-public-sites base URL mismatch: {site_id}")
+        routes = site.get("routes")
+        expected_routes = tuple(str(value) for value in requirement["routes"])
+        if not isinstance(routes, list) or len(routes) != len(expected_routes):
+            raise EvidenceError(f"six-public-sites route coverage mismatch: {site_id}")
+        for expected_route, route in zip(expected_routes, routes):
+            if not isinstance(route, dict):
+                raise EvidenceError(f"invalid route observation: {site_id}")
+            expected_url = exact_public_site_url(base_url, expected_route)
+            expected_final = expected_site_final_url(requirement, expected_route)
+            size = route.get("bytes_observed")
+            digest = route.get("sha256_observed")
+            if (
+                route.get("path") != expected_route
+                or route.get("url") != expected_url
+                or route.get("final_url") != expected_final
+                or route.get("http_status") != 200
+                or route.get("content_type") != "text/html"
+                or not isinstance(size, int)
+                or isinstance(size, bool)
+                or size <= 0
+                or size > site_route_max_bytes(requirement, expected_route)
+                or not isinstance(digest, str)
+                or re.fullmatch(r"[0-9a-f]{64}", digest) is None
+            ):
+                raise EvidenceError(
+                    f"six-public-sites route observation mismatch: {site_id}{expected_route}"
+                )
+        checks = site.get("semantic_checks")
+        expected_checks = required_site_checks(requirement)
+        if not isinstance(checks, dict) or set(checks) != set(expected_checks):
+            raise EvidenceError(f"six-public-sites semantic-check coverage mismatch: {site_id}")
+        failed = sorted(key for key, value in checks.items() if value is not True)
+        if failed:
+            raise EvidenceError(
+                f"six-public-sites semantic checks are not all true for {site_id}: "
+                + ", ".join(failed)
+            )
+
+
+def validate_capa_effectiveness_record_pointers(
+    current_status: dict[str, Any],
+    capa: dict[str, Any],
+) -> None:
+    closure = capa.get("closure")
+    current_capa = current_status.get("capa")
+    if not isinstance(closure, dict) or not isinstance(current_capa, dict):
+        raise EvidenceError("current status/CAPA closure object missing")
+    expected = list(CAPA_EFFECTIVENESS_RECORDS)
+    if (
+        closure.get("verification_record") != CURRENT_REDOWNLOAD_RECORD
+        or closure.get("verification_records") != expected
+        or current_capa.get("verification_records") != expected
+        or not all(
+            record in current_status.get("source_records", []) for record in expected
+        )
+    ):
+        raise EvidenceError(
+            "CAPA closure must bind redownload and six-public-sites effectiveness records"
+        )
 
 
 def verify_repository_metadata(phase: str = "POSTPUBLICATION") -> list[dict[str, Any]]:
@@ -1030,6 +1383,10 @@ def verify_repository_metadata(phase: str = "POSTPUBLICATION") -> list[dict[str,
 
     if manifest.get("schema") != "project-shadow.publication-manifest.v2":
         raise EvidenceError("unsupported publication manifest schema")
+    if current_status.get("schema") != "project-shadow.current-release-status.v1":
+        raise EvidenceError("unsupported current release-status schema")
+    if capa.get("schema") != "project-shadow.capa.v1":
+        raise EvidenceError("unsupported CAPA schema")
     if manifest.get("repository") != "PauseBeforeHarmProtocol/Project-Shadow":
         raise EvidenceError("unexpected repository identity")
     if manifest.get("publication_phase") != phase:
@@ -1107,20 +1464,28 @@ def verify_repository_metadata(phase: str = "POSTPUBLICATION") -> list[dict[str,
             raise EvidenceError(f"release {tag!r} has invalid state for phase {phase}")
 
         note = RELEASE_NOTES[tag].read_text(encoding="utf-8")
-        for expected in (tag,) + identity_markers:
+        note_markers = identity_markers if tag == "generic-myth-v0.2.0" else (tag,) + identity_markers
+        for expected in note_markers:
             if expected not in note:
                 raise EvidenceError(f"release notes for {tag} omit {expected!r}")
-        if not note.lstrip().startswith("**"):
+        if tag != "generic-myth-v0.2.0" and not note.lstrip().startswith("**"):
             raise EvidenceError(f"release notes for {tag} lack a bold first-line warning")
         if tag == "myth-v0.3.5":
             source_warning_present = (
                 "automatically generated source archive" in note
                 and "repackaged copy" in note
             )
-        else:
+        elif tag == "r1.0.1-2026-08-17":
+            source_warning_present = (
+                "automatically generated source ZIP and TAR archives" in note
+                and "repository snapshots" in note
+            )
+        elif tag != "generic-myth-v0.2.0":
             source_warning_present = (
                 "automatically generated" in note and "Source code (zip)" in note
             )
+        else:
+            source_warning_present = True
         if not source_warning_present:
             raise EvidenceError(f"release notes for {tag} omit the source-archive warning")
 
@@ -1528,19 +1893,41 @@ def verify_repository_metadata(phase: str = "POSTPUBLICATION") -> list[dict[str,
                     "pending-effectiveness postpublication state is inconsistent"
                 )
         elif capa_status == "CLOSED_EFFECTIVE":
+            closed_at = closure.get("closed_at")
             if (
                 manifest.get("postpublication_state")
                 != "PUBLISHED_EFFECTIVENESS_VERIFIED"
                 or current_capa.get("effectiveness_verified") is not True
                 or closure.get("effectiveness_verified") is not True
-                or closure.get("verification_record")
-                != "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json"
             ):
                 raise EvidenceError("current status/CAPA postpublication closure mismatch")
-            validate_current_redownload(
-                require_object(load_json(CURRENT_REDOWNLOAD), CURRENT_REDOWNLOAD.name),
+            closed_time = parse_rfc3339_utc("CAPA closure timestamp", closed_at)
+            validate_capa_effectiveness_record_pointers(current_status, capa)
+            redownload_record = require_object(
+                load_json(CURRENT_REDOWNLOAD),
+                CURRENT_REDOWNLOAD.name,
+            )
+            six_site_record = require_object(
+                load_json(SIX_SITE_EFFECTIVENESS),
+                SIX_SITE_EFFECTIVENESS.name,
+            )
+            validate_current_redownload(redownload_record, by_tag)
+            validate_six_public_sites_effectiveness(
+                six_site_record,
                 by_tag,
             )
+            evidence_time = max(
+                parse_rfc3339_utc(
+                    "R1.0.1 redownload timestamp",
+                    redownload_record.get("recorded_at"),
+                ),
+                parse_rfc3339_utc(
+                    "six-public-sites effectiveness timestamp",
+                    six_site_record.get("verified_at"),
+                ),
+            )
+            if closed_time < evidence_time:
+                raise EvidenceError("CAPA closure predates retained effectiveness evidence")
         else:
             raise EvidenceError(f"unsupported postpublication CAPA state: {capa_status!r}")
 
@@ -1598,7 +1985,10 @@ def request(url: str) -> Any:
     parsed = urllib.parse.urlparse(url)
     if parsed.scheme != "https" or not parsed.netloc:
         raise EvidenceError(f"refusing non-HTTPS URL: {url}")
-    headers = {"User-Agent": USER_AGENT}
+    headers = {
+        "Accept-Encoding": "identity",
+        "User-Agent": USER_AGENT,
+    }
     if parsed.netloc == "api.github.com":
         headers["Accept"] = "application/vnd.github+json"
         token = os.environ.get("GITHUB_TOKEN")
@@ -1620,38 +2010,104 @@ def request(url: str) -> Any:
     return response
 
 
+def public_download_provider(url: str) -> str | None:
+    hostname = (urllib.parse.urlparse(url).hostname or "").lower()
+    if hostname == "github.com":
+        return "GITHUB"
+    if hostname == "huggingface.co":
+        return "HUGGING_FACE"
+    return None
+
+
+def validate_public_download_final_host(
+    provider: str,
+    final_url: str,
+) -> str:
+    parsed = urllib.parse.urlparse(final_url)
+    hostname = (parsed.hostname or "").lower()
+    allowed = hostname in PUBLIC_DOWNLOAD_FINAL_HOSTS[provider]
+    if provider == "HUGGING_FACE" and hostname.endswith(".aws.cdn.hf.co"):
+        allowed = True
+    if parsed.scheme != "https" or not allowed:
+        raise EvidenceError(
+            f"unexpected {provider} public-download final host: {final_url}"
+        )
+    return hostname
+
+
 def download_and_hash(asset: dict[str, Any], destination: Path) -> Path:
     destination.mkdir(parents=True, exist_ok=True)
     output = destination / asset["filename"]
+    if output.exists() or output.is_symlink():
+        raise EvidenceError(f"refusing to overwrite release download: {output}")
     digest = hashlib.sha256()
     count = 0
-    with request(asset["download_url"]) as response, output.open("wb") as handle:
-        header = response.headers.get("Content-Length")
-        if header is not None:
-            try:
-                advertised = int(header)
-            except ValueError as exc:
-                raise EvidenceError(f"invalid Content-Length for {asset['filename']}") from exc
-            if advertised != asset["bytes"]:
-                raise EvidenceError(
-                    f"Content-Length mismatch for {asset['filename']}: "
-                    f"expected {asset['bytes']}; found {advertised}"
-                )
-        while True:
-            block = response.read(1024 * 1024)
-            if not block:
-                break
-            count += len(block)
-            if count > asset["bytes"]:
-                raise EvidenceError(f"oversized release download: {asset['filename']}")
-            digest.update(block)
-            handle.write(block)
+    temporary: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="wb",
+            dir=destination,
+            prefix=f".{asset['filename']}.",
+            delete=False,
+        ) as handle:
+            temporary = Path(handle.name)
+            with request(asset["download_url"]) as response:
+                if getattr(response, "status", None) != 200:
+                    raise EvidenceError(
+                        f"unexpected public-download status for {asset['filename']}"
+                    )
+                provider = public_download_provider(str(asset["download_url"]))
+                if provider is not None:
+                    validate_public_download_final_host(provider, response.geturl())
+                header = response.headers.get("Content-Length")
+                if header is not None:
+                    try:
+                        advertised = int(header)
+                    except ValueError as exc:
+                        raise EvidenceError(
+                            f"invalid Content-Length for {asset['filename']}"
+                        ) from exc
+                    if advertised != asset["bytes"]:
+                        raise EvidenceError(
+                            f"Content-Length mismatch for {asset['filename']}: "
+                            f"expected {asset['bytes']}; found {advertised}"
+                        )
+                while True:
+                    block = response.read(1024 * 1024)
+                    if not block:
+                        break
+                    count += len(block)
+                    if count > asset["bytes"]:
+                        raise EvidenceError(
+                            f"oversized release download: {asset['filename']}"
+                        )
+                    digest.update(block)
+                    handle.write(block)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.link(temporary, output)
+        temporary.unlink()
+        temporary = None
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
     if count != asset["bytes"] or digest.hexdigest() != asset["sha256"]:
         raise EvidenceError(
             f"release download identity mismatch for {asset['filename']}: "
             f"bytes={count}; sha256={digest.hexdigest()}"
         )
     return output
+
+
+def download_and_hash_at_url(
+    asset: dict[str, Any],
+    download_url: str,
+    destination: Path,
+) -> Path:
+    """Download one exact asset identity from an explicitly selected mirror."""
+    mirrored = dict(asset)
+    mirrored["download_url"] = download_url
+    return download_and_hash(mirrored, destination)
 
 
 def check_link(url: str) -> None:
@@ -1679,7 +2135,8 @@ def fetch_public_json(url: str) -> dict[str, Any]:
 
 
 def normalize_release_body(value: str) -> str:
-    return value.replace("\r\n", "\n").replace("\r", "\n").rstrip()
+    normalized = value.replace("\r\n", "\n").replace("\r", "\n")
+    return "\n".join(line.rstrip() for line in normalized.splitlines()).rstrip()
 
 
 def verify_live_release_metadata(
@@ -1730,36 +2187,264 @@ def verify_live_release_metadata(
         )
 
 
-def fetch_public_page(url: str) -> str:
+def fetch_public_site_route(
+    requirement: dict[str, Any],
+    route: str,
+) -> tuple[str, dict[str, Any]]:
+    url = exact_public_site_url(str(requirement["base_url"]), route)
+    expected_final = expected_site_final_url(requirement, route)
+    limit = site_route_max_bytes(requirement, route)
     with request(url) as response:
         status = getattr(response, "status", None)
-        if status is not None and not 200 <= status < 400:
+        final_url = response.geturl()
+        content_type = response.headers.get_content_type()
+        requested = urllib.parse.urlparse(url)
+        final = urllib.parse.urlparse(final_url)
+        if status != 200:
             raise EvidenceError(f"unexpected HTTP {status} for {url}")
-        body = response.read(MAX_LINK_RESPONSE_BYTES + 1)
-    if len(body) > MAX_LINK_RESPONSE_BYTES:
-        raise EvidenceError(f"public page exceeds bounded verification size: {url}")
+        if (
+            final.scheme != requested.scheme
+            or final.netloc != requested.netloc
+            or final_url != expected_final
+        ):
+            raise EvidenceError(f"public page final URL mismatch: {url} -> {final_url}")
+        body = bytearray()
+        digest = hashlib.sha256()
+        while True:
+            block = response.read(min(1024 * 1024, limit + 1 - len(body)))
+            if not block:
+                break
+            body.extend(block)
+            digest.update(block)
+            if len(body) > limit:
+                raise EvidenceError(f"public page exceeds bounded size {limit}: {url}")
+    if content_type != "text/html":
+        raise EvidenceError(f"public page content type is not text/html: {url}")
     try:
-        return body.decode("utf-8")
+        source = bytes(body).decode("utf-8")
     except UnicodeDecodeError as exc:
         raise EvidenceError(f"public page is not UTF-8: {url}") from exc
+    return source, {
+        "path": route,
+        "url": url,
+        "final_url": final_url,
+        "http_status": status,
+        "bytes_observed": len(body),
+        "sha256_observed": digest.hexdigest(),
+        "content_type": content_type,
+    }
 
 
-def verify_public_site_release_links(rows: list[dict[str, Any]]) -> None:
+class PublicHTMLView(HTMLParser):
+    """Extract visible text and anchors while excluding executable/hidden payloads."""
+
+    HIDDEN_TAGS = frozenset({"script", "style", "template", "noscript"})
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.hidden_depth = 0
+        self.text_chunks: list[str] = []
+        self.hrefs: list[str] = []
+
+    def handle_starttag(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+    ) -> None:
+        lowered = tag.lower()
+        if lowered in self.HIDDEN_TAGS:
+            self.hidden_depth += 1
+            return
+        if self.hidden_depth == 0 and lowered == "a":
+            for name, value in attrs:
+                if name.lower() == "href" and isinstance(value, str):
+                    self.hrefs.append(html.unescape(value))
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() in self.HIDDEN_TAGS and self.hidden_depth:
+            self.hidden_depth -= 1
+
+    def handle_data(self, data: str) -> None:
+        if self.hidden_depth == 0:
+            self.text_chunks.append(data)
+
+
+def public_html_view(source: str) -> tuple[str, tuple[str, ...]]:
+    parser = PublicHTMLView()
+    parser.feed(source)
+    parser.close()
+    text = re.sub(r"\s+", " ", " ".join(parser.text_chunks)).strip()
+    return text, tuple(parser.hrefs)
+
+
+def normalized_public_text(source: str) -> str:
+    return public_html_view(source)[0]
+
+
+def public_site_semantic_checks(
+    requirement: dict[str, Any],
+    pages: dict[str, str],
+) -> dict[str, bool]:
+    """Evaluate the corrected boundary as meaning, not link presence alone."""
+    missing_routes = [route for route in requirement["routes"] if route not in pages]
+    if missing_routes:
+        raise EvidenceError(
+            f"semantic input lacks routes for {requirement['site_id']}: "
+            + ", ".join(missing_routes)
+        )
+    home_source = pages["/"]
+    home_text, home_links = public_html_view(home_source)
+    combined_source = "\n".join(pages[route] for route in requirement["routes"])
+    combined_text = normalized_public_text(combined_source)
     canonical_release = "https://projectshadow.frylock117.chatgpt.site/release"
-    for index, url in enumerate(PUBLIC_SITE_URLS):
-        page = fetch_public_page(url)
-        expected = 'href="/release"' if index == 0 else canonical_release
-        if expected not in page:
-            raise EvidenceError(f"public site omits canonical release link: {url}")
+    canonical_capa = "https://projectshadow.frylock117.chatgpt.site/capa"
+    site_id = str(requirement["site_id"])
+    release_link = "/release" if site_id == "project-shadow" else canonical_release
+    capa_link = "/capa" if site_id == "project-shadow" else canonical_capa
 
-    release_page = fetch_public_page(canonical_release)
-    for row in rows:
+    checks: dict[str, bool] = {
+        "r1_0_1_current": re.search(
+            r"\b(?:project\s+shadow\s+)?(?:1\.0\.1|r1\.0\.1)\b",
+            home_text,
+            re.IGNORECASE,
+        ) is not None,
+        "contains_no_myth_package": re.search(
+            r"\b(?:contains?\s+no\s+myth\s+package|myth[- ]free\s+r1\.0\.1|"
+            r"no\s+myth\s+package\s+is\s+embedded|zero\s+embedded\s+myth\s+payload)\b",
+            home_text,
+            re.IGNORECASE,
+        ) is not None,
+        "generic_v0_2_0": re.search(
+            r"\bgeneric\s+myth\s+v0\.2\.0\b", home_text, re.IGNORECASE
+        ) is not None,
+        "full_canon_v0_3_5": re.search(
+            r"\bfull[- ]canon\s+myth\s+v0\.3\.5\b", home_text, re.IGNORECASE
+        ) is not None,
+        "sidecars_separate": re.search(r"\bseparate\b", home_text, re.IGNORECASE)
+        is not None,
+        "sidecars_optional": re.search(r"\boptional\b", home_text, re.IGNORECASE)
+        is not None,
+        "sidecars_default_off": re.search(
+            r"\b(?:default[- ]off|default\s+off|off\s+is\s+the\s+default)\b",
+            home_text,
+            re.IGNORECASE,
+        ) is not None,
+        "sidecars_nonauthorizing": re.search(
+            r"\b(?:non[- ]?authorizing|cannot\s+authorize|never\s+authorizes?|"
+            r"neither.{0,100}authorizes?)\b",
+            home_text,
+            re.IGNORECASE,
+        ) is not None,
+        "canonical_release_link": release_link in home_links,
+        "capa_link": capa_link in home_links,
+    }
+    if site_id != "project-shadow":
+        checks["no_direct_github_release_link"] = not any(
+            urllib.parse.urlparse(link).netloc.lower() == "github.com"
+            and "/PauseBeforeHarmProtocol/Project-Shadow/releases" in link
+            for link in home_links
+        )
+
+    exact_values = {
+        "outer_exact_identity": ("5,731,663", OUTER_FINAL["sha256"]),
+        "inner_exact_identity": ("5,463,189", INNER_FINAL["sha256"]),
+        "generic_exact_identity": ("93,676", GENERIC_FINAL["sha256"]),
+        "full_canon_exact_identity": (
+            "1,428,812",
+            "2b55867fe7c502a0defd8d6f2e9b53fbd1caaf1b0f225a438bd45b04a3e7bae2",
+        ),
+        "member_set_identity": (OPERATIONAL_MEMBER_SET_SHA256,),
+    }
+    for name, markers in exact_values.items():
+        if name in requirement["specific_checks"]:
+            checks[name] = all(marker in combined_text for marker in markers)
+    if "capa_id" in requirement["specific_checks"]:
+        checks["capa_id"] = CAPA_ID in combined_text
+    if "capa_state" in requirement["specific_checks"]:
+        checks["capa_state"] = re.search(
+            r"\b(?:implemented\W+pending\W+effectiveness|closed\W+effective|"
+            r"closed\W+effectiveness\W+verified)\b",
+            combined_text,
+            re.IGNORECASE,
+        ) is not None
+    if "archived_manual_current_boundary" in requirement["specific_checks"]:
+        manual = normalized_public_text(pages["/manual.html"])
+        checks["archived_manual_current_boundary"] = all(
+            re.search(pattern, manual, re.IGNORECASE) is not None
+            for pattern in (
+                r"(?:1\.0\.1|r1\.0\.1)",
+                r"contains?\s+no\s+myth\s+package",
+                r"generic\s+myth\s+v0\.2\.0",
+                r"full[- ]canon\s+myth\s+v0\.3\.5",
+            )
+        )
+    if "national_trump_record" in requirement["specific_checks"]:
+        checks["national_trump_record"] = re.search(
+            r"\bnational\s+trump\s+record\b",
+            normalized_public_text(pages["/national.html"]),
+            re.IGNORECASE,
+        ) is not None
+    if "preserved_predecessor" in requirement["specific_checks"]:
+        checks["preserved_predecessor"] = (
+            re.search(r"\bpreserved\s+predecessor\b", combined_text, re.IGNORECASE)
+            is not None
+            and "2f8fe1530b6a83294d15011df95853aaecf08fa4dba756f0c2e91dd089e1b1ec"
+            in combined_text
+        )
+    return checks
+
+
+def observe_public_sites(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    release_page = ""
+    observations: list[dict[str, Any]] = []
+    for requirement in PUBLIC_SITE_REQUIREMENTS:
+        pages: dict[str, str] = {}
+        routes: list[dict[str, Any]] = []
+        for route in requirement["routes"]:
+            source, observation = fetch_public_site_route(requirement, str(route))
+            pages[str(route)] = source
+            routes.append(observation)
+        checks = public_site_semantic_checks(requirement, pages)
+        expected_checks = required_site_checks(requirement)
+        if set(checks) != set(expected_checks):
+            raise EvidenceError(
+                f"live public-site semantic coverage mismatch: {requirement['site_id']}"
+            )
+        failed = sorted(key for key, value in checks.items() if value is not True)
+        if failed:
+            raise EvidenceError(
+                f"live public-site boundary mismatch for {requirement['site_id']}: "
+                + ", ".join(failed)
+            )
+        observations.append(
+            {
+                "site_id": requirement["site_id"],
+                "base_url": requirement["base_url"],
+                "routes": routes,
+                "semantic_checks": checks,
+            }
+        )
+        if requirement["site_id"] == "project-shadow":
+            release_page = pages["/release"]
+    if not release_page:
+        raise EvidenceError("canonical Project Shadow release page was not checked")
+    current_rows = [
+        row for row in rows if row.get("publication_state") == "PUBLISHED"
+    ]
+    if len(current_rows) != 3:
+        raise EvidenceError("canonical release-page current-row coverage is ambiguous")
+    for row in current_rows:
         asset = row["asset"]
         for expected in (asset["download_url"], asset["sha256"]):
             if expected not in release_page:
                 raise EvidenceError(
                     f"canonical public release page omits {row['role']} identity: {expected}"
                 )
+    return observations
+
+
+def verify_public_site_release_links(rows: list[dict[str, Any]]) -> None:
+    observe_public_sites(rows)
 
 
 def verify_online(
@@ -1772,12 +2457,22 @@ def verify_online(
     phase = phase_name(phase)
     online_rows = published_rows(rows) if phase == "PREPUBLICATION" else rows
     downloaded: dict[str, Path] = {}
+    hf_downloaded: dict[str, Path] = {}
     repository = "PauseBeforeHarmProtocol/Project-Shadow"
     for row in online_rows:
         asset = row["asset"]
         downloaded[row["role"]] = download_and_hash(asset, destination)
         release_url = f"https://github.com/{repository}/releases/tag/{row['tag']}"
         check_link(release_url)
+
+    by_tag = {str(row["tag"]): row for row in rows}
+    for tag in ("generic-myth-v0.2.0", "r1.0.1-2026-08-17"):
+        row = by_tag[tag]
+        hf_downloaded[tag] = download_and_hash_at_url(
+            row["asset"],
+            f"{HF_SPACE_RESOLVE_BASE}/{CURRENT_MIRROR_PATHS[tag]}",
+            destination / "hugging-face",
+        )
     verify_live_release_metadata(online_rows, expected_latest_tag)
     current_status = require_object(load_json(CURRENT_STATUS), CURRENT_STATUS.name)
     if (
@@ -1809,6 +2504,60 @@ def verify_online(
             "positive verification of the exact public R1 failed:\n" + completed.stdout
         )
     print(completed.stdout.rstrip())
+
+    generic = downloaded.get("OPTIONAL_GENERIC_COMPANION")
+    hf_generic = hf_downloaded.get("generic-myth-v0.2.0")
+    if generic is None or hf_generic is None:
+        raise EvidenceError("downloaded assets lack both Generic v0.2.0 mirrors")
+    for host, archive in (("GITHUB", generic), ("HUGGING_FACE", hf_generic)):
+        generic_completed = subprocess.run(
+            [
+                sys.executable,
+                "-I",
+                "-S",
+                "-B",
+                str(ROOT / "tools" / "verify_generic_myth_v0_2_0.py"),
+                str(archive),
+            ],
+            cwd=ROOT,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+        )
+        if generic_completed.returncode != 0:
+            raise EvidenceError(
+                f"bounded verification of {host} Generic v0.2.0 failed:\n"
+                + generic_completed.stdout
+            )
+        print(f"{host} Generic v0.2.0: {generic_completed.stdout.rstrip()}")
+
+    current_r1 = downloaded.get("R1_REFERENCE_CORRECTED")
+    hf_current_r1 = hf_downloaded.get("r1.0.1-2026-08-17")
+    if current_r1 is None or hf_current_r1 is None:
+        raise EvidenceError("downloaded assets lack both corrected R1.0.1 mirrors")
+    for host, archive in (("GITHUB", current_r1), ("HUGGING_FACE", hf_current_r1)):
+        current_completed = subprocess.run(
+            [
+                sys.executable,
+                "-I",
+                "-S",
+                "-B",
+                str(ROOT / "tools" / "verify_outer_release.py"),
+                str(archive),
+            ],
+            cwd=ROOT,
+            stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+        )
+        if current_completed.returncode != 0:
+            raise EvidenceError(
+                f"positive recursive verification of {host} R1.0.1 failed:\n"
+                + current_completed.stdout
+            )
+        print(f"{host} R1.0.1: {current_completed.stdout.rstrip()}")
 
 
 def parse_args() -> argparse.Namespace:
@@ -1883,7 +2632,7 @@ def main() -> int:
             phase == "POSTPUBLICATION"
             and current_status.get("capa", {}).get("status") == "CLOSED_EFFECTIVE"
         ):
-            print("PASS: six public-site release links")
+            print("PASS: six public-site routes and corrected-boundary semantics")
         elif phase == "POSTPUBLICATION":
             print("INFO: six-site CAPA effectiveness verification remains pending")
     else:
