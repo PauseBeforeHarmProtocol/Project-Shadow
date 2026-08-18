@@ -1,6 +1,6 @@
 {
   "current_reference": {
-    "publication_state": "READY_TO_PUBLISH",
+    "publication_state": "PUBLISHED",
     "tag": "r1.0.1-2026-08-17"
   },
   "expected_github_latest_tag": {
@@ -15,8 +15,8 @@
     "production_authorized": false,
     "safety_claimed": false
   },
-  "publication_phase": "PREPUBLICATION",
-  "prepublication_state": "READY_TO_PUBLISH",
+  "postpublication_state": "PUBLISHED_PENDING_EFFECTIVENESS",
+  "publication_phase": "POSTPUBLICATION",
   "release_identity": "PROJECT SHADOW 1.0.1 / R1 REFERENCE / BETA-ACTIVE-TESTING / PRELIVE",
   "releases": [
     {
@@ -77,7 +77,7 @@
       "current": true,
       "enabled_by_default": false,
       "order": 4,
-      "publication_state": "READY_TO_PUBLISH",
+      "publication_state": "PUBLISHED",
       "role": "OPTIONAL_GENERIC_COMPANION",
       "tag": "generic-myth-v0.2.0",
       "title": "Project Shadow Generic Myth Sidecar v0.2.0 — Optional Public Companion"
@@ -92,7 +92,7 @@
       "canonical_r1": true,
       "current": true,
       "order": 5,
-      "publication_state": "READY_TO_PUBLISH",
+      "publication_state": "PUBLISHED",
       "role": "R1_REFERENCE_CORRECTED",
       "tag": "r1.0.1-2026-08-17",
       "title": "Project Shadow 1.0.1 — R1 Reference Packaging Correction (PRELIVE)"
