@@ -38,7 +38,7 @@
       "expected_asset_path": "releases/generic-myth-v0.2.0/Project_Shadow_Generic_Myth_Sidecar_v0.2.0_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
       "repository": "ProjectShadow/project-shadow-r1-reference"
     },
-    "state": "READY_TO_PUBLISH"
+    "state": "PUBLISHED"
   },
   "authorization_record": "governance/GENERIC_MYTH_v0.2.0_EXACT_HASH_PUBLIC_RELEASE_AUTHORIZATION_2026-08-17.json",
   "schema": "project-shadow.generic-myth-public-release-reference.v1",
