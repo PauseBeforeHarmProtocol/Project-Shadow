@@ -9,7 +9,7 @@
     "final_outer_identity_bound": true,
     "inner_exact_hash_admitted": true,
     "myth_payload_required": false,
-    "publication_state": "READY_TO_PUBLISH",
+    "publication_state": "PUBLISHED",
     "tag": "r1.0.1-2026-08-17",
     "zero_operational_descendant_bytes_changed": true
   },
@@ -19,7 +19,7 @@
     "default_off": true,
     "final_hardened_identity_bound": true,
     "publication_authorization_recorded": true,
-    "publication_state": "READY_TO_PUBLISH",
+    "publication_state": "PUBLISHED",
     "required_for_r1": false,
     "tag": "generic-myth-v0.2.0",
     "terminal_only": true
@@ -39,7 +39,7 @@
     "production_authorized": false,
     "safety_claimed": false
   },
-  "publication_phase": "PREPUBLICATION",
+  "publication_phase": "POSTPUBLICATION",
   "published_optional_companion": {
     "default_off": true,
     "filename": "Project_Shadow_Full_Canon_Myth_Sidecar_v0.3.5_OPTIONAL_PUBLIC_COMPANION_2026-08-17.zip",
@@ -55,5 +55,5 @@
     "governance/R1_0_1_OUTER_RELEASE_AUTHORIZATION_2026-08-17.json",
     "governance/CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_2026-08-17.json"
   ],
-  "warning": "READY_TO_PUBLISH is still PREPUBLICATION. Exact-hash authorities are recorded, but public release, anonymous redownload verification, six-site effectiveness checks, and CAPA closure have not yet occurred."
+  "warning": "Generic Myth v0.2.0 and R1.0.1 are published on GitHub and Hugging Face. Anonymous GitHub and Hugging Face redownload identity verification and six-site effectiveness checks remain pending; CAPA remains IMPLEMENTED_PENDING_EFFECTIVENESS and is not closed."
 }
