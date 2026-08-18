@@ -15,7 +15,7 @@
     "production_authorized": false,
     "safety_claimed": false
   },
-  "postpublication_state": "PUBLISHED_PENDING_EFFECTIVENESS",
+  "postpublication_state": "PUBLISHED_EFFECTIVENESS_VERIFIED",
   "publication_phase": "POSTPUBLICATION",
   "release_identity": "PROJECT SHADOW 1.0.1 / R1 REFERENCE / BETA-ACTIVE-TESTING / PRELIVE",
   "releases": [
@@ -33,7 +33,7 @@
       "publication_state": "PUBLISHED_HISTORICAL",
       "role": "OPTIONAL_EXTERNAL_RESEARCH_SIDECAR",
       "tag": "myth-v0.3.4",
-      "title": "Project Shadow Myth Sidecar v0.3.4 — Optional External Research"
+      "title": "Project Shadow Myth Sidecar v0.3.4 — Public Release · Optional Companion"
     },
     {
       "asset": {
@@ -64,7 +64,7 @@
       "publication_state": "PUBLISHED",
       "role": "OPTIONAL_FULL_CANON_COMPANION",
       "tag": "myth-v0.3.5",
-      "title": "Project Shadow Full-Canon Myth Sidecar v0.3.5 — Optional Public Companion"
+      "title": "Project Shadow Myth Sidecar v0.3.5 — Public Release · Optional Companion"
     },
     {
       "asset": {
