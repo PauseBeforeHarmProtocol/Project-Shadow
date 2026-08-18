@@ -51,8 +51,12 @@ verification, or postpublication attestation.
     wording on all six public sites.
 
 Concrete identity fields are not self-authorizing; the separate authority
-records supply the scoped decisions. `tools/verify_repository_evidence.py
---phase postpublication` must still reject this ready-but-unpublished state.
+records supply the scoped decisions. Generic Myth v0.2.0 and R1.0.1 are now
+published on GitHub and Hugging Face, but publication is not CAPA effectiveness
+evidence. `tools/verify_repository_evidence.py --phase postpublication`
+therefore validates the published identities while preserving
+`IMPLEMENTED_PENDING_EFFECTIVENESS` until anonymous redownload and six-site
+criteria are evidenced.
 
 The signed admission record did not self-authorize public release. The later
 authorization does not modify the signed record or the exact R1 archive; it
