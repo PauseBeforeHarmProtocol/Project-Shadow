@@ -1,5 +1,9 @@
 # Project Shadow
 
+<p align="center">
+  <img src="assets/pbhp-x-project-shadow-heritage.png" width="520" alt="PBHP — Pause Before Harm Protocol × Project Shadow">
+</p>
+
 > **Mixed-rights repository.** This repository is not one blanket
 > Apache-2.0 work. Apache-2.0 applies only to eligible original software;
 > CC BY 4.0 applies only to eligible original documentation and
@@ -8,6 +12,27 @@
 > [`RIGHTS.md`](RIGHTS.md) before reuse.
 
 **PROJECT SHADOW 1.0.1 / R1 REFERENCE / BETA-ACTIVE-TESTING / PRELIVE**
+
+## Why this exists
+
+> The first dangerous thing an AI did to me was agree with me too well.
+
+I told the models not to flatter me. The obvious compliments disappeared and
+came back as inflated evaluation, destiny language, and polished
+rationalization. The wording passed. The requirement failed.
+
+I recognized the pattern because I work in quality systems. A record can be
+complete while the risk remains. Project Shadow grew from the attempt to build
+controls around that gap: separate evidence from inference, keep authority
+visible, preserve `UNKNOWN`, name who pays for error, and require correction to
+survive an effectiveness check.
+
+The question underneath it is simple: **If the system is wrong, who pays first,
+and can they recover?**
+
+- [Understand the system](https://projectshadow.frylock117.chatgpt.site/why)
+- [Verify exact R1.0.1](https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/tag/r1.0.1-2026-08-17)
+- [Challenge a claim](https://github.com/PauseBeforeHarmProtocol/Project-Shadow/issues/new/choose)
 
 Project Shadow 1.0.1 is the corrected current R1 reference. It removes Myth
 from the R1 runtime-family package while preserving all 27 active operational
@@ -124,7 +149,8 @@ recorded in
 ## Participate and challenge
 
 Technical criticism, correction evidence, false positives, false negatives,
-and adverse results are welcome. Start with
-[`CONTRIBUTING.md`](CONTRIBUTING.md), use the matching issue form, or email the
-current contact with the appropriate subject prefix. Report vulnerabilities
-privately under [`SECURITY.md`](SECURITY.md).
+and adverse results are welcome. Project Shadow is ready for examination, not
+coronation. Reality gets a vote. Start with [`CONTRIBUTING.md`](CONTRIBUTING.md),
+use the matching issue form, or email the current contact with the appropriate
+subject prefix. Report vulnerabilities privately under
+[`SECURITY.md`](SECURITY.md).

@@ -4,6 +4,17 @@ Project Shadow welcomes rigorous technical review, documentation corrections,
 false-positive and false-negative reports, and adverse results. Outside
 criticism is evidence to evaluate, not hostility to suppress.
 
+## Pick one thing to break
+
+You do not need to review the whole system. [Break or reproduce one technical
+claim](https://github.com/PauseBeforeHarmProtocol/Project-Shadow/issues/new?template=technical-review.yml),
+[correct one exact passage](https://github.com/PauseBeforeHarmProtocol/Project-Shadow/issues/new?template=documentation-correction.yml),
+or [report one false positive, false negative, or adverse
+result](https://github.com/PauseBeforeHarmProtocol/Project-Shadow/issues/new?template=adverse-result.yml).
+Keep the evidence, uncertainty, consequence, and proposed effectiveness check
+attached. Report exploitable security findings through the
+[private advisory route](https://github.com/PauseBeforeHarmProtocol/Project-Shadow/security/advisories/new).
+
 ## Current contact
 
 For corrections, CAPA proposals, research, press, collaboration, conduct, or a

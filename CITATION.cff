@@ -3,22 +3,27 @@ message: >-
   If you use or discuss Project Shadow, cite this repository and the exact
   release artifact. Read RIGHTS.md because the repository and releases are
   mixed-rights and no blanket license applies.
-title: Project Shadow
+title: Project Shadow 1.0.1 — Corrected R1 Reference (PRELIVE)
 type: software
 authors:
   - family-names: Linstrum
     given-names: Phillip
     email: projectshadowqa@protonmail.com
-version: "1.0 R1 Reference (PRELIVE)"
-date-released: 2026-08-14
+version: "1.0.1"
+date-released: 2026-08-17
 repository-code: https://github.com/PauseBeforeHarmProtocol/Project-Shadow
-repository-artifact: https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/tag/r1-2026-08-14
+repository-artifact: https://github.com/PauseBeforeHarmProtocol/Project-Shadow/releases/tag/r1.0.1-2026-08-17
 url: https://projectshadow.frylock117.chatgpt.site
 abstract: >-
-  A public PRELIVE reference system for pause, evidence, bounded decision
-  gates, verification, and human escalation. Publication is not production or
-  operational deployment and makes no efficacy, safety, certification, or
-  legal-compliance claim.
+  Project Shadow is a civic and technical quality system for making power
+  explain itself, preserving evidence, exposing drift, protecting meaningful
+  agency, and keeping a challengeable correction path. R1.0.1 is a Myth-free,
+  beta-active-testing, PRELIVE reference and is not production or operationally
+  deployable under this publication.
+identifiers:
+  - type: other
+    value: "sha256:6f6f1e16d5e9a20e62403f14af7ce8629ce2d702528fb7f80aaf4a14deb7a1d1"
+    description: Exact Project Shadow R1.0.1 public reference artifact
 keywords:
   - quality assurance
   - harm reduction
