@@ -115,6 +115,37 @@ RELEASE_NOTES = {
     "generic-myth-v0.2.0": ROOT / "release-notes" / "GENERIC_MYTH_SIDECAR_v0.2.0.md",
     "r1.0.1-2026-08-17": ROOT / "release-notes" / "PROJECT_SHADOW_R1_0_1_2026-08-17.md",
 }
+POSTPUBLICATION_EFFECTIVENESS_PREAMBLE = (
+    "> **Post-publication effectiveness update — 2026-08-18.** CAPA "
+    "`PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` is `CLOSED_EFFECTIVE` for the "
+    "packaging-boundary correction only. Exact GitHub and Hugging Face redownloads "
+    "matched the authorized R1.0.1 and Generic Myth v0.2.0 identities, their bounded "
+    "verifiers passed, and corrected-boundary checks passed across all six GPT Sites. "
+    "No production or operational deployment is authorized, and no efficacy, safety, "
+    "certification, legal-compliance, comprehensive-security, or independent-validation "
+    "claim is made. The release text below retains the publication-time state.\n\n---\n\n"
+)
+FULL_CANON_POSTPUBLICATION_EFFECTIVENESS_PREAMBLE = (
+    "> **Post-publication effectiveness update — 2026-08-18.** CAPA "
+    "`PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` is `CLOSED_EFFECTIVE` for the separate R1 "
+    "packaging-boundary correction only. The finding did not apply to Full-Canon Myth "
+    "v0.3.5. Exact GitHub and Hugging Face redownloads matched the authorized R1.0.1 and "
+    "Generic Myth v0.2.0 identities, their bounded verifiers passed, and corrected-boundary "
+    "checks passed across all six GPT Sites. No production or operational deployment is "
+    "authorized, and no efficacy, safety, certification, legal-compliance, "
+    "comprehensive-security, or independent-validation claim is made. The release text "
+    "below retains the publication-time state.\n\n"
+    "Current bounded compatibility command:\n\n"
+    "```bash\n"
+    "python3 -I -S -B tools/verify_package.py . --run-tests \\\n"
+    "  --r1-family-zip /path/to/Project_Shadow_R1.0.1_Runtime_Family_Myth_Decoupled_2026-08-17.zip\n"
+    "```\n\n---\n\n"
+)
+POSTPUBLICATION_RELEASE_PREAMBLES = {
+    "myth-v0.3.5": FULL_CANON_POSTPUBLICATION_EFFECTIVENESS_PREAMBLE,
+    "generic-myth-v0.2.0": POSTPUBLICATION_EFFECTIVENESS_PREAMBLE,
+    "r1.0.1-2026-08-17": POSTPUBLICATION_EFFECTIVENESS_PREAMBLE,
+}
 AUTHORIZATION_KEYS = {
     "OPTIONAL_EXTERNAL_RESEARCH_SIDECAR": "optional_external_myth_sidecar_v0_3_4",
     "R1_REFERENCE": "r1_reference",
@@ -2139,6 +2170,12 @@ def normalize_release_body(value: str) -> str:
     return "\n".join(line.rstrip() for line in normalized.splitlines()).rstrip()
 
 
+def expected_live_release_body(tag: str) -> str:
+    """Return the exact allowed live body without mutating its frozen release note."""
+    note = RELEASE_NOTES[tag].read_text(encoding="utf-8")
+    return POSTPUBLICATION_RELEASE_PREAMBLES.get(tag, "") + note
+
+
 def verify_live_release_metadata(
     rows: list[dict[str, Any]],
     expected_latest_tag: str,
@@ -2149,7 +2186,7 @@ def verify_live_release_metadata(
         release = fetch_public_json(
             f"https://api.github.com/repos/{repository}/releases/tags/{tag}"
         )
-        note = RELEASE_NOTES[tag].read_text(encoding="utf-8")
+        note = expected_live_release_body(tag)
         if (
             release.get("tag_name") != tag
             or release.get("name") != row.get("title")
