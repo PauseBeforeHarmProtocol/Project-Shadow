@@ -37,6 +37,29 @@ class RepositoryEvidenceTests(unittest.TestCase):
         )
         self.assertEqual(VERIFIER.prohibited_claim_findings(), [])
 
+    def test_live_release_preambles_are_exact_additive_controls(self) -> None:
+        self.assertEqual(
+            set(VERIFIER.POSTPUBLICATION_RELEASE_PREAMBLES),
+            {
+                "myth-v0.3.5",
+                "generic-myth-v0.2.0",
+                "r1.0.1-2026-08-17",
+            },
+        )
+        for tag, note_path in VERIFIER.RELEASE_NOTES.items():
+            frozen_note = note_path.read_text(encoding="utf-8")
+            expected = VERIFIER.expected_live_release_body(tag)
+            self.assertTrue(expected.endswith(frozen_note))
+            if tag in VERIFIER.POSTPUBLICATION_RELEASE_PREAMBLES:
+                self.assertTrue(expected.startswith("> **Post-publication effectiveness update — 2026-08-18.**"))
+                self.assertIn("`CLOSED_EFFECTIVE`", expected)
+            else:
+                self.assertEqual(expected, frozen_note)
+        self.assertIn(
+            "Project_Shadow_R1.0.1_Runtime_Family_Myth_Decoupled_2026-08-17.zip",
+            VERIFIER.expected_live_release_body("myth-v0.3.5"),
+        )
+
     def test_historical_public_release_verifier_remains_byte_pinned(self) -> None:
         digest = hashlib.sha256(
             (ROOT / "tools" / "verify_public_release.py").read_bytes()
