@@ -1,14 +1,26 @@
 {
   "capa_id": "PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001",
   "closure": {
-    "closed_at": "2026-08-18T10:39:24Z",
-    "effectiveness_verified": true,
-    "verification_record": "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json",
-    "verification_records": [
-      "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json",
-      "governance/R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json"
-    ]
+    "closed_at": null,
+    "effectiveness_verified": false,
+    "verification_record": null,
+    "verification_records": []
   },
+  "closure_history": [
+    {
+      "event": {
+        "closed_at": "2026-08-18T10:39:24Z",
+        "effectiveness_verified": true,
+        "verification_record": "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json",
+        "verification_records": [
+          "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json",
+          "governance/R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json"
+        ]
+      },
+      "status": "CLOSED_EFFECTIVE",
+      "superseded_for_current_effectiveness_by": "governance/CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_EFFECTIVENESS_REOPENING_2026-08-22.json"
+    }
+  ],
   "corrective_action": {
     "affected_august_14_release_mutated": false,
     "generic_myth_moved_to_separate_optional_sidecar": true,
@@ -39,6 +51,10 @@
     "safety_claimed": false
   },
   "opened_on": "2026-08-17",
+  "pending_effectiveness_criteria": [
+    "SIX_PUBLIC_PROJECT_SHADOW_SITES_REPORT_THE_CORRECTED_BOUNDARY"
+  ],
+  "reopening_record": "governance/CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_EFFECTIVENESS_REOPENING_2026-08-22.json",
   "schema": "project-shadow.capa.v1",
-  "status": "CLOSED_EFFECTIVE"
+  "status": "IMPLEMENTED_PENDING_EFFECTIVENESS"
 }

@@ -13,8 +13,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: public-evidence-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: public-evidence-${{ github.workflow }}-${{ github.event_name }}-${{ github.event_name == 'workflow_dispatch' && github.run_id || github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'workflow_dispatch' }}
 
 jobs:
   verify:
@@ -25,6 +25,7 @@ jobs:
       - name: Check out exact repository state
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
+          fetch-depth: 0
           persist-credentials: false
 
       - name: Run positive and fail-closed mutation tests
@@ -32,7 +33,47 @@ jobs:
           PYTHONDONTWRITEBYTECODE: "1"
         run: python3 -I -S -B -m unittest discover -s tests -v
 
-      - name: Verify repository evidence and exact public assets
+      - name: Re-run tests from a core.autocrlf=true materialization
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        shell: bash
+        run: |
+          materialized="${RUNNER_TEMP}/project-shadow-autocrlf"
+          git clone --no-checkout --no-local "${GITHUB_WORKSPACE}" "${materialized}"
+          git -C "${materialized}" config core.autocrlf true
+          git -C "${materialized}" fetch --no-tags "${GITHUB_WORKSPACE}" HEAD
+          git -C "${materialized}" checkout --detach FETCH_HEAD
+          (
+            cd "${materialized}"
+            python3 -I -S -B -m unittest discover -s tests -v
+          )
+
+      - name: Verify retained repository evidence offline
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python3 -I -S -B tools/verify_repository_evidence.py
+
+      - name: Determine whether pending evidence must be retained
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        id: capa_state
+        shell: bash
+        run: |
+          capa_status="$(python3 -I -S -B -c 'import json; print(json.load(open("PUBLIC_RELEASE_STATUS_2026-08-17.json", encoding="utf-8"))["capa"]["status"])')"
+          case "${capa_status}" in
+            IMPLEMENTED_PENDING_EFFECTIVENESS)
+              printf 'pending_capture=true\n' >> "${GITHUB_OUTPUT}"
+              ;;
+            CLOSED_EFFECTIVE)
+              printf 'pending_capture=false\n' >> "${GITHUB_OUTPUT}"
+              ;;
+            *)
+              printf 'Unsupported CAPA state: %s\n' "${capa_status}" >&2
+              exit 1
+              ;;
+          esac
+
+      - name: Verify exact public assets and sites manually
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
           PYTHONDONTWRITEBYTECODE: "1"
@@ -40,3 +81,14 @@ jobs:
           python3 -I -S -B tools/verify_repository_evidence.py
           --online
           --download-dir "${RUNNER_TEMP}/project-shadow-release-assets"
+
+      - name: Retain manual public-site evidence candidate
+        if: ${{ always() && github.event_name == 'workflow_dispatch' && steps.capa_state.outputs.pending_capture == 'true' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: project-shadow-public-site-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/project-shadow-release-assets/public-site-evidence/*.json
+            ${{ runner.temp }}/project-shadow-release-assets/public-site-evidence/*.zip
+          if-no-files-found: error
+          retention-days: 30

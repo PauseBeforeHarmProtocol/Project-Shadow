@@ -1,0 +1,69 @@
+{
+  "affected_effectiveness_criterion": "SIX_PUBLIC_PROJECT_SHADOW_SITES_REPORT_THE_CORRECTED_BOUNDARY",
+  "associated_verifier_hardening_findings": {
+    "git_working_tree_eol": {
+      "disposition": "SEPARATE_PORTABILITY_CORRECTION",
+      "finding": "The verifier byte-pin result changed under standard Git CRLF working-tree materialization because Python files were not explicitly pinned to LF.",
+      "scope": "This does not negate the canonical release identity or the recursive zero-Myth result."
+    },
+    "hugging_face_gcp_cdn": {
+      "disposition": "SEPARATE_ROUTE_POLICY_CORRECTION",
+      "finding": "The online verifier rejected the documented us.gcp.cdn.hf.co distribution edge while still requiring exact artifact size and SHA-256.",
+      "scope": "This does not negate the historical exact-identity redownload observation."
+    }
+  },
+  "capa_id": "PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001",
+  "current_status": "IMPLEMENTED_PENDING_EFFECTIVENESS",
+  "disposition": {
+    "affected_august_14_release_mutated": false,
+    "artifact_identity_findings": false,
+    "authorization_boundary_findings": false,
+    "correction_implementation_remains_verified": true,
+    "current_effectiveness_verified": false,
+    "prior_closure_preserved_as_history": true,
+    "prior_six_site_receipt_classification": "VALID_HISTORICAL_OBSERVATION_RECORD_INSUFFICIENT_FOR_RELATIONAL_EFFECTIVENESS",
+    "r1_0_1_zero_myth_result_remains_verified": true
+  },
+  "external_review": {
+    "forum_url": "https://discuss.huggingface.co/t/project-shadow-a-capa-can-close-without-fixing-anything-a-system-for-ai-and-civic-qa/178974/4",
+    "pinned_repository_commit": "013334aebf200455f1e03c05a7574db1aa673575",
+    "reviewer_handle": "John6666"
+  },
+  "nonclaims": {
+    "certification_claimed": false,
+    "efficacy_claimed": false,
+    "legal_compliance_claimed": false,
+    "operational_deployment_authorized": false,
+    "production_authorized": false,
+    "safety_claimed": false
+  },
+  "prior_closure": {
+    "closed_at": "2026-08-18T10:39:24Z",
+    "verification_records": [
+      "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json",
+      "governance/R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json"
+    ]
+  },
+  "reclosure_requirements": [
+    "DETERMINISTIC_RELATION_UNIQUENESS_CONTRADICTION_AND_BINDING_CHECKS_PASS",
+    "ADVERSARIAL_NEGATIVE_CONTROLS_EXECUTE_WITH_EXPECTED_VERDICT_FLIPS",
+    "ALL_REQUIRED_PUBLIC_ROUTES_PASS_THE_CORRECTED_V2_BOUNDARY_CONTRACT",
+    "EXACT_RESPONSE_BODIES_ARE_RETAINED_AND_REPLAYED_OFFLINE",
+    "EXPECTED_EXECUTED_SKIPPED_AND_NEGATIVE_CONTROL_COUNTS_ARE_RECORDED",
+    "HUMAN_REVIEW_CONFIRMS_THE_VISIBLE_PUBLIC_MEANING"
+  ],
+  "reopened_at": "2026-08-22T12:47:23Z",
+  "reproduced_semantic_oracle_finding": {
+    "baseline_repository_tests": "38/38_PASS",
+    "finding": "Meaning-changing fixtures could preserve all expected lexical markers while reversing release roles, creating dual-current states, combining incompatible CAPA states, reversing sidecar semantics, or misbinding exact artifact identities.",
+    "mutation_classes_reproduced": [
+      "REVERSE_CURRENT",
+      "DUAL_CURRENT",
+      "CONTRADICTORY_CAPA",
+      "SIDECAR_SEMANTICS_REVERSED",
+      "IDENTITY_MISBINDING"
+    ],
+    "scope": "This undercuts the relation-level inference made from the historical six-site semantic PASS. It does not establish that the observed live pages or sealed R1.0.1 artifact were incorrect."
+  },
+  "schema": "project-shadow.capa-effectiveness-reopening.v1"
+}

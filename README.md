@@ -42,11 +42,12 @@ R1.0.1 outer identity has its own exact-hash publication authorization.
 
 Generic Myth v0.2.0 and R1.0.1 now exist as public GitHub and Hugging Face
 releases. Anonymous exact-identity redownloads from both hosts, bounded package
-verification, recursive zero-Myth verification, and corrected-boundary checks
-across all six public sites passed. The machine-readable phase is
+verification, and recursive zero-Myth verification remain valid. The August 18
+six-site receipt is preserved, but its relation-level semantic sufficiency was
+reopened after external adversarial review. The machine-readable phase remains
 [`POSTPUBLICATION`](PUBLIC_RELEASE_STATUS_2026-08-17.json), and CAPA
-`PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` is `CLOSED_EFFECTIVE` for this
-packaging correction.
+`PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` is currently
+`IMPLEMENTED_PENDING_EFFECTIVENESS` for the reopened six-site criterion.
 
 ## Current contact
 
@@ -102,10 +103,10 @@ python3 -I -S -B tools/verify_repository_evidence.py --phase postpublication
 ```
 
 This validates the published identities, scoped authorities, optional-sidecar
-boundaries, retained redownload and six-site receipts, and closed CAPA state.
+boundaries, retained historical receipts, and current reopened CAPA state.
 Online mode additionally redownloads the exact GitHub and Hugging Face assets,
 runs the historical and current bounded package verifiers, checks live release
-metadata, and rechecks the six-site boundary semantics:
+metadata, and checks the current six-site boundary contract:
 
 ```bash
 python3 -I -S -B tools/verify_repository_evidence.py --phase postpublication \
@@ -124,15 +125,22 @@ v0.2.0 by
 ## CAPA state
 
 CAPA `PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` is
-**CLOSED_EFFECTIVE** for the 2026-08-17 packaging-boundary correction. Exact
-public GitHub and Hugging Face redownload identity checks, bounded Generic and
-recursive R1.0.1 verification, and live checks across all six Project Shadow
-public sites passed. See the
+**IMPLEMENTED_PENDING_EFFECTIVENESS**. The packaging correction, exact public
+GitHub and Hugging Face identities, bounded Generic verification, and recursive
+R1.0.1 zero-Myth result remain verified. The August 18 closure is preserved as
+a historical event, but the six-site criterion was reopened because its lexical
+checks did not adequately establish release roles, uniqueness, contradiction
+rejection, sidecar semantics, or artifact-to-identity binding. See the
 [`CAPA record`](governance/CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_2026-08-17.json).
-The retained evidence is the
+The reopening is recorded in the
+[`effectiveness reopening record`](governance/CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_EFFECTIVENESS_REOPENING_2026-08-22.json).
+The retained historical evidence is the
 [`redownload receipt`](governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json)
 and
-[`six-site receipt`](governance/R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json).
+[`six-site receipt`](governance/R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json);
+the latter no longer suffices by itself for relation-level effectiveness.
+The replacement public presentation and replay requirements are specified in
+[`Public site boundary contract v2`](docs/PUBLIC_SITE_BOUNDARY_CONTRACT_V2.md).
 
 ## Scope boundary
 

@@ -1,5 +1,6 @@
 * text=auto
 *.md text eol=lf
+*.py text eol=lf
 NOTICE text eol=lf
 RIGHTS.md text eol=lf
 SECURITY.md text eol=lf
@@ -7,4 +8,3 @@ SHA256SUMS text eol=lf
 governance/PROJECT_SHADOW_FABLE7_SCOPED_MAINTAINER_ADMISSION_RECORD_2026-08-12.json -text
 governance/PROJECT_SHADOW_FABLE7_SCOPED_MAINTAINER_ADMISSION_RECORD_2026-08-12.json.sigstore.json -text
 governance/PROJECT_SHADOW_SIGNATURE_INDEPENDENT_VERIFICATION_RECEIPT_2026-08-14.json -text
-

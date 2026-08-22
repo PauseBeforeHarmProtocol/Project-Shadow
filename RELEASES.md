@@ -6,8 +6,8 @@ snapshots, not Project Shadow release artifacts.
 
 ## Current public releases
 
-Publication phase: **POSTPUBLICATION**. Packaging-correction effectiveness is
-verified.
+Publication phase: **POSTPUBLICATION**. The packaging correction remains
+implemented; its six-site effectiveness criterion is pending reverification.
 
 1. `generic-myth-v0.2.0` — Generic Myth Sidecar v0.2.0, optional public
    companion. Its final identity is frozen, its final tests pass, and its exact
@@ -19,8 +19,11 @@ verified.
 
 The Generic sidecar was published first. R1.0.1 was published last so the
 corrected R1 is the latest release. Subsequent anonymous GitHub and Hugging
-Face redownloads, bounded package verification, and all six public-site checks
-passed; the packaging-boundary CAPA is `CLOSED_EFFECTIVE`.
+Face redownloads and bounded package verification remain valid. The historical
+six-site checks passed their then-current lexical predicates, but external
+adversarial review showed those predicates did not adequately prove the
+relation-level boundary. The packaging-boundary CAPA is currently
+`IMPLEMENTED_PENDING_EFFECTIVENESS`.
 
 ## Existing public releases
 
@@ -37,11 +40,13 @@ redownload receipt, tags, or archive.
 Files under `release-notes/` are content-aligned publication-time snapshots of
 the live GitHub release bodies (line endings and trailing Markdown spaces are
 normalized). Any open/pending CAPA wording retained there records the
-then-current release-time state; current lifecycle status is defined only by
-`PUBLIC_RELEASE_STATUS_2026-08-17.json`, `PUBLICATION_MANIFEST.json`, and the
-two retained effectiveness receipts.
+then-current release-time state. Current lifecycle status is defined by
+`PUBLIC_RELEASE_STATUS_2026-08-17.json`, `PUBLICATION_MANIFEST.json`, the current
+CAPA and reopening records, and whichever effectiveness records those current
+records explicitly bind. Historical receipts remain evidence of their own
+observations; they do not independently define today’s state.
 
-## Completed effectiveness sequence
+## Historical effectiveness sequence and reopening
 
 1. The recorded Generic, inner, and outer exact-hash authorities were
    preserved without broadening them.
@@ -49,11 +54,19 @@ two retained effectiveness receipts.
    redownloaded and matched their exact byte counts and SHA-256 values.
 3. Both downloaded Generic archives passed the bounded 23-path verifier, and
    R1.0.1 passed recursive zero-Myth verification.
-4. All six public sites passed the corrected-boundary semantic checks,
-   including the current Project Shadow status surface and the National Trump
-   Record route.
-5. CAPA `PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` was closed effective on the
-   retained redownload and six-site receipts.
+4. All six public sites passed the original corrected-boundary lexical checks,
+   including the Project Shadow status surface and the National Trump Record
+   route.
+5. CAPA `PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` was recorded closed effective
+   on 2026-08-18 using the retained redownload and six-site receipts.
+6. On 2026-08-22, external adversarial fixtures demonstrated that release-role
+   reversal, dual-current, contradictory CAPA, reversed sidecar semantics, and
+   identity misbinding could preserve the old PASS result.
+7. The historical closure was preserved and the current CAPA state returned to
+   `IMPLEMENTED_PENDING_EFFECTIVENESS` for the six-site criterion only. A new
+   v2 receipt must retain and replay exact response bodies before reclosure.
+   A named human must then review all six browser-rendered sites, bind that
+   review to the exact v2 receipt/evidence pack, and confirm the visible meaning.
 
 ## Prospective custody procedure
 

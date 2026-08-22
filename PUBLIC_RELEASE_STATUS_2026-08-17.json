@@ -1,12 +1,24 @@
 {
   "capa": {
-    "effectiveness_verified": true,
+    "closure_history": [
+      {
+        "closed_at": "2026-08-18T10:39:24Z",
+        "status": "CLOSED_EFFECTIVE",
+        "superseded_for_current_effectiveness_by": "governance/CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_EFFECTIVENESS_REOPENING_2026-08-22.json",
+        "verification_records": [
+          "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json",
+          "governance/R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json"
+        ]
+      }
+    ],
+    "effectiveness_verified": false,
     "id": "PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001",
-    "status": "CLOSED_EFFECTIVE",
-    "verification_records": [
-      "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json",
-      "governance/R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json"
-    ]
+    "pending_effectiveness_criteria": [
+      "SIX_PUBLIC_PROJECT_SHADOW_SITES_REPORT_THE_CORRECTED_BOUNDARY"
+    ],
+    "reopening_record": "governance/CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_EFFECTIVENESS_REOPENING_2026-08-22.json",
+    "status": "IMPLEMENTED_PENDING_EFFECTIVENESS",
+    "verification_records": []
   },
   "current_reference": {
     "active_descendant_count": 27,
@@ -59,7 +71,8 @@
     "governance/R1_0_1_OUTER_RELEASE_AUTHORIZATION_2026-08-17.json",
     "governance/CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_2026-08-17.json",
     "governance/R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json",
-    "governance/R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json"
+    "governance/R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json",
+    "governance/CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_EFFECTIVENESS_REOPENING_2026-08-22.json"
   ],
-  "warning": "Generic Myth v0.2.0 and R1.0.1 are published on GitHub and Hugging Face. Anonymous exact-identity redownloads from both hosts, bounded package verification, recursive zero-Myth verification, and corrected-boundary checks across all six public sites passed. CAPA is CLOSED_EFFECTIVE for this packaging correction only; no production, deployment, efficacy, safety, certification, or legal-compliance claim is made."
+  "warning": "Generic Myth v0.2.0 and R1.0.1 remain published with unchanged exact identities. Anonymous exact-identity redownloads, bounded package verification, and recursive zero-Myth verification remain valid. The CAPA is IMPLEMENTED_PENDING_EFFECTIVENESS because the six-site relation-level semantic evidence was reopened for corrected verification; no production, deployment, efficacy, safety, certification, or legal-compliance claim is made."
 }

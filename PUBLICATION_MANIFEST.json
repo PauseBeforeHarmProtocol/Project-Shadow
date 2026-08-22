@@ -15,7 +15,7 @@
     "production_authorized": false,
     "safety_claimed": false
   },
-  "postpublication_state": "PUBLISHED_EFFECTIVENESS_VERIFIED",
+  "postpublication_state": "PUBLISHED_PENDING_EFFECTIVENESS",
   "publication_phase": "POSTPUBLICATION",
   "release_identity": "PROJECT SHADOW 1.0.1 / R1 REFERENCE / BETA-ACTIVE-TESTING / PRELIVE",
   "releases": [

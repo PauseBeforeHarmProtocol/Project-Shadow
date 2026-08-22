@@ -45,22 +45,37 @@ verification, or postpublication attestation.
     records the maintainer's exact wording authorizing the separately built
     final outer archive and corresponding repository/site updates.
 12. [`CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_2026-08-17.json`](CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_2026-08-17.json)
-    records the corrective design and its `CLOSED_EFFECTIVE` transition after
-    every bounded effectiveness criterion passed.
+    records the corrective design, the preserved historical closure event, and
+    the current `IMPLEMENTED_PENDING_EFFECTIVENESS` state.
 13. [`R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json`](R1_0_1_PUBLIC_REDOWNLOAD_VERIFICATION_2026-08-17.json)
     records exact anonymous GitHub and Hugging Face observations for Generic
     v0.2.0 and R1.0.1, plus bounded Generic and recursive R1.0.1 verifier PASS
     results.
 14. [`R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json`](R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_VERIFICATION_2026-08-17.json)
-    records bounded HTTP, final-route, content-type, SHA-256, and visible
-    semantic observations across all six public sites.
+    records bounded HTTP, final-route, content-type, SHA-256, and non-hidden
+    HTML-source lexical observations across all six public sites. It remains valid evidence
+    of what the v1 checker observed, but it is insufficient by itself for
+    relation-level effectiveness.
+15. [`CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_EFFECTIVENESS_REOPENING_2026-08-22.json`](CAPA_PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001_EFFECTIVENESS_REOPENING_2026-08-22.json)
+    records the external adversarial finding, preserves the August 18 closure
+    as history, limits the reopening to the six-site criterion, and defines the
+    v2 reclosure requirements.
+
+Future reclosure additionally requires the generated
+`R1_0_1_SIX_PUBLIC_SITES_EFFECTIVENESS_REVERIFICATION_2026-08-22.json`, its
+exact response-evidence ZIP, and
+`R1_0_1_PUBLIC_BOUNDARY_V2_HUMAN_REVIEW_2026-08-22.json`. The human record is
+not pre-created: it must identify a real human reviewer, bind the exact v2
+receipt and pack, cover every required rendered route, and be timestamped after
+v2 verification and before reclosure.
 
 Concrete identity fields are not self-authorizing; the separate authority
-records supply the scoped decisions. Publication alone was not CAPA
-effectiveness evidence. The later redownload, package-verifier, and six-site
-receipts satisfy the bounded criteria, so
+records supply the scoped decisions. The redownload and package-verifier
+evidence remain valid. The six-site criterion is pending a deterministic v2
+relation/binding check with replayable response custody, so
 `tools/verify_repository_evidence.py --phase postpublication` now validates
-`CLOSED_EFFECTIVE` without broadening any publication or operational authority.
+`IMPLEMENTED_PENDING_EFFECTIVENESS` without broadening any publication or
+operational authority.
 
 The signed admission record did not self-authorize public release. The later
 authorization does not modify the signed record or the exact R1 archive; it

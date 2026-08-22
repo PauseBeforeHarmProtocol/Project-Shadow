@@ -21,13 +21,15 @@ Validate the current published repository state:
 python3 -I -S -B tools/verify_repository_evidence.py --phase postpublication
 ```
 
-The current postpublication state records packaging-correction effectiveness.
-Anonymous GitHub and Hugging Face redownloads matched the exact current
-identities; both downloaded Generic packages passed the bounded 23-path
-verifier; R1.0.1 passed recursive zero-Myth verification; and all six public
-sites passed the corrected-boundary checks. CAPA
-`PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` is `CLOSED_EFFECTIVE` for that bounded
-correction.
+The current postpublication state records an implemented packaging correction
+with effectiveness reverification pending for one criterion. Anonymous GitHub
+and Hugging Face redownloads matched the exact current identities; both
+downloaded Generic packages passed the bounded 23-path verifier; and R1.0.1
+passed recursive zero-Myth verification. The August 18 six-site receipt is
+preserved as historical observation evidence, but external adversarial review
+showed that its lexical predicates were insufficient for relation-level
+meaning. CAPA `PS-R1-PRIVATE-MYTH-PUBLIC-BOUNDARY-001` is therefore
+`IMPLEMENTED_PENDING_EFFECTIVENESS` until a replayable v2 six-site check passes.
 
 Online mode redownloads and verifies the exact GitHub and Hugging Face assets,
 runs the historical and current package verifiers, checks live release
@@ -38,6 +40,48 @@ evidence but does not rewrite receipts or publish anything:
 python3 -I -S -B tools/verify_repository_evidence.py --phase postpublication \
   --online --download-dir /tmp/project-shadow-release-assets
 ```
+
+The Hugging Face route policy is deliberately separate from artifact identity.
+It permits only HTTPS on the default port and the exact documented hosts
+`huggingface.co`, `us.aws.cdn.hf.co`, and `us.gcp.cdn.hf.co`. The downloaded
+byte count and SHA-256 must still match the authorized artifact. Broad suffix
+matching and lookalike hosts are rejected.
+
+The six-site machine check uses the non-hidden HTML-source
+`public-boundary-v2` contract. It requires
+one current R1 role, one preserved-superseded predecessor role, contradiction
+rejection, exact sidecar roles, and artifact identities bound to exact semantic
+records. All visible `data-shadow-*` markers must fit the closed structured
+schema; the prose layer rejects the enumerated direct contradiction fixtures,
+not every possible natural-language paraphrase. The verifier also runs
+adversarial negative controls and records the
+expected, executed, passed, failed, skipped, and unexpected check counts.
+
+When the online check runs with a clean, committed verifier, it writes a
+bounded response-evidence ZIP and a v2 JSON receipt beneath the download
+directory. The receipt binds every route to the exact retained response bytes,
+their SHA-256 values, the pending CAPA state actually observed, and the exact
+verifier blob at a reachable clean Git commit. The same semantic assertions are
+then replayed offline from those retained bytes without consulting a later
+mutable CAPA state.
+
+Machine replay alone cannot establish browser-computed visibility when an
+external or embedded stylesheet is involved or judge every unstructured prose
+paraphrase. Before reclosure, a named human
+reviewer must inspect all required routes as rendered, sign the exact
+attestation defined by the verifier, and retain
+`governance/R1_0_1_PUBLIC_BOUNDARY_V2_HUMAN_REVIEW_2026-08-22.json`. That record
+must bind the exact v2 receipt and response-evidence ZIP, cover all six sites,
+and confirm the ordinary visible meaning and relation/binding determinations.
+The generated v2 receipt, evidence ZIP, and human-review record must all be
+reviewed and added to `governance/` before the CAPA can return to
+`CLOSED_EFFECTIVE`. A later online run checks the new live closed-state
+declarations separately; it does not rewrite the retained pending-state
+receipt.
+
+Git materialization is also explicit: `.gitattributes` pins Python verifier and
+test sources to LF. That makes the working-tree byte identity deterministic
+under standard checkout configurations, including `core.autocrlf=true`.
 
 ## Published and preserved exact identities
 
